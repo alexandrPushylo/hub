@@ -17,6 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from hub import views as V
+
 urlpatterns = [
+    path('', V.index, name='index'),
+    path('dashboard', V.dashboard_view, name='dashboard'),
     path('admin/', admin.site.urls),
 ]
