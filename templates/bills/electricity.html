@@ -1,0 +1,34 @@
+<div class="bills-card">
+    <div class="electricity bills-card-body">
+        <div class="bills-card-header">
+            <div class="bills-title">{{ electricity.title }}</div>
+            <div class="bills-payment_date">{{ electricity.payment_date }}</div>
+        </div>
+        <div class="bills-indications">
+            <div class="bills-indications-value">
+                <span>{{ electricity.indications }}</span><span class="bills-indications-unit">&nbsp;кВт/ч</span>
+            </div>
+            <div class="bills-amount">
+                <span class="bills-amount-value">{{ electricity.amount }}</span><span class="bills-amount-currency">&nbsp;руб.</span>
+            </div>
+        </div>
+        <div class="bills-difference">
+            {% if electricity.diff_indications %}
+                <div class="bills-indications-diff">
+                    <span>+{{ electricity.diff_indications }}</span><span
+                        class="bills-indications-unit">&nbsp;кВт/ч</span>
+                </div>
+            {% endif %}
+            {% if electricity.diff_indications %}
+                <div class="bills-amount-diff">
+                    <span>{{ electricity.diff_amount }}</span><span class="bills-indications-unit">&nbsp;руб.</span>
+                </div>
+            {% endif %}
+        </div>
+        <div class="bills-description">{{ electricity.description }}</div>
+    </div>
+    <div class="card-buttons-control">
+        <a class="btn btn-outline-primary" href="{% url 'info_bills' %}?bill=electricity">{% include 'components/icons/info.html' %}</a>
+        <a class="btn btn-outline-success" href="{% url 'edit_bills' %}?bill=electricity">{% include 'components/icons/edit.html' %}</a>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+<div class="bills-card">
+    <div class="cold_water bills-card-body">
+        <div class="bills-card-header">
+            <div class="bills-title">{{ cold_water.title }}</div>
+            <div class="bills-payment_date">{{ cold_water.payment_date }}</div>
+        </div>
+
+        <div class="bills-indications">
+
+            <div class="bills-indications-value">
+                {% if cold_water.indications %}
+                    <span>{{ cold_water.indications }}</span>
+                    <span class="bills-indications-unit">&nbsp;M<span class="bills-indications-unit-pow">3</span></span>
+                {% endif %}
+            </div>
+
+            <div class="bills-amount">
+                {% if cold_water.amount %}
+                    <span class="bills-amount-value">{{ cold_water.amount }}</span>
+                    <span class="bills-amount-currency">&nbsp;руб.</span>
+                {% endif %}
+            </div>
+
+        </div>
+
+        <div class="bills-difference">
+
+            <div class="bills-indications-diff">
+                {% if cold_water.diff_indications %}
+                    <span>+{{ cold_water.diff_indications }}</span>
+                    <span class="bills-indications-unit">&nbsp;M<span class="bills-indications-unit-pow">3</span></span>
+                {% endif %}
+            </div>
+
+
+            <div class="bills-amount-diff">
+                {% if cold_water.diff_amount %}
+                    <span>{{ cold_water.diff_amount }}</span><span class="bills-indications-unit">&nbsp;руб.</span>
+                {% endif %}
+            </div>
+
+        </div>
+        <div class="bills-description">{{ cold_water.description }}</div>
+    </div>
+    <div class="card-buttons-control">
+        <a class="btn btn-outline-primary" href="{% url 'info_bills' %}?bill=cold_water">{% include 'components/icons/info.html' %}</a>
+        <a class="btn btn-outline-success" href="{% url 'edit_bills' %}?bill=cold_water">{% include 'components/icons/edit.html' %}</a>
+    </div>
+</div>

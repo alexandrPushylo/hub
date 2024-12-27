@@ -1,0 +1,49 @@
+<div class="bills-card">
+    <div class="hot_water bills-card-body">
+        <div class="bills-card-header">
+            <div class="bills-title">{{ hot_water.title }}</div>
+            <div class="bills-payment_date">{{ hot_water.payment_date }}</div>
+        </div>
+
+        <div class="bills-indications">
+
+            <div class="bills-indications-value">
+                {% if hot_water.indications %}
+                    <span>{{ hot_water.indications }}</span>
+                    <span class="bills-indications-unit">&nbsp;M<span class="bills-indications-unit-pow">3</span></span>
+                {% endif %}
+            </div>
+
+            <div class="bills-amount">
+                {% if hot_water.amount %}
+                    <span class="bills-amount-value">{{ hot_water.amount }}</span>
+                    <span class="bills-amount-currency">&nbsp;руб.</span>
+                {% endif %}
+            </div>
+
+        </div>
+
+        <div class="bills-difference">
+
+            <div class="bills-indications-diff">
+                {% if hot_water.diff_indications %}
+                    <span>+{{ hot_water.diff_indications }}</span>
+                    <span class="bills-indications-unit">&nbsp;M<span class="bills-indications-unit-pow">3</span></span>
+                {% endif %}
+            </div>
+
+
+            <div class="bills-amount-diff">
+                {% if hot_water.diff_amount %}
+                    <span>{{ hot_water.diff_amount }}</span><span class="bills-indications-unit">&nbsp;руб.</span>
+                {% endif %}
+            </div>
+
+        </div>
+        <div class="bills-description">{{ hot_water.description }}</div>
+    </div>
+    <div class="card-buttons-control">
+        <a class="btn btn-outline-primary" href="{% url 'info_bills' %}?bill=hot_water">{% include 'components/icons/info.html' %}</a>
+        <a class="btn btn-outline-success" href="{% url 'edit_bills' %}?bill=hot_water">{% include 'components/icons/edit.html' %}</a>
+    </div>
+</div>

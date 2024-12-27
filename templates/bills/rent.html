@@ -1,0 +1,38 @@
+<div class="bills-card">
+    <div class="rent bills-card-body">
+        <div class="bills-card-header">
+            <div class="bills-title">{{ rent.title }}</div>
+            <div class="bills-payment_date">{{ rent.payment_date }}</div>
+        </div>
+        <div class="bills-indications">
+            <div class="bills-indications-value"></div>
+            <div class="bills-amount">
+                <span class="bills-amount-value">{{ rent.amount }}</span><span
+                    class="bills-amount-currency">&nbsp;руб.</span>
+            </div>
+        </div>
+
+        <div class="bills-difference">
+
+            <div class="bills-indications-diff">
+                {% if rent.diff_indications %}
+                    <span>+{{ rent.diff_indications }}</span><span class="bills-indications-unit">&nbsp;руб.<span
+                        class="bills-indications-unit-pow">3</span></span>
+                {% endif %}
+            </div>
+
+
+            <div class="bills-amount-diff">
+                {% if rent.diff_amount %}
+                    <span>{{ rent.diff_amount }}</span><span class="bills-indications-unit">&nbsp;руб.</span>
+                {% endif %}
+            </div>
+
+        </div>
+        <div class="bills-description">{{ rent.description }}</div>
+    </div>
+    <div class="rent-buttons-control card-buttons-control">
+        <a class="btn btn-outline-primary" href="{% url 'info_bills' %}?bill=rent">{% include 'components/icons/info.html' %}</a>
+        <a class="btn btn-outline-success" href="{% url 'edit_bills' %}?bill=rent">{% include 'components/icons/edit.html' %}</a>
+    </div>
+</div>
