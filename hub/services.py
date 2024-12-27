@@ -31,3 +31,8 @@ def get_bills(bill: type[Electricity] | type[HotWater] | type[ColdWater] | type[
         out['amount'] = last_bill.amount
         out['payment_date'] = last_bill.payment_date
     return out
+def get_inform_data()-> dict:
+    out = {
+        'today': U.TODAY()
+    }
+    return out
