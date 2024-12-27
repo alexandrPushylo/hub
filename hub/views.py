@@ -60,3 +60,22 @@ def edit_bills_view(request):
         return HttpResponse(status)
 
     return render(request, 'bills/edit_bills.html', {'bill': bill})
+
+
+def info_bills_view(request):
+    type_of_bill = request.GET.get('bill')
+    type_of_bill = type_of_bill.strip("'") if type_of_bill else None
+
+    match type_of_bill:
+        case A.Bills.HOT_WATER.value:
+            bill = S.get_info_bills(HotWater)
+        case A.Bills.COLD_WATER.value:
+            bill = S.get_info_bills(ColdWater)
+        case A.Bills.ELECTRICITY.value:
+            bill = S.get_info_bills(Electricity)
+        case A.Bills.RENT.value:
+            bill = S.get_info_bills(Rent)
+        case _:
+            bill = None
+
+    return render(request, 'bills/info_bills.html', bill)

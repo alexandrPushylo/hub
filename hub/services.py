@@ -31,6 +31,21 @@ def get_bills(bill: type[Electricity] | type[HotWater] | type[ColdWater] | type[
         out['amount'] = last_bill.amount
         out['payment_date'] = last_bill.payment_date
     return out
+
+
+def get_info_bills(bill: type[Electricity] | type[HotWater] | type[ColdWater] | type[Rent]) -> dict:
+    if bill in (Electricity, HotWater, ColdWater):
+        bill = bill.objects.filter().order_by('-payment_date')
+    elif bill in (Rent,):
+        bill = bill.objects.filter().order_by('-payment_date')
+
+    out = {'title': None, 'bill': []}
+    for b in bill:
+        out['title'] = b.title
+        out['bill'].append(b)
+    return out
+
+
 def set_bills(bill: type[Electricity] | type[HotWater] | type[ColdWater] | type[Rent], data: dict) -> bool:
     try:
         last_bill = bill.objects.filter().order_by('payment_date').last()

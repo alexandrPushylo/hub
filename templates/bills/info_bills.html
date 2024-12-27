@@ -1,0 +1,32 @@
+{% extends 'index.html' %}
+{% block body %}
+    <div class="edit-bills-container card mx-auto">
+        <div class="card-header">
+            <span>{{ title }}</span>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <td>Дата</td>
+                    <td>Показания</td>
+                    <td>Сумма</td>
+                </tr>
+                </thead>
+                <tbody>
+                {% for b in bill %}
+                    <tr>
+                        <td>{{ b.payment_date.isoformat }}</td>
+                        <td>{{ b.indications }}</td>
+                        <td>{{ b.amount }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+        <div class="card-buttons btn-group">
+            <a class="btn btn-secondary" href="{% url 'dashboard' %}">Назад</a>
+        </div>
+    </div>
+{% endblock %}
