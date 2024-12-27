@@ -18,10 +18,11 @@ def get_bills(bill: type[Electricity] | type[HotWater] | type[ColdWater] | type[
         if prev_bill:
             diff_amount = last_bill.amount - prev_bill.amount
             out['diff_amount'] = diff_amount
+            if bill in (Electricity, HotWater, ColdWater):
+                diff_indications = last_bill.indications - prev_bill.indications
+                out['diff_indications'] = diff_indications
 
         if bill in (Electricity, HotWater, ColdWater):
-            diff_indications = last_bill.indications - prev_bill.indications
-            out['diff_indications'] = diff_indications
             out['indications'] = last_bill.indications
             out['rate'] = last_bill.rate
 
