@@ -1,4 +1,6 @@
-console.log('OK')function submitEditBill() {
+console.log('OK')
+
+
 $('#div-body').masonry({
 // указываем элемент-контейнер в котором расположены блоки для динамической верстки
     itemSelector: '.application_items',
@@ -31,6 +33,11 @@ function clickBillsCard(element){
     billsCardBody.blur()
     billsCardButtons.fadeToggle(100)
 }
+
+
+
+
+function submitEditBill() {
     const operation = 'submit_edit_bill'
     // const app_material_description = $('#app_mat_desc_id_' + application_material_id).val()
     $.ajax({

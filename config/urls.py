@@ -24,5 +24,11 @@ urlpatterns = [
     path('dashboard', V.dashboard_view, name='dashboard'),
     path('edit_bills/', V.edit_bills_view, name='edit_bills'),
     path('info_bills/', V.info_bills_view, name='info_bills'),
+
+
+
+
+
+
     path('admin/', admin.site.urls),
 ]
