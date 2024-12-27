@@ -1,8 +1,8 @@
 {% extends 'index.html' %}
 {% block body %}
     <div class="application_items">{% include 'informs/informs.html' %}</div>
-    <div class="application_items">{% include 'bills/rent.html' %}</div>
-    <div class="application_items">{% include 'bills/cold_water.html' %}</div>
-    <div class="application_items">{% include 'bills/hot_water.html' %}</div>
-    <div class="application_items">{% include 'bills/electricity.html' %}</div>
+    {% if rent %}<div class="application_items">{% include 'bills/rent.html' %}</div>{% endif %}
+    {% if cold_water %}<div class="application_items">{% include 'bills/cold_water.html' %}</div>{% endif %}
+    {% if hot_water %}<div class="application_items">{% include 'bills/hot_water.html' %}</div>{% endif %}
+    {% if electricity %}<div class="application_items">{% include 'bills/electricity.html' %}</div>{% endif %}
 {% endblock %}
