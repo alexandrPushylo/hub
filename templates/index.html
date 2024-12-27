@@ -10,14 +10,18 @@
     <link href="{% static 'css/main.css' %}" rel="stylesheet">
 </head>
 <body>
-<div id="root">
-    {% block body %}{% endblock %}
+<div id="root" class="container-fluid">
+    <div id="div-body" class="container-fluid position-relative translate-middle-x start-50 top-0">
+        {% block body %}{% endblock %}
+    </div>
 </div>
 
 <script src="{% static 'js/5ee7c81d0c.js' %}" type="text/javascript"></script>
 <script src="{% static 'js/bootstrap.bundle.min.js' %}" type="text/javascript"></script>
 <script src="{% static 'js/jquery-3.7.1.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/masonry.pkgd.min.js' %}" type="text/javascript"></script>
 <script src="{% static 'js/main.js' %}" type="text/javascript"></script>
+
 
 </body>
 </html>

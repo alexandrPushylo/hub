@@ -3,3 +3,125 @@
 	padding: 0;
 	box-sizing: border-box;
 }
+:root {
+	/*--index: calc(1vw + 1vh);*/
+	/*--color-header: #f4efec;*/
+	/*--color-text: #cdc6c3;*/
+	/*--gallery-gap: calc(var(--index) * 7.5)*/
+	--color-more: rgb(1, 165, 92);
+	--color-less: rgb(165, 3, 3);
+	--weight-card: 20rem;
+	--card-background-color: rgba(208, 214, 214, 0.52);
+	/*--height-card: max-;*/
+}
+#root{
+	/*display: flex;*/
+	/*justify-content: center;*/
+	/*position: relative;*/
+	/*width: 100vw;*/
+
+}
+#div-body{
+
+}
+.application_items{
+	margin: 10px;
+}
+
+
+/*	Bills	*/
+.bills-card, .inform-card{
+	width: var(--weight-card);
+	height: 6rem;
+	border: black 1px solid;
+	border-radius: 10px;
+	/*padding: 5px;*/
+	position: relative;
+	box-shadow: 2px 2px 20px 2px;
+	background-color: var(--card-background-color);
+}
+.bills-card-body{
+	margin: 5px;
+}
+.bills-card-header, .inform-card-header{
+	display: flex;
+	justify-content: space-between;
+}
+.bills-title{
+	font-weight: bold;
+}
+.bills-payment_date{}
+
+
+.bills-indications{
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+}
+.bills-indications-value{
+	font-weight: bolder;
+}
+.bills-amount{
+	font-weight: bolder;
+}
+.bills-difference{
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+}
+.bills-indications-diff{
+	font-size: 9pt;
+	font-weight: bolder;
+}
+.bills-amount-diff{
+	font-size: 9pt;
+	font-weight: bolder;
+}
+.bills-description{
+	font-size: 8pt;
+}
+.bills-indications-unit{
+	font-weight: normal;
+	font-size: .8em;
+}
+.bills-indications-unit-pow{
+	font-size: .7em;
+	position: relative;
+  	bottom: 1ex;
+}
+
+.card-buttons{
+	padding: 10px 10px;
+}
+
+.card-buttons-control{
+	display: none;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	border-radius: 10px;
+	background-color: rgba(208, 214, 214, 0);
+	align-content: center;
+	text-align: center;
+	/*filter: saturate(2.2);*/
+	/*filter: blur(3px);*/
+
+}
+.bills-card:hover{
+	.bills-card-body{
+		filter: blur(3px);
+	}
+	.card-buttons-control{
+		display: block;
+	}
+}
+
+
+
+/* edit bills ---------------------------- */
+.edit-bills-container{
+	margin-top: 10px;
+	max-width: var(--weight-card);
+}
+/*----------------------------*/

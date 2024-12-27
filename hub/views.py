@@ -18,7 +18,7 @@ def index(request):
 
 
 def dashboard_view(request):
-    return render(request, 'dashboard.html', {})    out = {
+    out = {
         'rent': S.get_bills(Rent),
         'cold_water': S.get_bills(ColdWater),
         'hot_water': S.get_bills(HotWater),
