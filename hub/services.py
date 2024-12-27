@@ -78,4 +78,7 @@ def get_inform_data()-> dict:
     out = {
         'today': U.TODAY()
     }
-    return out
+    return outdef calculate_amount(rate: float, indications:int)->float:
+    if not indications or not rate:
+        raise ValueError('indications and rate are required')
+    return float(rate) * int(indications)
