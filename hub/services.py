@@ -3,6 +3,7 @@ from typing import Type
 from django.template.defaultfilters import title
 
 from hub.models import Rent, ColdWater, HotWater, Electricity
+from hub.models import Debt, Debtor, ExchangeRate
 import hub.utilites as U
 
 
