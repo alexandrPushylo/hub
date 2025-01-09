@@ -24,6 +24,7 @@ def dashboard_view(request):
         'hot_water': S.get_bills(HotWater),
         'electricity': S.get_bills(Electricity),
         'inf': S.get_inform_data(),
+        'rate': S.check_currency_data(),
     }
 
     return render(request, 'dashboard.html', out)
