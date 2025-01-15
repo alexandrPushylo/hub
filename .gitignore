@@ -341,3 +341,4 @@ fabric.properties
 /static
 /tmp
 creds.py
+/hub/migrations
