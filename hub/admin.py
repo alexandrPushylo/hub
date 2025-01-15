@@ -5,10 +5,35 @@ from hub.models import Rent, Gas, ColdWater, HotWater, Electricity
 
 admin.site.register(Debt)
 admin.site.register(Debtor)
-admin.site.register(ExchangeRate)
 
-admin.site.register(Rent)
-admin.site.register(Gas)
-admin.site.register(ColdWater)
-admin.site.register(HotWater)
-admin.site.register(Electricity)
+
+
+
+@admin.register(ExchangeRate)
+class ExchangeRateAdmin(admin.ModelAdmin):
+    list_display = ('date', 'rate', 'currency', 'scale')
+
+
+@admin.register(Rent)
+class RentAdmin(admin.ModelAdmin):
+    list_display = ('payment_date', 'amount')
+
+
+@admin.register(Gas)
+class GasAdmin(admin.ModelAdmin):
+    list_display = ('payment_date', 'indications')
+
+
+@admin.register(ColdWater)
+class ColdWaterAdmin(admin.ModelAdmin):
+    list_display = ('payment_date', 'indications', 'amount')
+
+
+@admin.register(HotWater)
+class HotWaterAdmin(admin.ModelAdmin):
+    list_display = ('payment_date', 'indications', 'amount')
+
+
+@admin.register(Electricity)
+class ElectricityAdmin(admin.ModelAdmin):
+    list_display = ('payment_date', 'indications', 'amount')
