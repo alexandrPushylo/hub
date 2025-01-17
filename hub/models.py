@@ -44,6 +44,7 @@ class ExchangeRate(models.Model):
     date = models.DateField(verbose_name='Дата')
     currency = models.CharField(max_length=200, verbose_name='Валюта', choices=CURRENCY_CHOICES)
     scale = models.IntegerField(default=1, verbose_name='Масштаб')
+    difference = models.DecimalField(max_digits=7, decimal_places=2, default=0, verbose_name='Разница')
 
     def __str__(self):
         return f'{self.date} :: {self.scale} BYN = {self.rate} {self.currency}'
