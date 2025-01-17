@@ -160,10 +160,20 @@ def prepare_currency_data(currency_url: A.CurrencyURL):
         currency = currency_url.name
         scale = currency_data.get('Cur_Scale')
 
+        try:
+            prev_exc_rate = ExchangeRate.objects.get(
+                date=date-U.timedelta(days=1),
+                currency=currency,
+            )
+            difference = rate - prev_exc_rate.rate
+        except ExchangeRate.DoesNotExist:
+            difference = 0
+
         exc_rate = ExchangeRate.objects.create(
             rate=rate,
             date=date,
             currency=currency,
-            scale=scale
+            scale=scale,
+            difference=difference,
         )
         return exc_rate
