@@ -1,0 +1,71 @@
+<div class="rate-card">
+    <div class="rate rate-card-body">
+
+
+        <div class="rate-card-header">
+            <div>-</div>
+            <div class="rate-usd">                
+                {% if rate.usd.difference > 0 %}
+                    <span class="text-success">{{ rate.usd.difference }}</span>
+                    <span class="text-success">{% include 'components/icons/arrow_up.html' %}</span>
+                {% elif rate.usd.difference < 0 %}
+                    <span class="text-danger">{{ rate.usd.difference }}</span>
+                    <span class="text-danger">{% include 'components/icons/arrow_down.html' %}</span>
+                {% endif %}
+            </div>
+            <div class="rate-usd">
+                <span>{{ rate.usd.scale }}</span>
+                <span>{{ rate.usd.currency }}</span>
+                <span>=</span>
+                <span>{{ rate.usd.rate }}</span>
+                <span>BYN</span>
+            </div>
+        </div>
+        <div class="rate-card-header">
+            <div>-</div>
+            <div class="rate-eur">                
+                {% if rate.eur.difference > 0 %}
+                    <span class="text-success">{{ rate.eur.difference }}</span>
+                    <span class="text-success">{% include 'components/icons/arrow_up.html' %}</span>
+                {% elif rate.eur.difference < 0 %}
+                    <span class="text-danger">{{ rate.eur.difference }}</span>
+                    <span class="text-danger">{% include 'components/icons/arrow_down.html' %}</span>
+                {% endif %}
+            </div>
+            <div class="rate-eur">
+                <span>{{ rate.eur.scale }}</span>
+                <span>{{ rate.eur.currency }}</span>
+                <span>=</span>
+                <span>{{ rate.eur.rate }}</span>
+                <span>BYN</span>
+            </div>
+        </div>
+        <div class="rate-card-header">
+            <div>-</div>
+            <div class="rate-rub">                
+                {% if rate.rub.difference > 0 %}
+                    <span class="text-success">{{ rate.rub.difference }}</span>
+                    <span class="text-success">{% include 'components/icons/arrow_up.html' %}</span>
+                {% elif rate.rub.difference < 0 %}
+                    <span class="text-danger">{{ rate.rub.difference }}</span>
+                    <span class="text-danger">{% include 'components/icons/arrow_down.html' %}</span>
+                {% endif %}
+            </div>
+            <div class="rate-rub">
+                <span>{{ rate.rub.scale }}</span>
+                <span>{{ rate.rub.currency }}</span>
+                <span>=</span>
+                <span>{{ rate.rub.rate }}</span>
+                <span>BYN</span>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="card-buttons-control">
+        <a class="btn btn-outline-primary"
+           href="{% url 'info_bills' %}?bill=cold_water">{% include 'components/icons/info.html' %}</a>
+        <a class="btn btn-outline-success"
+           href="{% url 'edit_bills' %}?bill=cold_water">{% include 'components/icons/edit.html' %}</a>
+    </div>
+</div>

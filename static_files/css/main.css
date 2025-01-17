@@ -30,7 +30,7 @@
 
 
 /*	Bills	*/
-.bills-card, .inform-card{
+.bills-card, .inform-card, .rate-card{
 	width: var(--weight-card);
 	height: 6rem;
 	border: black 1px solid;
@@ -40,13 +40,16 @@
 	box-shadow: 2px 2px 20px 2px;
 	background-color: var(--card-background-color);
 }
-.bills-card-body{
+.bills-card-body, .rate-card-body{
 	margin: 5px;
 }
-.bills-card-header, .inform-card-header{
+.bills-card-header, .inform-card-header, .rate-card-header{
 	display: flex;
 	justify-content: space-between;
 }
+
+
+
 .bills-title{
 	font-weight: bold;
 }
