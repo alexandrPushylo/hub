@@ -165,7 +165,7 @@ def prepare_currency_data(currency_url: A.CurrencyURL):
                 date=date-U.timedelta(days=1),
                 currency=currency,
             )
-            difference = float(rate) - prev_exc_rate.rate
+            difference = round(float(rate) - float(prev_exc_rate.rate), 2)
         except ExchangeRate.DoesNotExist:
             difference = 0
 
