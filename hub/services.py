@@ -27,12 +27,12 @@ def get_bills(bill: type[Electricity] | type[HotWater] | type[ColdWater] | type[
 
         if bill in (Electricity, HotWater, ColdWater):
             out['indications'] = last_bill.indications
-            out['rate'] = last_bill.rate
+            out['rate'] = str(last_bill.rate)
 
         out['id'] = last_bill.id
         out['title'] = last_bill.title
         out['description'] = last_bill.description
-        out['amount'] = last_bill.amount
+        out['amount'] = str(last_bill.amount)
         out['payment_date'] = last_bill.payment_date
     return out
 
