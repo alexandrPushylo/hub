@@ -64,8 +64,7 @@ def set_bills(bill: type[Electricity] | type[HotWater] | type[ColdWater] | type[
 
         diff_days = (U.TODAY() - payment_date).days
         last_bill = bill.objects.filter().order_by('payment_date').last()
-
-        if not last_bill or U.TODAY().month > last_bill.payment_date.month or diff_days > 10:
+        if not last_bill or U.TODAY().month != last_bill.payment_date.month or diff_days > 14:
             log.debug('set_bills() - ADD')
             new_bill = bill()
             # payment_date = U.TODAY()
