@@ -73,7 +73,7 @@ def set_bills(bill: type[Electricity] | type[HotWater] | type[ColdWater] | type[
             new_bill.payment_date = payment_date
             new_bill.description = description
             if bill not in (Rent,):
-                diff_indications = last_bill.indications - indications
+                diff_indications = indications - last_bill.indications
                 new_bill.indications = indications
                 new_bill.rate = rate
                 new_bill.amount = calculate_amount(rate, diff_indications)
