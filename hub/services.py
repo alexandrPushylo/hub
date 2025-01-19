@@ -73,9 +73,10 @@ def set_bills(bill: type[Electricity] | type[HotWater] | type[ColdWater] | type[
             new_bill.payment_date = payment_date
             new_bill.description = description
             if bill not in (Rent,):
+                diff_indications = last_bill.indications - indications
                 new_bill.indications = indications
                 new_bill.rate = rate
-                new_bill.amount = calculate_amount(rate, indications)
+                new_bill.amount = calculate_amount(rate, diff_indications)
             else:
                 new_bill.amount = amount
             new_bill.save()
@@ -93,10 +94,10 @@ def get_inform_data()-> dict:
     return out
 
 
-def calculate_amount(rate: float, indications:int)->float:
-    if not indications or not rate:
+def calculate_amount(rate: float, diff_indications:int)->float:
+    if not diff_indications or not rate:
         raise ValueError('indications and rate are required')
-    return float(rate) * int(indications)
+    return float(rate) * int(diff_indications)
 
 
 def get_currency_data(currency_url: A.CurrencyURL) -> dict:
