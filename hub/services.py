@@ -98,7 +98,7 @@ def get_inform_data()-> dict:
 
 
 def calculate_amount(rate: float, diff_indications:int)->float:
-    if not diff_indications or not rate:
+    if diff_indications is None or rate is None:
         raise ValueError('indications and rate are required')
     return float(rate) * int(diff_indications)
 
