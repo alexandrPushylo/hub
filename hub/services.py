@@ -17,7 +17,7 @@ def get_bills(bill: type[Electricity] | type[HotWater] | type[ColdWater] | type[
     out = {}
     last_bill = bill.objects.filter().order_by('payment_date').last()
     if last_bill:
-        prev_bill = bill.objects.filter(payment_date__lt=last_bill.payment_date).last()
+        prev_bill = bill.objects.filter(payment_date__lt=last_bill.payment_date).first()
         if prev_bill:
             diff_amount = last_bill.amount - prev_bill.amount
             out['diff_amount'] = diff_amount
