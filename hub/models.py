@@ -92,7 +92,7 @@ class ColdWater(models.Model):
     description = models.TextField(verbose_name='Описание', blank=True, null=True)
     indications = models.IntegerField(verbose_name='Показания')
     amount = models.DecimalField(max_digits=9, decimal_places=2, verbose_name='Сумма', blank=True, null=True)
-    rate = models.DecimalField(max_digits=5, decimal_places=4, verbose_name='Тариф')
+    rate = models.DecimalField(max_digits=7, decimal_places=4, verbose_name='Тариф')
     payment_date = models.DateField(verbose_name='Дата платежа')
 
     def __str__(self):
@@ -109,7 +109,7 @@ class HotWater(models.Model):
     description = models.TextField(verbose_name='Описание', blank=True, null=True)
     indications = models.IntegerField(verbose_name='Показания')
     amount = models.DecimalField(max_digits=9, decimal_places=2, verbose_name='Сумма', blank=True, null=True)
-    rate = models.DecimalField(max_digits=5, decimal_places=4, verbose_name='Тариф')
+    rate = models.DecimalField(max_digits=7, decimal_places=4, verbose_name='Тариф')
     payment_date = models.DateField(verbose_name='Дата платежа')
 
     def __str__(self):
@@ -126,7 +126,7 @@ class Electricity(models.Model):
     description = models.TextField(verbose_name='Описание', blank=True, null=True)
     indications = models.IntegerField(verbose_name='Показания')
     amount = models.DecimalField(max_digits=9, decimal_places=2, verbose_name='Сумма', blank=True, null=True)
-    rate = models.DecimalField(max_digits=5, decimal_places=4, verbose_name='Тариф')
+    rate = models.DecimalField(max_digits=7, decimal_places=4, verbose_name='Тариф')
     payment_date = models.DateField(verbose_name='Дата платежа')
 
     def __str__(self):
