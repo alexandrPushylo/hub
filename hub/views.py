@@ -60,7 +60,7 @@ def edit_bills_view(request):
                 status = A.Status.ERROR.value
         return HttpResponse(status)
 
-    return render(request, 'bills/edit_bills.html', {'bill': bill})
+    return render(request, 'bills/edit_bills.html', {'bill': bill, 'today': U.TODAY()})
 
 
 def info_bills_view(request):

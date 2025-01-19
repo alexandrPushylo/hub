@@ -63,3 +63,7 @@ function submitEditBill() {
         },
     })
 }
+
+function setTodayToPayment_date(){
+    $('#payment_date').val($('#today_field').val());
+}

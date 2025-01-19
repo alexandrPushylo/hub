@@ -53,7 +53,10 @@ def get_info_bills(bill: type[Electricity] | type[HotWater] | type[ColdWater] | 
 def set_bills(bill: type[Electricity] | type[HotWater] | type[ColdWater] | type[Rent], data: dict) -> bool:
     try:
         payment_date = data.get('payment_date')
-        payment_date = U.datetime.strptime(payment_date, '%Y-%m-%d').date()
+        if payment_date:
+            payment_date = U.datetime.strptime(payment_date, '%Y-%m-%d').date()
+        else:
+            payment_date = U.TODAY()
         description = data.get('description')
         indications = int(data.get('indications')) if data.get('indications') else None
         rate = float(data.get('rate')) if data.get('rate') else None
@@ -65,7 +68,7 @@ def set_bills(bill: type[Electricity] | type[HotWater] | type[ColdWater] | type[
         if not last_bill or U.TODAY().month > last_bill.payment_date.month or diff_days > 10:
             log.debug('set_bills() - ADD')
             new_bill = bill()
-            payment_date = U.TODAY()
+            # payment_date = U.TODAY()
         else:
             log.debug('set_bills() - EDIT')
             new_bill = last_bill
