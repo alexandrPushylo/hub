@@ -1,5 +1,3 @@
-console.log('OK')
-
 
 $('#div-body').masonry({
 // указываем элемент-контейнер в котором расположены блоки для динамической верстки
@@ -33,8 +31,6 @@ function clickBillsCard(element){
     billsCardBody.blur()
     billsCardButtons.fadeToggle(100)
 }
-
-
 
 
 function submitEditBill() {

@@ -24,8 +24,8 @@ urlpatterns = [
     path('', V.index, name='index'),
     path('dashboard', V.dashboard_view, name='dashboard'),
     path('edit_bills/', V.edit_bills_view, name='edit_bills'),
-    path('info_bills/', V.info_bills_view, name='info_bills'),
     path('delete_bills/', V.delete_bills_view, name='delete_bills'),
+    path('info_bills', V.info_bills_view, name='info_bills'),
 
     path('api/', API.test_api, name='test_api'),
 
