@@ -32,7 +32,7 @@
 /*	Bills	*/
 .bills-card, .inform-card, .rate-card{
 	width: var(--weight-card);
-	height: 6rem;
+	/*height: 6rem;*/
 	border: black 1px solid;
 	border-radius: 10px;
 	/*padding: 5px;*/
@@ -109,8 +109,10 @@
 	text-align: center;
 	/*filter: saturate(2.2);*/
 	/*filter: blur(3px);*/
-
 }
+.button-control-group{
+}
+
 .bills-card:hover{
 	.bills-card-body{
 		filter: blur(3px);
@@ -125,6 +127,35 @@
 /* edit bills ---------------------------- */
 .edit-bills-container{
 	margin-top: 10px;
-	max-width: var(--weight-card);
+	/*max-width: var(--weight-card);*/
+	max-width: max-content;
 }
 /*----------------------------*/
+.water_supply-hr-title{
+	margin: 5px;
+}
+.water_supply-data{
+	display: flex;
+	justify-content: space-around;
+}
+.water_supply-total-data{
+	display: flex;
+	justify-content: space-around;
+}
+.water_supply-cold_water-cold_water_volume{
+	border: rgba(3, 74, 251, 0.45) solid 2px;
+	border-radius: 5px;
+	padding: 0 5px;
+}
+.water_supply-hot_water-hot_water_volume{
+	border: rgba(251, 3, 3, 0.45) solid 2px;
+	border-radius: 5px;
+	padding: 0 5px;
+}
+
+.cold_water-droplet-icon{
+	color: #0a53be;
+}
+.hot_water-droplet-icon{
+	color: #be0a0a;
+}
