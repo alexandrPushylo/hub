@@ -64,6 +64,35 @@ function submitEditBill() {
     })
 }
 
+function calculateColdWaterV(e){
+    const el_id = e.id
+    const prev_cold_water_indications = parseInt($('#prev_cold_water_indications').val());
+    const cold_water_indications = $('#cold_water_indications');
+    const cold_water_volume = $('#cold_water_volume');
+
+    if (el_id === "cold_water_indications"){
+        cold_water_volume.val(cold_water_indications.val() - prev_cold_water_indications)
+    }
+    if (el_id === "cold_water_volume"){
+        cold_water_indications.val(prev_cold_water_indications+parseInt(cold_water_volume.val()))
+    }
+}
+function calculateHotWaterV(e){
+    const el_id = e.id
+    const prev_hot_water_indications = parseInt($('#prev_hot_water_indications').val());
+    const hot_water_indications = $('#hot_water_indications');
+    const hot_water_volume = $('#hot_water_volume');
+
+    if (el_id === "hot_water_indications"){
+        hot_water_volume.val(hot_water_indications.val() - prev_hot_water_indications)
+    }
+    if (el_id === "hot_water_volume"){
+        hot_water_indications.val(prev_hot_water_indications+parseInt(hot_water_volume.val()))
+    }
+}
+
+
+
 function setTodayToPayment_date(){
     $('#payment_date').val($('#today_field').val());
 }
