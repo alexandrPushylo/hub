@@ -1,5 +1,5 @@
 from django.db import models
-from hub.assets import CURRENCY_CHOICES
+from hub.assets import CURRENCY_CHOICES, MONTH_CHOICES
 
 # Create your models here.
 
@@ -72,52 +72,32 @@ class Rent(models.Model):
         ordering = ('-payment_date',)
 
 
-class Gas(models.Model):
-    title = 'Газ'
-    description = models.TextField(verbose_name='Описание', blank=True, null=True)
-    indications = models.DecimalField(max_digits=9, decimal_places=3, verbose_name='Показания', max_length=120)
+class Water(models.Model):
+    title = 'Водоснабжение'
     payment_date = models.DateField(verbose_name='Дата платежа')
+    payment_month = models.CharField(max_length=9, verbose_name='Оплачиваемый месяц', choices=MONTH_CHOICES)
+
+    cold_water_indications = models.IntegerField(verbose_name='Показания холодной воды')
+    hot_water_indications = models.IntegerField(verbose_name='Показания горячей воды')
+    cold_water_volume = models.IntegerField(verbose_name='Объем израсходованной холодной воды', default=0)
+    hot_water_volume = models.IntegerField(verbose_name='Объем израсходованной горячей воды', default=0)
+    total_water_volume = models.IntegerField(verbose_name='Общий объем израсходованной воды', default=0)
+    total_water_amount = models.DecimalField(max_digits=9, decimal_places=2,
+                                             verbose_name='Общая сумма за водоснабжение', blank=True, null=True)
+    water_rate = models.DecimalField(max_digits=7, decimal_places=4, verbose_name='Тариф на водоснабжение')
+
+    water_heating_volume = models.DecimalField(max_digits=7, decimal_places=4, verbose_name='Подогрев воды Гкал.')
+    water_heating_rate = models.DecimalField(max_digits=9, decimal_places=4, verbose_name='Подогрев воды тариф.')
+    water_heating_amount = models.DecimalField(max_digits=9, decimal_places=2,
+                                             verbose_name='Общая сумма за подогрев воды', blank=True, null=True)
+
 
     def __str__(self):
-        return f"{self.payment_date} - {self.indications}"
+        return f"{self.payment_date} - {self.total_water_volume} кубов - {self.total_water_amount} руб."
 
     class Meta:
-        verbose_name = 'Газ'
-        verbose_name_plural = 'Газ'
-        ordering = ('-payment_date',)
-
-
-class ColdWater(models.Model):
-    title = 'Холодная вода'
-    description = models.TextField(verbose_name='Описание', blank=True, null=True)
-    indications = models.IntegerField(verbose_name='Показания')
-    amount = models.DecimalField(max_digits=9, decimal_places=2, verbose_name='Сумма', blank=True, null=True)
-    rate = models.DecimalField(max_digits=7, decimal_places=4, verbose_name='Тариф')
-    payment_date = models.DateField(verbose_name='Дата платежа')
-
-    def __str__(self):
-        return f"{self.payment_date} - {self.indications} кубов - {self.amount} руб."
-
-    class Meta:
-        verbose_name = 'Холодная вода'
-        verbose_name_plural = 'Холодная вода'
-        ordering = ('-payment_date',)
-
-
-class HotWater(models.Model):
-    title = 'Горячая вода'
-    description = models.TextField(verbose_name='Описание', blank=True, null=True)
-    indications = models.IntegerField(verbose_name='Показания')
-    amount = models.DecimalField(max_digits=9, decimal_places=2, verbose_name='Сумма', blank=True, null=True)
-    rate = models.DecimalField(max_digits=7, decimal_places=4, verbose_name='Тариф')
-    payment_date = models.DateField(verbose_name='Дата платежа')
-
-    def __str__(self):
-        return f"{self.payment_date} - {self.indications} кубов - {self.amount} руб."
-
-    class Meta:
-        verbose_name = 'Горячая вода'
-        verbose_name_plural = 'Горячая вода'
+        verbose_name = 'Водоснабжение'
+        verbose_name_plural = 'Водоснабжение'
         ordering = ('-payment_date',)
 
 
@@ -131,6 +111,9 @@ class Electricity(models.Model):
 
     def __str__(self):
         return f"{self.payment_date} - {self.indications} кВт/ч - {self.amount} руб."
+
+    def calculate_amount(self, diff_indications: int):
+        self.amount = diff_indications * self.rate
 
     class Meta:
         verbose_name = 'Электроэнергия'

@@ -1,4 +1,5 @@
-from .types import Enum
+from enum import Enum
+from typing import NamedTuple, Type
 
 
 class CurrencyURL(Enum):
@@ -11,6 +12,35 @@ CURRENCY_CHOICES = (
     ('USD', 'USD'),
     ('EUR', 'EUR'),
     ('RUB', 'RUB'),
+)
+
+class MONTH(Enum):
+    JANUARY = 'January'
+    FEBRUARY = 'February'
+    MARCH = 'March'
+    APRIL = 'April'
+    MAY = 'May'
+    JUNE = 'June'
+    JULY = 'July'
+    AUGUST = 'August'
+    SEPTEMBER = 'September'
+    OCTOBER = 'October'
+    NOVEMBER = 'November'
+    DECEMBER = 'December'
+
+MONTH_CHOICES = (
+    (MONTH.JANUARY.value, 'Январь'),
+    (MONTH.FEBRUARY.value, 'Февраль'),
+    (MONTH.MARCH.value, 'Март'),
+    (MONTH.APRIL.value, 'Апрель'),
+    (MONTH.MAY.value, 'Май'),
+    (MONTH.JUNE.value, 'Июнь'),
+    (MONTH.JULY.value, 'Июль'),
+    (MONTH.AUGUST.value, 'Август'),
+    (MONTH.SEPTEMBER.value, 'Сентябрь'),
+    (MONTH.OCTOBER.value, 'Октябрь'),
+    (MONTH.NOVEMBER.value, 'Ноябрь'),
+    (MONTH.DECEMBER.value, 'Декабрь'),
 )
 
 class Currency(Enum):

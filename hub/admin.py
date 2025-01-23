@@ -1,6 +1,8 @@
 from django.contrib import admin
 from hub.models import Debt, Debtor, ExchangeRate
-from hub.models import Rent, Gas, ColdWater, HotWater, Electricity
+from hub.models import Rent
+from hub.models import Electricity
+from hub.models import Water
 # Register your models here.
 
 admin.site.register(Debt)
@@ -19,19 +21,9 @@ class RentAdmin(admin.ModelAdmin):
     list_display = ('payment_date', 'amount')
 
 
-@admin.register(Gas)
-class GasAdmin(admin.ModelAdmin):
-    list_display = ('payment_date', 'indications')
-
-
-@admin.register(ColdWater)
-class ColdWaterAdmin(admin.ModelAdmin):
-    list_display = ('payment_date', 'indications', 'amount')
-
-
-@admin.register(HotWater)
-class HotWaterAdmin(admin.ModelAdmin):
-    list_display = ('payment_date', 'indications', 'amount')
+@admin.register(Water)
+class WaterAdmin(admin.ModelAdmin):
+    list_display = ('payment_date', 'cold_water_indications', 'hot_water_indications', 'total_water_amount')
 
 
 @admin.register(Electricity)
