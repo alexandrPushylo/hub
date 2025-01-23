@@ -64,6 +64,45 @@ function submitEditBill() {
     })
 }
 
+function submitWaterSupplyData() {
+    const operation = 'submit_water_supply_data'
+    // const app_material_description = $('#app_mat_desc_id_' + application_material_id).val()
+    $.ajax({
+        type: 'POST',
+        mode: 'same-origin',
+        url: window.location,
+        data: {
+            csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
+            operation: operation,
+            id: $('#water_supply_id').val(),
+            payment_date: $('#payment_date').val(),
+            payment_month: $('#payment_month').val(),
+
+            cold_water_indications: $('#cold_water_indications').val(),
+            hot_water_indications: $('#hot_water_indications').val(),
+
+            water_rate: $('#water_rate').val(),
+            water_heating_rate: $('#water_heating_rate').val(),
+            cold_water_volume: $('#cold_water_volume').val(),
+            hot_water_volume: $('#hot_water_volume').val(),
+            total_water_volume: $('#total_water_volume').val(),
+            total_water_amount: $('#total_water_amount').val(),
+            water_heating_volume: $('#water_heating_volume').val(),
+            water_heating_amount: $('#water_heating_amount').val(),
+            prev_cold_water_indications: $('#prev_cold_water_indications').val(),
+            prev_hot_water_indications: $('#prev_hot_water_indications').val(),
+        },
+        success: (response) => {
+            if (response === 'ok') {
+                window.location.href = '/dashboard'
+            }
+            if (response === 'error') {
+                alert('Error')
+            }
+        },
+    })
+}
+
 function calculateColdWaterV(e){
     const el_id = e.id
     const prev_cold_water_indications = parseInt($('#prev_cold_water_indications').val());
