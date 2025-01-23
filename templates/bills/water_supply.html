@@ -1,0 +1,59 @@
+<div class="bills-card">
+    <div class="water_supply bills-card-body">
+        <div class="bills-card-header">
+            <div class="bills-title">{{ water_supply.title }}</div>
+            <div class="bills-payment_date">{{ water_supply.payment_date }}</div>
+        </div>
+
+        <div>
+            <hr class="water_supply-hr-title">
+        </div>
+
+        <div class="water_supply-data">
+            <div class="hot_water-data">
+                <span class="hot_water-droplet-icon">{% include 'components/icons/droplet.html' %}</span>
+                <span>{% if water_supply.hot_water_volume > 0 %}+{% endif %}{{ water_supply.hot_water_volume }}
+                    <span class="bills-indications-unit">M<span class="bills-indications-unit-pow">3</span></span>
+                </span>
+                <span class="water_supply-hot_water-hot_water_volume">{{ water_supply.hot_water_indications }}
+                    <span class="bills-indications-unit">M<span class="bills-indications-unit-pow">3</span></span>
+                </span>
+            </div>
+            <div class="cold_water-data">
+                <span class="cold_water-droplet-icon">{% include 'components/icons/droplet.html' %}</span>
+                <span>{% if water_supply.cold_water_volume > 0 %}+{% endif %}{{ water_supply.cold_water_volume }}
+                    <span class="bills-indications-unit">M<span class="bills-indications-unit-pow">3</span></span>
+                </span>
+                <span class="water_supply-cold_water-cold_water_volume">{{ water_supply.cold_water_indications }}
+                    <span class="bills-indications-unit">M<span class="bills-indications-unit-pow">3</span></span>
+                </span>
+            </div>
+        </div>
+
+        <div class="water_supply-total-data">
+            <div class="heating-total-data">
+                <span class="hot_water-droplet-icon">{% include 'components/icons/heating.html' %}</span>
+                <span class="">{{ water_supply.water_heating_amount }}
+                <span class="bills-indications-unit">руб.</span>
+            </span>
+            </div>
+            <div class="water-total-data">
+                <span class="cold_water-droplet-icon">{% include 'components/icons/faucet.html' %}</span>
+                <span class="">{{ water_supply.total_water_amount }}
+                <span class="bills-indications-unit">руб.</span>
+            </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-buttons-control">
+        <div class="button-control-group">
+            <a class="btn btn-outline-primary"
+               href="{% url 'info_bills' %}?bill=water_supply">{% include 'components/icons/info.html' %}</a>
+            <a class="btn btn-outline-success"
+               href="{% url 'edit_bills' %}?bill=water_supply&id={{ water_supply.id }}">{% include 'components/icons/edit.html' %}</a>
+            <a class="btn btn-outline-success"
+               href="{% url 'edit_bills' %}?bill=water_supply">{% include 'components/icons/plus.html' %}</a>
+        </div>
+    </div>
+</div>
