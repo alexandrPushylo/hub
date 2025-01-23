@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 
@@ -76,7 +76,21 @@ def info_bills_view(request):
             bill = S.get_info_bills(Electricity)
         case A.Bills.RENT.value:
             bill = S.get_info_bills(Rent)
-        case _:
-            bill = None
+def delete_bills_view(request):
+    bills_id = request.GET.get('id')
+    type_of_bill = request.GET.get('bill')
+    type_of_bill = type_of_bill.strip("'") if type_of_bill else None
 
-    return render(request, 'bills/info_bills.html', bill)
+    match type_of_bill:
+        case A.Bills.WATER_SUPPLY.value:
+            WS_.delete_water_supply(bills_id)
+        # case A.Bills.COLD_WATER.value:
+        #     data = S.get_info_bills(ColdWater)
+        # case A.Bills.ELECTRICITY.value:
+        #     data = S.get_info_bills(Electricity)
+        # case A.Bills.RENT.value:
+        #     data = S.get_info_bills(Rent)
+        case _:
+            pass
+
+    return HttpResponseRedirect(f'/info_bills?bill={type_of_bill}')
