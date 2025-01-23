@@ -52,8 +52,7 @@ class Currency(Enum):
 
 class Bills(Enum):
     ELECTRICITY = 'electricity'
-    COLD_WATER = 'cold_water'
-    HOT_WATER = 'hot_water'
+    WATER_SUPPLY = 'water_supply'
     RENT = 'rent'
 
 class Status(Enum):

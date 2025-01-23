@@ -2,8 +2,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 
-from hub.models import Rent, ColdWater, HotWater, Electricity
-import hub.services as S
+from hub.models import Rent, Water, Electricity
+from hub.services import water_supply as WS_
+import hub.services_b as S
 import hub.utilites as U
 import  hub.assets as A
 
@@ -20,8 +21,7 @@ def index(request):
 def dashboard_view(request):
     out = {
         'rent': S.get_bills(Rent),
-        'cold_water': S.get_bills(ColdWater),
-        'hot_water': S.get_bills(HotWater),
+        'water_supply': WS_.get_data_water_supply(WS_.get_last_water_supply()),
         'electricity': S.get_bills(Electricity),
         'inf': S.get_inform_data(),
         'rate': S.check_currency_data(),
@@ -31,27 +31,38 @@ def dashboard_view(request):
 
 
 def edit_bills_view(request):
+    context = {
+        'today': U.TODAY(),
+        'month_choices': A.MONTH_CHOICES,
+    }
+    template_name = 'bills/edit_bills_404.html'
+
+    bills_id = request.GET.get('id')
     type_of_bill = request.GET.get('bill')
     type_of_bill = type_of_bill.strip("'") if type_of_bill else None
 
+
     match type_of_bill:
-        case A.Bills.HOT_WATER.value:
-            bill = S.get_bills(HotWater)
-        case A.Bills.COLD_WATER.value:
-            bill = S.get_bills(ColdWater)
+        case A.Bills.WATER_SUPPLY.value:
+            bill = WS_.get_water_supply_by_id(bills_id)
+            data = WS_.get_data_water_supply(bill)
+            template_name = 'bills/edit_water_supply.html'
         case A.Bills.ELECTRICITY.value:
-            bill = S.get_bills(Electricity)
+            data = S.get_bills(Electricity)
+            template_name = 'bills/edit_bills.html'
         case A.Bills.RENT.value:
-            bill = S.get_bills(Rent)
+            data = S.get_bills(Rent)
+            template_name = 'bills/edit_bills.html'
         case _:
-            bill = None
+            data = None
+    context['bill'] = data
 
     if request.method == 'POST':
         match type_of_bill:
-            case A.Bills.HOT_WATER.value:
-                status = A.Status.OK.value if S.set_bills(HotWater, request.POST) else A.Status.ERROR.value
-            case A.Bills.COLD_WATER.value:
-                status = A.Status.OK.value if S.set_bills(ColdWater, request.POST) else A.Status.ERROR.value
+            case A.Bills.WATER_SUPPLY.value:
+                bill = WS_.get_water_supply_by_id(bills_id)
+                status = A.Status.OK.value if WS_.set_data_water_supply(bill, request.POST) else A.Status.ERROR.value
+
             case A.Bills.ELECTRICITY.value:
                 status = A.Status.OK.value if S.set_bills(Electricity, request.POST) else A.Status.ERROR.value
             case A.Bills.RENT.value:
@@ -59,23 +70,36 @@ def edit_bills_view(request):
             case _:
                 status = A.Status.ERROR.value
         return HttpResponse(status)
-
-    return render(request, 'bills/edit_bills.html', {'bill': bill, 'today': U.TODAY()})
+    return render(request, template_name, context)
 
 
 def info_bills_view(request):
+    context = {
+        'title': 'Водоснабжение',
+        'month_choices': A.MONTH_CHOICES
+    }
+    template_name = 'bills/info_bills.html'
+
+    bills_id = request.GET.get('id')
     type_of_bill = request.GET.get('bill')
     type_of_bill = type_of_bill.strip("'") if type_of_bill else None
 
     match type_of_bill:
-        case A.Bills.HOT_WATER.value:
-            bill = S.get_info_bills(HotWater)
-        case A.Bills.COLD_WATER.value:
-            bill = S.get_info_bills(ColdWater)
+        case A.Bills.WATER_SUPPLY.value:
+            context['bills'] = WS_.get_info_water_supply()
+            template_name = 'bills/info_water_supply.html'
+        # case A.Bills.COLD_WATER.value:
+        #     data = S.get_info_bills(ColdWater)
         case A.Bills.ELECTRICITY.value:
-            bill = S.get_info_bills(Electricity)
+            data = S.get_info_bills(Electricity)
         case A.Bills.RENT.value:
-            bill = S.get_info_bills(Rent)
+            data = S.get_info_bills(Rent)
+        case _:
+            data = None
+
+    return render(request, template_name, context)
+
+
 def delete_bills_view(request):
     bills_id = request.GET.get('id')
     type_of_bill = request.GET.get('bill')
