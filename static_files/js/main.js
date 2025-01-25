@@ -182,3 +182,28 @@ function calculateElectricityAmount() {
     const electricity_amount = $('#electricity_amount');
     electricity_amount.val(parseInt(electricity_volume) * parseFloat(electricity_rate))
 }
+
+function submitRentData() {
+    const operation = 'submit_rent_data'
+    $.ajax({
+        type: 'POST',
+        mode: 'same-origin',
+        url: window.location,
+        data: {
+            csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
+            operation: operation,
+            id: $('#electricity_id').val(),
+            payment_date: $('#payment_date').val(),
+            payment_month: $('#payment_month').val(),
+            rent_amount: $('#rent_amount').val(),
+        },
+        success: (response) => {
+            if (response === 'ok') {
+                window.location.href = '/dashboard'
+            }
+            if (response === 'error') {
+                alert('Error')
+            }
+        },
+    })
+}

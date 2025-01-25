@@ -1,0 +1,42 @@
+{% extends 'index.html' %}
+{% block body %}
+    <div class="edit-bills-container card mx-auto">
+        <div class="card-header">
+            <span>{{ title }}</span>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <td>Дата</td>
+                    <td>Сумма</td>
+                </tr>
+                </thead>
+                <tbody>
+                {% for bill in bills %}
+                    <tr>
+                        <td>
+                            <span>{{ bill.payment_date }}</span>
+                            <hr class="m-0 p-0">
+                            {% for month in month_choices %}{% if month.0 == bill.payment_month %}
+                                <span>{{ month.1 }}</span>
+                            {% endif %}{% endfor %}
+                        </td>
+
+                        <td>
+                            <span class="text-primary">{{ bill.amount }}</span>
+                        </td>
+                        <td><a class="text-danger"
+                               href="{% url 'delete_bills' %}?bill=rent&id={{ bill.id }}">{% include 'components/icons/trash.html' %}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+        <div class="card-buttons btn-group">
+            <a class="btn btn-secondary" href="{% url 'dashboard' %}">Назад</a>
+        </div>
+    </div>
+{% endblock %}
