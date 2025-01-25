@@ -80,7 +80,7 @@ def edit_bills_view(request):
 
 def info_bills_view(request):
     context = {
-        'title': 'Водоснабжение',
+        'title': '',
         'month_choices': A.MONTH_CHOICES
     }
     template_name = 'bills/info_bills.html'
@@ -91,10 +91,9 @@ def info_bills_view(request):
 
     match type_of_bill:
         case A.Bills.WATER_SUPPLY.value:
+            context['title'] = 'Водоснабжение'
             context['bills'] = WS_.get_info_water_supply()
             template_name = 'bills/info_water_supply.html'
-        # case A.Bills.COLD_WATER.value:
-        #     data = S.get_info_bills(ColdWater)
         case A.Bills.ELECTRICITY.value:
             context['title'] = 'Электроэнергия'
             context['bills'] = E_.get_info_electricity()

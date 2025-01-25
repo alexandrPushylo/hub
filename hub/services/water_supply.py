@@ -32,13 +32,16 @@ def get_last_water_supply() -> Water:
     water_supply = Water.objects.filter().order_by('payment_date').last()
     return water_supply
 
-def get_prev_water_supply() -> Water:
+def get_prev_water_supply() -> Water | None:
     last_water_supply = get_last_water_supply()
+    if last_water_supply is None:
+        return None
     water_supply = Water.objects.filter(payment_date__lt=last_water_supply.payment_date).first()
     return water_supply
 
 def get_data_water_supply(water_supply: Water) -> dict:
     out = {}
+    out = get_prev_data_water_supply(out)
     if water_supply:
         out['title'] = water_supply.title
         out['id'] = water_supply.id
@@ -65,7 +68,7 @@ def get_data_water_supply(water_supply: Water) -> dict:
 
             out['water_heating_volume'] = str(water_supply.water_heating_volume)
             out['water_heating_rate'] = str(water_supply.water_heating_rate)
-    out = get_prev_data_water_supply(out)
+
     return out
 
 def get_prev_data_water_supply(out: dict):
