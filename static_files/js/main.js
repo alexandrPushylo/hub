@@ -126,8 +126,6 @@ function calculateHotWaterV(e){
     }
 }
 
-
-
 function setTodayToPayment_date(){
     $('#payment_date').val($('#today_field').val());
 }

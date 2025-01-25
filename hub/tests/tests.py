@@ -3,7 +3,8 @@ from django.test import TestCase
 # Create your tests here.
 
 class YourTestClass(TestCase):
-
+    def test_1(self):
+        self.assertEqual(1,1)
     # @classmethod
     # def setUpTestData(cls):
     #     print("setUpTestData: Run once to set up non-modified data for all class methods.")
@@ -22,5 +23,6 @@ class YourTestClass(TestCase):
     #     print("Method: test_false_is_true.")
     #     self.assertTrue(True)
     #
-    def test_one_plus_one_equals_two(self):
-        self.assertEqual(1 + 1, 2)
+    # def test_one_plus_one_equals_two(self):
+    #     self.assertEqual(1 + 1, 2)
+
