@@ -80,9 +80,7 @@
 	font-size: 9pt;
 	font-weight: bolder;
 }
-.bills-description{
-	font-size: 8pt;
-}
+
 .bills-indications-unit{
 	font-weight: normal;
 	font-size: .8em;
@@ -131,10 +129,10 @@
 	max-width: max-content;
 }
 /*----------------------------*/
-.water_supply-hr-title{
+.card-hr-title{
 	margin: 5px;
 }
-.water_supply-data{
+.bills-data{
 	display: flex;
 	justify-content: space-around;
 }
