@@ -59,9 +59,10 @@ class ExchangeRate(models.Model):
 
 class Rent(models.Model):
     title = 'Жировка'
-    description = models.TextField(verbose_name='Описание', blank=True, null=True)
-    amount = models.DecimalField(max_digits=9, decimal_places=2, verbose_name='Сумма')
     payment_date = models.DateField(verbose_name='Дата платежа')
+    payment_month = models.CharField(max_length=9, verbose_name='Оплачиваемый месяц', choices=MONTH_CHOICES)
+    amount = models.DecimalField(max_digits=9, decimal_places=2, verbose_name='Сумма')
+
 
     def __str__(self):
         return f"{self.payment_date} - {self.amount} руб."
