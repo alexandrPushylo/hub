@@ -8,7 +8,7 @@
             <form id="edit_bills_form">{% csrf_token %}
                 <input id="electricity_id" type="hidden" value="{{ bill.id }}">
                 <input id="today_field" type="hidden" value="{{ today.isoformat }}">
-                <input id="prev_indications" type="text" value="{{ bill.prev_indications }}">
+                <input id="prev_indications" type="hidden" value="{{ bill.prev_indications }}">
                 
                 <div class="row">
                     <div class="col-auto">

@@ -8,8 +8,8 @@
             <form id="edit_bills_form">{% csrf_token %}
                 <input id="today_field" type="hidden" value="{{ today.isoformat }}">
                 <input id="water_supply_id" type="hidden" value="{{ bill.id }}">            
-                <input id="prev_cold_water_indications" type="text" value="{{ bill.prev_cold_water_indications }}">
-                <input id="prev_hot_water_indications" type="text" value="{{ bill.prev_hot_water_indications }}">
+                <input id="prev_cold_water_indications" type="hidden" value="{{ bill.prev_cold_water_indications }}">
+                <input id="prev_hot_water_indications" type="hidden" value="{{ bill.prev_hot_water_indications }}">
                 
                 <div class="row">
                     <div class="col">
