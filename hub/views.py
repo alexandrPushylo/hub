@@ -5,6 +5,7 @@ from django.shortcuts import render
 from hub.services import water_supply as WS_
 from hub.services import electricity as E_
 from hub.services import rent as R_
+from hub.services import exchange_rate as ER_
 
 import hub.services_b as S
 import hub.utilites as U
@@ -25,8 +26,8 @@ def dashboard_view(request):
         'rent': R_.get_data_rent(R_.get_last_rent()),
         'water_supply': WS_.get_data_water_supply(WS_.get_last_water_supply()),
         'electricity': E_.get_data_electricity(E_.get_last_electricity()),
-        'inf': S.get_inform_data(),
-        'rate': S.check_currency_data(),
+        # 'inf': S.get_inform_data(),
+        'rate': ER_.check_currency_data(),
     }
     return render(request, 'dashboard.html', out)
 

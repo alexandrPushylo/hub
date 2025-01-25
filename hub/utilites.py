@@ -1,4 +1,5 @@
 from datetime import date, datetime, timedelta
+import requests
 
 from hub.models import Rent, Water, Electricity
 from hub.models import Debt, Debtor, ExchangeRate
