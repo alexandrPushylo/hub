@@ -28,4 +28,4 @@ class WaterAdmin(admin.ModelAdmin):
 
 @admin.register(Electricity)
 class ElectricityAdmin(admin.ModelAdmin):
-    list_display = ('payment_date', 'indications', 'amount')
+    list_display = ('payment_date', 'volume', 'amount')

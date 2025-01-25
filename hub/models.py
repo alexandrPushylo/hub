@@ -103,17 +103,16 @@ class Water(models.Model):
 
 class Electricity(models.Model):
     title = 'Электроэнергия'
-    description = models.TextField(verbose_name='Описание', blank=True, null=True)
-    indications = models.IntegerField(verbose_name='Показания')
+    indications = models.IntegerField(verbose_name='Показания, кВт/ч.')
+    volume = models.IntegerField(verbose_name='Израсходовано, кВт/ч.', default=0)
+
     amount = models.DecimalField(max_digits=9, decimal_places=2, verbose_name='Сумма', blank=True, null=True)
     rate = models.DecimalField(max_digits=7, decimal_places=4, verbose_name='Тариф')
     payment_date = models.DateField(verbose_name='Дата платежа')
+    payment_month = models.CharField(max_length=9, verbose_name='Оплачиваемый месяц', choices=MONTH_CHOICES)
 
     def __str__(self):
-        return f"{self.payment_date} - {self.indications} кВт/ч - {self.amount} руб."
-
-    def calculate_amount(self, diff_indications: int):
-        self.amount = diff_indications * self.rate
+        return f"{self.payment_date} - {self.volume} кВт/ч - {self.amount} руб."
 
     class Meta:
         verbose_name = 'Электроэнергия'

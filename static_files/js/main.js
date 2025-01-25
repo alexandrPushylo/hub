@@ -131,3 +131,56 @@ function calculateHotWaterV(e){
 function setTodayToPayment_date(){
     $('#payment_date').val($('#today_field').val());
 }
+
+function submitElectricityData() {
+    const operation = 'submit_electricity_data'
+    $.ajax({
+        type: 'POST',
+        mode: 'same-origin',
+        url: window.location,
+        data: {
+            csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
+            operation: operation,
+            id: $('#electricity_id').val(),
+            payment_date: $('#payment_date').val(),
+            payment_month: $('#payment_month').val(),
+
+            electricity_indications: $('#electricity_indications').val(),
+
+            electricity_volume: $('#electricity_volume').val(),
+            electricity_rate: $('#electricity_rate').val(),
+            electricity_amount: $('#electricity_amount').val(),
+            prev_indications: $('#prev_indications').val(),
+
+        },
+        success: (response) => {
+            if (response === 'ok') {
+                window.location.href = '/dashboard'
+            }
+            if (response === 'error') {
+                alert('Error')
+            }
+        },
+    })
+}
+
+function calculateElectricityV(e){
+    const el_id = e.id
+    const prev_indications = parseInt($('#prev_indications').val());
+    const electricity_indications = $('#electricity_indications');
+    const electricity_volume = $('#electricity_volume');
+
+    if (el_id === "electricity_indications"){
+        electricity_volume.val(electricity_indications.val() - prev_indications)
+    }
+    if (el_id === "electricity_volume"){
+        electricity_indications.val(prev_indications+parseInt(electricity_volume.val()))
+    }
+    calculateElectricityAmount()
+}
+function calculateElectricityAmount() {
+    const electricity_volume = $('#electricity_volume').val();
+    const electricity_rate = $('#electricity_rate').val();
+    const electricity_amount = $('#electricity_amount');
+    electricity_amount.val(parseInt(electricity_volume) * parseFloat(electricity_rate))
+}

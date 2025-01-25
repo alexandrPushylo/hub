@@ -4,6 +4,7 @@ from django.shortcuts import render
 
 from hub.models import Rent, Water, Electricity
 from hub.services import water_supply as WS_
+from hub.services import electricity as E_
 import hub.services_b as S
 import hub.utilites as U
 import  hub.assets as A
@@ -22,7 +23,7 @@ def dashboard_view(request):
     out = {
         'rent': S.get_bills(Rent),
         'water_supply': WS_.get_data_water_supply(WS_.get_last_water_supply()),
-        'electricity': S.get_bills(Electricity),
+        'electricity': E_.get_data_electricity(E_.get_last_electricity()),
         'inf': S.get_inform_data(),
         'rate': S.check_currency_data(),
     }
@@ -48,8 +49,10 @@ def edit_bills_view(request):
             data = WS_.get_data_water_supply(bill)
             template_name = 'bills/edit_water_supply.html'
         case A.Bills.ELECTRICITY.value:
-            data = S.get_bills(Electricity)
-            template_name = 'bills/edit_bills.html'
+            bill = E_.get_electricity_by_id(bills_id)
+            data = E_.get_data_electricity(bill)
+            # data = S.get_bills(Electricity)
+            template_name = 'bills/edit_electricity.html'
         case A.Bills.RENT.value:
             data = S.get_bills(Rent)
             template_name = 'bills/edit_bills.html'
@@ -64,7 +67,9 @@ def edit_bills_view(request):
                 status = A.Status.OK.value if WS_.set_data_water_supply(bill, request.POST) else A.Status.ERROR.value
 
             case A.Bills.ELECTRICITY.value:
-                status = A.Status.OK.value if S.set_bills(Electricity, request.POST) else A.Status.ERROR.value
+                bill = E_.get_electricity_by_id(bills_id)
+                status = A.Status.OK.value if E_.set_data_electricity(bill, request.POST) else A.Status.ERROR.value
+                # status = A.Status.OK.value if S.set_bills(Electricity, request.POST) else A.Status.ERROR.value
             case A.Bills.RENT.value:
                 status = A.Status.OK.value if S.set_bills(Rent, request.POST) else A.Status.ERROR.value
             case _:
@@ -91,7 +96,9 @@ def info_bills_view(request):
         # case A.Bills.COLD_WATER.value:
         #     data = S.get_info_bills(ColdWater)
         case A.Bills.ELECTRICITY.value:
-            data = S.get_info_bills(Electricity)
+            context['title'] = 'Электроэнергия'
+            context['bills'] = E_.get_info_electricity()
+            template_name = 'bills/info_electricity.html'
         case A.Bills.RENT.value:
             data = S.get_info_bills(Rent)
         case _:
@@ -108,10 +115,8 @@ def delete_bills_view(request):
     match type_of_bill:
         case A.Bills.WATER_SUPPLY.value:
             WS_.delete_water_supply(bills_id)
-        # case A.Bills.COLD_WATER.value:
-        #     data = S.get_info_bills(ColdWater)
-        # case A.Bills.ELECTRICITY.value:
-        #     data = S.get_info_bills(Electricity)
+        case A.Bills.ELECTRICITY.value:
+            E_.delete_electricity(bills_id)
         # case A.Bills.RENT.value:
         #     data = S.get_info_bills(Rent)
         case _:

@@ -4,31 +4,34 @@
             <div class="bills-title">Электроэнергия</div>
             <div class="bills-payment_date">{{ electricity.payment_date }}</div>
         </div>
-        <div class="bills-indications">
-            <div class="bills-indications-value">
-                <span>{{ electricity.indications }}</span><span class="bills-indications-unit">&nbsp;кВт/ч</span>
+
+        <div>
+            <hr class="card-hr-title">
+        </div>
+
+        <div class="bills-data">
+            <div class="">
+                <span class="electricity-icon">{% include 'components/icons/electricity.html' %}</span>
+                <span>{% if electricity.volume > 0 %}+{% endif %}{{ electricity.volume }}
+                    <span class="bills-indications-unit">кВт/ч</span>
+                </span>
+                <span class="electricity_indications">{{ electricity.indications }}
+                    <span class="bills-indications-unit">кВт/ч</span>
+                </span>
             </div>
-            <div class="bills-amount">
-                <span class="bills-amount-value">{{ electricity.amount }}</span><span class="bills-amount-currency">&nbsp;руб.</span>
+
+            <div class="">
+                <span class="bills-amount">{{ electricity.amount }}</span><span class="bills-indications-unit">&nbsp;руб.</span>
             </div>
         </div>
-        <div class="bills-difference">
-            {% if electricity.diff_indications %}
-                <div class="bills-indications-diff">
-                    <span>+{{ electricity.diff_indications }}</span><span
-                        class="bills-indications-unit">&nbsp;кВт/ч</span>
-                </div>
-            {% endif %}
-            {% if electricity.diff_amount %}
-                <div class="bills-amount-diff">
-                    <span>{{ electricity.diff_amount }}</span><span class="bills-indications-unit">&nbsp;руб.</span>
-                </div>
-            {% endif %}
-        </div>
-        <div class="bills-description">{{ electricity.description }}</div>
+    
     </div>
     <div class="card-buttons-control">
-        <a class="btn btn-outline-primary" href="{% url 'info_bills' %}?bill=electricity">{% include 'components/icons/info.html' %}</a>
-        <a class="btn btn-outline-success" href="{% url 'edit_bills' %}?bill=electricity">{% include 'components/icons/edit.html' %}</a>
+        <a class="btn btn-outline-primary"
+           href="{% url 'info_bills' %}?bill=electricity">{% include 'components/icons/info.html' %}</a>
+        <a class="btn btn-outline-success"
+           href="{% url 'edit_bills' %}?bill=electricity&id={{ electricity.id }}">{% include 'components/icons/edit.html' %}</a>
+        <a class="btn btn-outline-success"
+           href="{% url 'edit_bills' %}?bill=electricity">{% include 'components/icons/add.html' %}</a>
     </div>
 </div>

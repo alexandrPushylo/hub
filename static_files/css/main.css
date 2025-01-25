@@ -152,10 +152,19 @@
 	border-radius: 5px;
 	padding: 0 5px;
 }
+.electricity_indications{
+	border: rgb(10, 83, 190) solid 2px;
+	border-radius: 5px;
+	padding: 0 5px;
+}
+
 
 .cold_water-droplet-icon{
 	color: #0a53be;
 }
 .hot_water-droplet-icon{
 	color: #be0a0a;
+}
+.electricity-icon{
+	color: #1275e4;
 }
