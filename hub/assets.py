@@ -1,5 +1,5 @@
-from .types import Enum
-
+from enum import Enum
+from typing import NamedTuple, Type
 
 class CurrencyURL(Enum):
     USD = "https://api.nbrb.by/exrates/rates/431"
@@ -13,6 +13,35 @@ CURRENCY_CHOICES = (
     ('RUB', 'RUB'),
 )
 
+class MONTH(Enum):
+    JANUARY = 'January'
+    FEBRUARY = 'February'
+    MARCH = 'March'
+    APRIL = 'April'
+    MAY = 'May'
+    JUNE = 'June'
+    JULY = 'July'
+    AUGUST = 'August'
+    SEPTEMBER = 'September'
+    OCTOBER = 'October'
+    NOVEMBER = 'November'
+    DECEMBER = 'December'
+
+MONTH_CHOICES = (
+    (MONTH.JANUARY.value, 'Январь'),
+    (MONTH.FEBRUARY.value, 'Февраль'),
+    (MONTH.MARCH.value, 'Март'),
+    (MONTH.APRIL.value, 'Апрель'),
+    (MONTH.MAY.value, 'Май'),
+    (MONTH.JUNE.value, 'Июнь'),
+    (MONTH.JULY.value, 'Июль'),
+    (MONTH.AUGUST.value, 'Август'),
+    (MONTH.SEPTEMBER.value, 'Сентябрь'),
+    (MONTH.OCTOBER.value, 'Октябрь'),
+    (MONTH.NOVEMBER.value, 'Ноябрь'),
+    (MONTH.DECEMBER.value, 'Декабрь'),
+)
+
 class Currency(Enum):
     BYN = CURRENCY_CHOICES[0][0]
     USD = CURRENCY_CHOICES[1][0]
@@ -22,10 +51,27 @@ class Currency(Enum):
 
 class Bills(Enum):
     ELECTRICITY = 'electricity'
-    COLD_WATER = 'cold_water'
-    HOT_WATER = 'hot_water'
+    WATER_SUPPLY = 'water_supply'
     RENT = 'rent'
 
 class Status(Enum):
     OK = 'ok'
     ERROR = 'error'
+
+EDIT_BILLS_TEMPLATES = {
+    Bills.WATER_SUPPLY.value: 'bills/edit_water_supply.html',
+    Bills.RENT.value: 'bills/edit_rent.html',
+    Bills.ELECTRICITY.value: 'bills/edit_electricity.html',
+}
+
+INFO_BILLS_TEMPLATES = {
+    Bills.WATER_SUPPLY.value: 'bills/info_water_supply.html',
+    Bills.RENT.value: 'bills/info_rent.html',
+    Bills.ELECTRICITY.value: 'bills/info_electricity.html',
+}
+
+TITLE_BILLS = {
+    Bills.WATER_SUPPLY.value: 'Водоснабжение',
+    Bills.RENT.value: 'Жировка',
+    Bills.ELECTRICITY.value: 'Электроэнергия',
+}

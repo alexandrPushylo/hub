@@ -1,5 +1,3 @@
-console.log('OK')
-
 
 $('#div-body').masonry({
 // указываем элемент-контейнер в котором расположены блоки для динамической верстки
@@ -35,8 +33,6 @@ function clickBillsCard(element){
 }
 
 
-
-
 function submitEditBill() {
     const operation = 'submit_edit_bill'
     // const app_material_description = $('#app_mat_desc_id_' + application_material_id).val()
@@ -64,6 +60,150 @@ function submitEditBill() {
     })
 }
 
+function submitWaterSupplyData() {
+    const operation = 'submit_water_supply_data'
+    // const app_material_description = $('#app_mat_desc_id_' + application_material_id).val()
+    $.ajax({
+        type: 'POST',
+        mode: 'same-origin',
+        url: window.location,
+        data: {
+            csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
+            operation: operation,
+            id: $('#water_supply_id').val(),
+            payment_date: $('#payment_date').val(),
+            payment_month: $('#payment_month').val(),
+
+            cold_water_indications: $('#cold_water_indications').val(),
+            hot_water_indications: $('#hot_water_indications').val(),
+
+            water_rate: $('#water_rate').val(),
+            water_heating_rate: $('#water_heating_rate').val(),
+            cold_water_volume: $('#cold_water_volume').val(),
+            hot_water_volume: $('#hot_water_volume').val(),
+            total_water_volume: $('#total_water_volume').val(),
+            total_water_amount: $('#total_water_amount').val(),
+            water_heating_volume: $('#water_heating_volume').val(),
+            water_heating_amount: $('#water_heating_amount').val(),
+            prev_cold_water_indications: $('#prev_cold_water_indications').val(),
+            prev_hot_water_indications: $('#prev_hot_water_indications').val(),
+        },
+        success: (response) => {
+            if (response === 'ok') {
+                window.location.href = '/dashboard'
+            }
+            if (response === 'error') {
+                alert('Error')
+            }
+        },
+    })
+}
+
+function calculateColdWaterV(e){
+    const el_id = e.id
+    const prev_cold_water_indications = parseInt($('#prev_cold_water_indications').val());
+    const cold_water_indications = $('#cold_water_indications');
+    const cold_water_volume = $('#cold_water_volume');
+
+    if (el_id === "cold_water_indications"){
+        cold_water_volume.val(cold_water_indications.val() - prev_cold_water_indications)
+    }
+    if (el_id === "cold_water_volume"){
+        cold_water_indications.val(prev_cold_water_indications+parseInt(cold_water_volume.val()))
+    }
+}
+function calculateHotWaterV(e){
+    const el_id = e.id
+    const prev_hot_water_indications = parseInt($('#prev_hot_water_indications').val());
+    const hot_water_indications = $('#hot_water_indications');
+    const hot_water_volume = $('#hot_water_volume');
+
+    if (el_id === "hot_water_indications"){
+        hot_water_volume.val(hot_water_indications.val() - prev_hot_water_indications)
+    }
+    if (el_id === "hot_water_volume"){
+        hot_water_indications.val(prev_hot_water_indications+parseInt(hot_water_volume.val()))
+    }
+}
+
 function setTodayToPayment_date(){
     $('#payment_date').val($('#today_field').val());
+}
+
+function submitElectricityData() {
+    const operation = 'submit_electricity_data'
+    $.ajax({
+        type: 'POST',
+        mode: 'same-origin',
+        url: window.location,
+        data: {
+            csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
+            operation: operation,
+            id: $('#electricity_id').val(),
+            payment_date: $('#payment_date').val(),
+            payment_month: $('#payment_month').val(),
+
+            electricity_indications: $('#electricity_indications').val(),
+
+            electricity_volume: $('#electricity_volume').val(),
+            electricity_rate: $('#electricity_rate').val(),
+            electricity_amount: $('#electricity_amount').val(),
+            prev_indications: $('#prev_indications').val(),
+
+        },
+        success: (response) => {
+            if (response === 'ok') {
+                window.location.href = '/dashboard'
+            }
+            if (response === 'error') {
+                alert('Error')
+            }
+        },
+    })
+}
+
+function calculateElectricityV(e){
+    const el_id = e.id
+    const prev_indications = parseInt($('#prev_indications').val());
+    const electricity_indications = $('#electricity_indications');
+    const electricity_volume = $('#electricity_volume');
+
+    if (el_id === "electricity_indications"){
+        electricity_volume.val(electricity_indications.val() - prev_indications)
+    }
+    if (el_id === "electricity_volume"){
+        electricity_indications.val(prev_indications+parseInt(electricity_volume.val()))
+    }
+    calculateElectricityAmount()
+}
+function calculateElectricityAmount() {
+    const electricity_volume = $('#electricity_volume').val();
+    const electricity_rate = $('#electricity_rate').val();
+    const electricity_amount = $('#electricity_amount');
+    electricity_amount.val(parseInt(electricity_volume) * parseFloat(electricity_rate))
+}
+
+function submitRentData() {
+    const operation = 'submit_rent_data'
+    $.ajax({
+        type: 'POST',
+        mode: 'same-origin',
+        url: window.location,
+        data: {
+            csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
+            operation: operation,
+            id: $('#electricity_id').val(),
+            payment_date: $('#payment_date').val(),
+            payment_month: $('#payment_month').val(),
+            rent_amount: $('#rent_amount').val(),
+        },
+        success: (response) => {
+            if (response === 'ok') {
+                window.location.href = '/dashboard'
+            }
+            if (response === 'error') {
+                alert('Error')
+            }
+        },
+    })
 }

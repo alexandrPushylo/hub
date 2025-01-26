@@ -1,0 +1,79 @@
+{% extends 'index.html' %}
+{% block body %}
+    <div class="edit-bills-container card mx-auto">
+        <div class="card-header">
+            <span>{{ bill.title }}</span>
+        </div>
+        <div class="card-body">
+            <form id="edit_bills_form">{% csrf_token %}
+                <input id="electricity_id" type="hidden" value="{{ bill.id }}">
+                <input id="today_field" type="hidden" value="{{ today.isoformat }}">
+                <input id="prev_indications" type="hidden" value="{{ bill.prev_indications }}">
+                
+                <div class="row">
+                    <div class="col-auto">
+                        <label class="">Дата платежа
+                            <input id="payment_date" class="form-control" type="date"
+                                   value="{{ bill.payment_date.isoformat }}">
+                        </label>
+                        <button id="btn_set_today" type="button"                                
+                                onclick="setTodayToPayment_date()"
+                                class="btn btn-outline-primary p-1 mb-1">Сегодня</button>
+                    </div>
+                    <div class="col">
+                        <label>Оплачиваемый месяц
+                            <select class="form-select" name="month_choices" id="payment_month">
+                                {% for month in month_choices %}
+                                    <option {% if month.0 == bill.payment_month %}selected{% endif %}
+                                            value="{{ month.0 }}">{{ month.1 }}</option>
+                                {% endfor %}
+                            </select>
+                        </label>                        
+                    </div>
+                </div>
+                
+            <div><hr></div>
+            
+            <div class="row">
+                <label class="col">Показания, кВт/ч.
+                    <input id="electricity_indications" class="form-control" 
+                           onchange="calculateElectricityV(this)"
+                           type="number" required min="0" step="1"
+                           value="{{ bill.indications }}">
+                </label>
+                <label class="col">Израсходовано, кВт/ч.
+                    <input id="electricity_volume" class="form-control" required 
+                           onchange="calculateElectricityV(this)"
+                           type="number" min="0" step="1"
+                           value="{{ bill.volume }}">
+                </label>
+            </div>
+                
+            <div><hr></div>
+            
+            <div class="row">
+                <label class="col">Тариф, руб.
+                    <input id="electricity_rate" class="form-control" required type="number" min="0" step="0.0001"
+                           value="{{ bill.rate }}">
+                </label>                
+            </div>
+                
+            <div><hr></div>
+                        
+            <div class="row">
+                <label class="col">Сумма, руб.
+                    <input id="electricity_amount" class="form-control" type="number" min="0" step="0.01"
+                           value="{{ bill.amount }}">
+                </label>
+            </div>
+
+            
+            </form>
+
+        </div>
+        <div class="card-buttons btn-group">
+            <a class="btn btn-secondary" href="{% url 'dashboard' %}">Отмена</a>
+            <button class="btn btn-success" onclick="submitElectricityData()" type="button">Сохранить</button>
+        </div>
+    </div>
+{% endblock %}

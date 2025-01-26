@@ -11,8 +11,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
 from pathlib import Path
+from dotenv import load_dotenv, find_dotenv
 
-from config import creds
+# from config import creds
+load_dotenv(find_dotenv())
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,12 +24,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = creds.SECRET_KEY
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = creds.DEBUG
-
-ALLOWED_HOSTS = creds.ALLOWED_HOSTS
+DEBUG = os.environ.get('DEBUG')
+ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOSTS')]
 
 
 # Application definition
@@ -77,7 +78,16 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = creds.DATABASES
+DATABASES = {
+    'default': {
+        "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),
+        "NAME": os.environ.get("SQL_DATABASE", os.path.join(BASE_DIR, "db.sqlite3")),
+        "USER": os.environ.get("SQL_USER", "user"),
+        "PASSWORD": os.environ.get("SQL_PASSWORD", "password"),
+        "HOST": os.environ.get("SQL_HOST", "localhost"),
+        "PORT": os.environ.get("SQL_PORT", "5432"),
+    },
+}
 
 
 # Password validation
@@ -115,15 +125,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 # STATIC_URL = 'static/'
-STATIC_URL = creds.STATIC_URL
+STATIC_URL = os.environ.get('STATIC_URL')
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static_files'), ]
 
 # STATIC_ROOT = BASE_DIR / 'static'
-STATIC_ROOT = creds.STATIC_ROOT
+STATIC_ROOT = os.environ.get('STATIC_ROOT')
 
-MEDIA_URL = creds.MEDIA_URL
-MEDIA_ROOT = creds.MEDIA_ROOT
+MEDIA_URL = os.environ.get('MEDIA_URL')
+MEDIA_ROOT = os.environ.get('MEDIA_ROOT')
 
 
 # Default primary key field type
