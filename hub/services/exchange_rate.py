@@ -8,8 +8,21 @@ log = getLogger(__name__)
 
 
 def get_currency_data(currency_url: A.CurrencyURL) -> dict:
-    response = U.requests.get(currency_url.value)
-    return response.json()
+    try:
+        response = U.requests.get(currency_url.value)
+        return response.json()
+    except U.requests.exceptions.ConnectTimeout as e:
+        log.error(e)
+        return {}
+    except U.requests.exceptions.HTTPError as e:
+        log.error(e)
+        return {}
+    except U.requests.exceptions.RequestException as e:
+        log.error(e)
+        return {}
+    except Exception as e:
+        log.error(e)
+        return {}
 
 
 def convert_currency(amount: int, to_currency: A.CurrencyURL, reverse: bool = False) -> float:
