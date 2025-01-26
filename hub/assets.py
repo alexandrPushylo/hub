@@ -1,7 +1,6 @@
 from enum import Enum
 from typing import NamedTuple, Type
 
-
 class CurrencyURL(Enum):
     USD = "https://api.nbrb.by/exrates/rates/431"
     EUR = "https://api.nbrb.by/exrates/rates/451"
@@ -58,3 +57,21 @@ class Bills(Enum):
 class Status(Enum):
     OK = 'ok'
     ERROR = 'error'
+
+EDIT_BILLS_TEMPLATES = {
+    Bills.WATER_SUPPLY.value: 'bills/edit_water_supply.html',
+    Bills.RENT.value: 'bills/edit_rent.html',
+    Bills.ELECTRICITY.value: 'bills/edit_electricity.html',
+}
+
+INFO_BILLS_TEMPLATES = {
+    Bills.WATER_SUPPLY.value: 'bills/info_water_supply.html',
+    Bills.RENT.value: 'bills/info_rent.html',
+    Bills.ELECTRICITY.value: 'bills/info_electricity.html',
+}
+
+TITLE_BILLS = {
+    Bills.WATER_SUPPLY.value: 'Водоснабжение',
+    Bills.RENT.value: 'Жировка',
+    Bills.ELECTRICITY.value: 'Электроэнергия',
+}
