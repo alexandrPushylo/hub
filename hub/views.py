@@ -125,4 +125,7 @@ def delete_bills_view(request):
         case _:
             pass
 
-    return HttpResponseRedirect(f'/info_bills?bill={type_of_bill}')
+    return HttpResponseRedirect(f'/info_bills?bill={type_of_bill}')def dev_view(request):
+    context = {}
+    template_name = 'dev.html'
+    return render(request, template_name, context)

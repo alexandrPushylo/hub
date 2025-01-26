@@ -28,6 +28,7 @@ urlpatterns = [
     path('info_bills', V.info_bills_view, name='info_bills'),
 
     path('api/', API.test_api, name='test_api'),
+    path('dev', V.dev_view, name='dev'),
 
 
 
