@@ -20,6 +20,24 @@ NOW = datetime.now().time
 MONTH = datetime.now().month
 
 
+def get_data_json(url: str) -> dict:
+    try:
+        response = requests.get(url)
+        return response.json()
+    except requests.exceptions.ConnectTimeout as e:
+        log.error(e)
+        return {}
+    except requests.exceptions.HTTPError as e:
+        log.error(e)
+        return {}
+    except requests.exceptions.RequestException as e:
+        log.error(e)
+        return {}
+    except Exception as e:
+        log.error(e)
+        return {}
+
+
 def get_ru_month(month_eng: str) -> str:
     for month in A.MONTH_CHOICES:
         if month[0] == month_eng:
