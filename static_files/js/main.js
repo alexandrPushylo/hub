@@ -111,6 +111,7 @@ function calculateColdWaterV(e){
     if (el_id === "cold_water_volume"){
         cold_water_indications.val(prev_cold_water_indications+parseInt(cold_water_volume.val()))
     }
+    calculateTotalWaterVolume()
 }
 function calculateHotWaterV(e){
     const el_id = e.id
@@ -124,7 +125,30 @@ function calculateHotWaterV(e){
     if (el_id === "hot_water_volume"){
         hot_water_indications.val(prev_hot_water_indications+parseInt(hot_water_volume.val()))
     }
+    calculateTotalWaterVolume()
 }
+
+function calculateTotalWaterVolume(){
+    const total_water_volume = $('#total_water_volume');
+    const cold_water_volume = $('#cold_water_volume').val();
+    const hot_water_volume = $('#hot_water_volume').val();
+    total_water_volume.val(parseInt(cold_water_volume) + parseInt(hot_water_volume))
+    calculateWaterAmount()
+}
+function calculateWaterAmount(){
+    const total_water_amount = $('#total_water_amount');
+    const total_water_volume = $('#total_water_volume').val();
+    const water_rate = $('#water_rate').val();
+    total_water_amount.val(parseInt(total_water_volume) + parseFloat(water_rate))
+}
+function calculateWaterHeatingAmount(){
+    const water_heating_amount = $('#water_heating_amount');
+    const water_heating_volume = $('#water_heating_volume').val();
+    const water_heating_rate = $('#water_heating_rate').val();
+    water_heating_amount.val(parseFloat(water_heating_volume) + parseFloat(water_heating_rate))
+}
+
+
 
 function setTodayToPayment_date(){
     $('#payment_date').val($('#today_field').val());
