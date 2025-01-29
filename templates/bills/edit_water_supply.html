@@ -37,13 +37,13 @@
             
             <div class="row">
                 <label class="col">Показания холодной воды, куб.
-                    <input id="cold_water_indications" class="form-control" 
+                    <input id="cold_water_indications" class="form-control border-primary" 
                            onchange="calculateColdWaterV(this)"
                            type="number" required min="0" step="1"
                            value="{{ bill.cold_water_indications }}">
                 </label>
                 <label class="col">Показания горячей воды, куб.
-                    <input id="hot_water_indications" class="form-control" 
+                    <input id="hot_water_indications" class="form-control border-danger" 
                            onchange="calculateHotWaterV(this)"
                            type="number" required min="0" step="1"
                            value="{{ bill.hot_water_indications }}">
@@ -52,13 +52,13 @@
             
             <div class="row">
                 <label class="col">V холодной воды, куб.
-                    <input id="cold_water_volume" class="form-control" required 
+                    <input id="cold_water_volume" class="form-control border-primary" required 
                            onchange="calculateColdWaterV(this)"
                            type="number" min="0" step="1"
                            value="{{ bill.cold_water_volume }}">
                 </label>
                 <label class="col">V горячей воды, куб.
-                    <input id="hot_water_volume" class="form-control" required 
+                    <input id="hot_water_volume" class="form-control border-danger" required 
                            onchange="calculateHotWaterV(this)"
                            type="number" min="0" step="1"
                            value="{{ bill.hot_water_volume }}">
@@ -74,13 +74,17 @@
                 </label>
 
                 <label class="col">Подогрев воды тариф, руб.
-                    <input id="water_heating_rate" class="form-control" required type="number" min="0" step="0.0001"
+                    <input id="water_heating_rate" class="form-control border-danger" 
+                           required type="number" min="0" step="0.0001"
+                           onchange="calculateWaterHeatingAmount()"
                            value="{{ bill.water_heating_rate }}">
                 </label>
             </div>
             <div class="row">
                 <label class="col-auto">Подогрев воды, Гкал.
-                    <input id="water_heating_volume" class="form-control" required type="number" min="0" step="0.0001"
+                    <input id="water_heating_volume" class="form-control border-danger" 
+                           required type="number" min="0" step="0.0001"
+                           onchange="calculateWaterHeatingAmount()"
                            value="{{ bill.water_heating_volume }}">
                 </label>
             </div>
