@@ -32,34 +32,7 @@ function clickBillsCard(element){
     billsCardButtons.fadeToggle(100)
 }
 
-
-function submitEditBill() {
-    const operation = 'submit_edit_bill'
-    // const app_material_description = $('#app_mat_desc_id_' + application_material_id).val()
-    $.ajax({
-        type: 'POST',
-        mode: 'same-origin',
-        url: window.location,
-        data: {
-            csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
-            operation: operation,
-            payment_date: $('#payment_date').val(),
-            rate: $('#rate').val(),
-            indications: $('#indications').val(),
-            amount: $('#amount').val(),
-            description: $('#description').val(),
-        },
-        success: (response) => {
-            if (response === 'ok') {
-                window.location.href = '/dashboard'
-            }
-            if (response === 'error') {
-                alert('Error')
-            }
-        },
-    })
-}
-
+////////////////////////////////////////////////////////////////
 function submitWaterSupplyData() {
     const operation = 'submit_water_supply_data'
     // const app_material_description = $('#app_mat_desc_id_' + application_material_id).val()
@@ -150,6 +123,7 @@ function calculateWaterHeatingAmount(){
 
 
 
+///////////////////////////////////////////////////////
 function setTodayToPayment_date(){
     $('#payment_date').val($('#today_field').val());
 }
