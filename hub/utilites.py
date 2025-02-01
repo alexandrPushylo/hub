@@ -74,9 +74,13 @@ def get_last_bill(
     return last_bill[0] if last_bill.exists() else None
 
 def get_prev_bill(
+        bill_instance: Rent | Water | Electricity,# todo==================================
         bill_type: A.Type[Rent | Water | Electricity]
 ) -> Rent | Water | Electricity | None:
-    last_bill = get_last_bill(bill_type)
+    if bill_instance is None:
+        last_bill = get_last_bill(bill_type)
+    else:
+        last_bill = bill_instance
     if last_bill:
         prev_bill = bill_type.objects.filter(payment_date__lt=last_bill.payment_date)
         return prev_bill[0] if prev_bill.exists() else None
@@ -88,15 +92,15 @@ def get_data_bill(
     data = {}
     if isinstance(bill_instance, Rent):
         data.update(RENT_S.get_data(bill_instance))
-        data.update(RENT_S.get_prev_data(get_prev_bill(Rent)))
+        data.update(RENT_S.get_prev_data(get_prev_bill(bill_instance, Rent)))
 
     elif isinstance(bill_instance, Water):
         data.update(WATER_S.get_data(bill_instance))
-        data.update(WATER_S.get_prev_data(get_prev_bill(Water)))
+        data.update(WATER_S.get_prev_data(get_prev_bill(bill_instance, Water)))
 
     elif isinstance(bill_instance, Electricity):
         data.update(ELECTRICITY_S.get_data(bill_instance))
-        data.update(ELECTRICITY_S.get_prev_data(get_prev_bill(Electricity)))
+        data.update(ELECTRICITY_S.get_prev_data(get_prev_bill(bill_instance, Electricity)))
     return data
 
 def get_data_last_bill(
