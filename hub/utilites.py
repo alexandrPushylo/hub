@@ -1,4 +1,6 @@
+from calendar import month
 from datetime import date, datetime, timedelta
+
 import requests
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -74,33 +76,35 @@ def get_last_bill(
     return last_bill[0] if last_bill.exists() else None
 
 def get_prev_bill(
-        bill_instance: Rent | Water | Electricity,# todo==================================
-        bill_type: A.Type[Rent | Water | Electricity]
+        bill_type: A.Type[Rent | Water | Electricity],
+        **kwargs
 ) -> Rent | Water | Electricity | None:
-    if bill_instance is None:
-        last_bill = get_last_bill(bill_type)
-    else:
-        last_bill = bill_instance
+    last_bill = get_last_bill(bill_type)
     if last_bill:
-        prev_bill = bill_type.objects.filter(payment_date__lt=last_bill.payment_date)
-        return prev_bill[0] if prev_bill.exists() else None
-    return None
+        if kwargs.get('bill_id'):
+            prev_bill = bill_type.objects.filter(payment_date__lt=last_bill.payment_date)
+            return prev_bill[0] if prev_bill.exists() else None
+        else:
+            return last_bill
+    else:
+        return None
 
 def get_data_bill(
-        bill_instance: Rent | Water | Electricity
+        bill_instance: Rent | Water | Electricity,
+        **kwargs
 ) -> dict[str, str]:
     data = {}
     if isinstance(bill_instance, Rent):
         data.update(RENT_S.get_data(bill_instance))
-        data.update(RENT_S.get_prev_data(get_prev_bill(bill_instance, Rent)))
+        data.update(RENT_S.get_prev_data(get_prev_bill(Rent, **kwargs)))
 
     elif isinstance(bill_instance, Water):
         data.update(WATER_S.get_data(bill_instance))
-        data.update(WATER_S.get_prev_data(get_prev_bill(bill_instance, Water)))
+        data.update(WATER_S.get_prev_data(get_prev_bill(Water, **kwargs)))
 
     elif isinstance(bill_instance, Electricity):
         data.update(ELECTRICITY_S.get_data(bill_instance))
-        data.update(ELECTRICITY_S.get_prev_data(get_prev_bill(bill_instance, Electricity)))
+        data.update(ELECTRICITY_S.get_prev_data(get_prev_bill(Electricity, **kwargs)))
     return data
 
 def get_data_last_bill(
@@ -135,7 +139,7 @@ def get_data_for_edit_view(
         bill = get_bill_by_id(bill_id, bill_type)
     else:
         bill = get_last_bill(bill_type)
-    data = get_data_bill(bill)
+    data = get_data_bill(bill, bill_id=bill_id)
     return data
 
 def get_bill_type(type_of_bill:str) -> A.Type[Rent | Water | Electricity] | None:
@@ -168,3 +172,4 @@ def set_data_bill(
             status = A.Status.OK.value
 
     return status
+
