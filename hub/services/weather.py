@@ -15,12 +15,12 @@ URL = f'{URL_server}?q={CITY}{spec_props}{WEATHER_API_KEY}'
 def get_main_indicators(data: dict) -> dict:
     try:
         return {
-            'temp': data['main']['temp'],
-            'feels_like': data['main']['feels_like'],
+            'temp': round(data['main']['temp']),
+            'feels_like': round(data['main']['feels_like']),
             'humidity': data['main']['humidity'],
             'pressure': data['main']['pressure'],
-            'temp_min': data['main']['temp_min'],
-            'temp_max': data['main']['temp_max'],
+            'temp_min': round(data['main']['temp_min']),
+            'temp_max': round(data['main']['temp_max']),
         }
     except KeyError as e:
         log.error('get_main_indicators() - [KeyError]' + str(e))
