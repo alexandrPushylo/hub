@@ -1,4 +1,3 @@
-from calendar import month
 from datetime import date, datetime, timedelta
 from dateutil.relativedelta import relativedelta
 
@@ -13,6 +12,7 @@ from hub.services import electricity as ELECTRICITY_S
 from hub.services import rent as RENT_S
 # from hub.services import exchange_rate as EXCHANGE_RATE_S
 from hub.services import weather as WEATHER_S
+from hub.services import subscriptions as SUB_S
 
 import hub.assets as A
 
@@ -185,7 +185,7 @@ def get_inform_data() -> dict:
 
 def get_weather():
     data = get_data_json(WEATHER_S.URL)
-    return data    return data
+    return data
 
 
 def get_next_payment_date(period: A.PaidPeriod, current_date: date=TODAY()) -> date:
