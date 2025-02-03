@@ -11,6 +11,7 @@ from hub.services import water_supply as WATER_S
 from hub.services import electricity as ELECTRICITY_S
 from hub.services import rent as RENT_S
 # from hub.services import exchange_rate as EXCHANGE_RATE_S
+from hub.services import weather as WEATHER_S
 
 import hub.assets as A
 
@@ -173,3 +174,14 @@ def set_data_bill(
 
     return status
 
+
+def get_inform_data() -> dict:
+    data = {
+        'today': TODAY(),
+        'weather': WEATHER_S.get_main_indicators(get_weather())
+    }
+    return data
+
+def get_weather():
+    data = get_data_json(WEATHER_S.URL)
+    return data

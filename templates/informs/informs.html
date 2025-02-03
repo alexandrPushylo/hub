@@ -1,6 +1,12 @@
-<div class="inform-card">
-    
+<div class="inform-card">    
     <div class="inform-card-header">
-        <div class="inform-today">{{ today }}</div>
+        <div class="inform-today">{{ inf.today }}</div>
+        
     </div> 
+    <div><span>Температура: </span>{{ inf.weather.temp }}</div>
+    <div><span>Ощущается как: </span>{{ inf.weather.feels_like }}</div>
+    <div><span>Влажность: </span>{{ inf.weather.humidity }}</div>
+    <div><span>Давление: </span>{{ inf.weather.pressure }}</div>
+    <div><span>Min. T.: </span>{{ inf.weather.temp_min }}</div>
+    <div><span>Max. T.: </span>{{ inf.weather.temp_max }}</div>
 </div>
