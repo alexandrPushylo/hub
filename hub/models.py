@@ -153,7 +153,7 @@ class Subscriptions(models.Model):
     date_of_creation = models.DateField(auto_now_add=True, verbose_name='Дата создания')
 
     def __str__(self):
-        return f"{self.title} :: {self.category}"
+        return f"{self.title} :: {self.next_payment_date}"
 
     class Meta:
         verbose_name = 'Подписка'
