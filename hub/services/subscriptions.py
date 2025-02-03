@@ -7,3 +7,9 @@ from logger import getLogger
 log = getLogger(__name__)
 
 
+def get_subscriptions_by_period(period: date):
+    subscriptions = Subscriptions.objects.filter(
+        next_payment_date__gte=date.today(),
+        next_payment_date__lte=period
+    )
+    return subscriptions
