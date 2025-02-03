@@ -213,3 +213,25 @@ def get_next_payment_date(period: A.PaidPeriod, current_date: date=TODAY()) -> d
         case _:
             return current_date
 
+def get_notification_date(period: A.NotificationPeriod, current_date: date) -> date | None:
+    match period:
+        case A.NotificationPeriod.D1:
+            return current_date - timedelta(days=1)
+        case A.NotificationPeriod.D3:
+            return current_date - timedelta(days=3)
+        case A.NotificationPeriod.D5:
+            return current_date - timedelta(days=5)
+        case A.NotificationPeriod.W1:
+            return current_date - timedelta(weeks=1)
+        case A.NotificationPeriod.W2:
+            return current_date - timedelta(weeks=2)
+        case A.NotificationPeriod.W3:
+            return current_date - timedelta(weeks=3)
+        case A.NotificationPeriod.M1:
+            return current_date - relativedelta(months=+1)
+        case A.NotificationPeriod.M2:
+            return current_date - relativedelta(months=+2)
+        case A.NotificationPeriod.M3:
+            return current_date - relativedelta(months=+3)
+        case _:
+            return None
