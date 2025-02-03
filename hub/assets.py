@@ -76,28 +76,54 @@ TITLE_BILLS = {
     Bills.ELECTRICITY.value: 'Электроэнергия',
 }
 
+class NotificationPeriod(Enum):
+    NOT = None
+    D1 = '1d'
+    D3 = '3d'
+    D5 = '5d'
+    W1 = '1w'
+    W2 = '2w'
+    W3 = '3w'
+    M1 = '1m'
+    M2 = '2m'
+    M3 = '3m'
+
 NOTIFICATION_PERIOD_CHOICES = (
-    (None, 'Нет'),
-    ('1d', 'За 1 день'),
-    ('3d', 'За 3 дня'),
-    ('5d', 'За 5 дней'),
-    ('1w', 'За 1 неделю'),
-    ('2w', 'За 2 недели'),
-    ('3w', 'За 3 недели'),
-    ('1m', 'За 1 месяц'),
-    ('2m', 'За 2 месяца'),
-    ('3m', 'За 3 месяца'),
+    (NotificationPeriod.NOT.value, 'Нет'),
+    (NotificationPeriod.D1.value, 'За 1 день'),
+    (NotificationPeriod.D3.value, 'За 3 дня'),
+    (NotificationPeriod.D5.value, 'За 5 дней'),
+    (NotificationPeriod.W1.value, 'За 1 неделю'),
+    (NotificationPeriod.W2.value, 'За 2 недели'),
+    (NotificationPeriod.W3.value, 'За 3 недели'),
+    (NotificationPeriod.M1.value, 'За 1 месяц'),
+    (NotificationPeriod.M2.value, 'За 2 месяца'),
+    (NotificationPeriod.M3.value, 'За 3 месяца'),
 )
+
+class PaidPeriod(Enum):
+    NOT = None
+    D1 = '1d'
+    D2 = '2d'
+    W1 = '1w'
+    W2 = '2w'
+    W3 = '3w'
+    M1 = '1m'
+    M2 = '2m'
+    M3 = '3m'
+    M6 = '6m'
+    Y1 = '1y'
+
 PAID_PERIOD_CHOICES = (
-    (None, 'Нет'),
-    ('1d', '1 день'),
-    ('2d', '2 дня'),
-    ('1w', '1 неделя'),
-    ('2w', '2 недели'),
-    ('3w', '3 недели'),
-    ('1m', '1 месяц'),
-    ('2m', '2 месяца'),
-    ('3m', '3 месяца'),
-    ('6m', '6 месяцев'),
-    ('1y', '1 год'),
+    (PaidPeriod.NOT.value, 'Нет'),
+    (PaidPeriod.D1.value, '1 день'),
+    (PaidPeriod.D2.value, '2 дня'),
+    (PaidPeriod.W1.value, '1 неделя'),
+    (PaidPeriod.W2.value, '2 недели'),
+    (PaidPeriod.W3.value, '3 недели'),
+    (PaidPeriod.M1.value, '1 месяц'),
+    (PaidPeriod.M2.value, '2 месяца'),
+    (PaidPeriod.M3.value, '3 месяца'),
+    (PaidPeriod.M6.value, '6 месяцев'),
+    (PaidPeriod.Y1.value, '1 год'),
 )
