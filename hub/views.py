@@ -27,7 +27,7 @@ def dashboard_view(request):
         'water_supply': U.get_data_last_bill(Water),
         'electricity': U.get_data_last_bill(Electricity),
         'inf': U.get_inform_data(),
-        'rate': ER_.check_currency_data(),
+        'rate': U.get_current_currency_data(),
     }
     return render(request, 'dashboard.html', out)
 

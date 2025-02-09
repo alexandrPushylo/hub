@@ -10,7 +10,7 @@ from hub.models import Rent, Water, Electricity
 from hub.services import water_supply as WATER_S
 from hub.services import electricity as ELECTRICITY_S
 from hub.services import rent as RENT_S
-# from hub.services import exchange_rate as EXCHANGE_RATE_S
+from hub.services import exchange_rate as EXCHANGE_RATE_S
 from hub.services import weather as WEATHER_S
 from hub.services import subscriptions as SUB_S
 
@@ -187,6 +187,10 @@ def get_weather():
     data = get_data_json(WEATHER_S.URL)
     return data
 
+def get_current_currency_data() -> dict:
+    return EXCHANGE_RATE_S.check_currency_data()
+
+# ====================================================================================================================
 
 def get_next_payment_date(period: A.PaidPeriod, current_date: date=TODAY()) -> date:
     match period:
