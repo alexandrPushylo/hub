@@ -157,6 +157,10 @@ class Subscriptions(models.Model):
     is_active = models.BooleanField(default=True, verbose_name='Активная')
     date_of_creation = models.DateField(auto_now_add=True, verbose_name='Дата создания')
 
+    # def calculate_total_paid_for(self):
+    #     self.total_paid_for += self.amount
+    #     self.save(update_fields=['total_paid_for'])
+
     def __str__(self):
         return f"{self.title} :: {self.next_payment_date}"
 

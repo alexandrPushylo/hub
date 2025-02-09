@@ -93,8 +93,8 @@ def subscriptions_view(request):
 def subscription_view(request):
     context = {}
     template_name = '404.html'
-
     subscription_id = request.GET.get('id')
+
     if subscription_id:
         template_name = 'subscriptions/item_subscription.html'
         subs_dict = U.get_subs_to_dict(subscription_id)

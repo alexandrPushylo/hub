@@ -172,6 +172,10 @@
 	margin-top: 10px;
 	max-width: 20rem;
 }
+.subs_header_control{
+	display: flex;
+	justify-content: space-between;
+}
 .subs_header{
 	display: flex;
 	justify-content: space-between;
