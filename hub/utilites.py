@@ -235,3 +235,59 @@ def get_notification_date(period: A.NotificationPeriod, current_date: date) -> d
             return current_date - relativedelta(months=+3)
         case _:
             return None
+
+def get_subs_by_id(subscription_id: int) -> SUB_S.Subscriptions | None:
+    return SUB_S.get_subscription_by_id(subscription_id)
+
+def get_subs_to_dict(subscription_id: int) -> dict:
+    return SUB_S.get_subscription_to_dict(subscription_id)
+
+def get_str_notification(notification_period: str) -> str:
+    for item in A.NOTIFICATION_PERIOD_CHOICES:
+        if item[0] == notification_period:
+            return item[1]
+
+def get_str_paid_period(paid_period: str) -> str:
+    for item in A.PAID_PERIOD_CHOICES:
+        if item[0] == paid_period:
+            return f'Каждые {item[1]}'
+
+
+def get_str_next_payment_date(next_payment_period: date) -> str:
+    date_diff = relativedelta(next_payment_period, TODAY())
+
+    if date_diff.years != 0:
+        if date_diff.years == 1:
+            return f'Через {date_diff.years} год'
+        elif date_diff.years in (2, 3, 4,):
+            return f'Через {date_diff.years} года'
+        else:
+            return f'Через {date_diff.years} лет'
+
+    elif date_diff.months != 0:
+        if date_diff.months == 1:
+            return f'Через {date_diff.months} месяц'
+        elif date_diff.months in (2, 3, 4,):
+            return f'Через {date_diff.months} месяца'
+        else:
+            return f'Через {date_diff.months} месяцев'
+
+    elif date_diff.weeks != 0:
+        if date_diff.weeks == 1:
+            return f'Через {date_diff.weeks} неделю'
+        elif date_diff.weeks in (2, 3, 4,):
+            return f'Через {date_diff.weeks} недели'
+        else:
+            return f'Через {date_diff.weeks} недель'
+
+    elif date_diff.days != 0:
+        if date_diff.days == 1:
+            return f'Через {date_diff.days} день'
+        elif date_diff.days in (2, 3, 4,):
+            return f'Через {date_diff.days} дня'
+        else:
+            return f'Через {date_diff.days} дней'
+    else:
+        return ''
+
+

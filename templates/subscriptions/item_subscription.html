@@ -1,0 +1,77 @@
+{% extends 'index.html' %}
+{% block body %}
+    <div class="subs_container card mx-auto">
+        <div class="card-header">
+            <div class="subs_header">
+                <div class="subs_logo">
+                    <img class="subs_logo_img" src="{{ subscription.logo.url }}" alt="logo">
+                </div>
+                <div class="subs_div_desc">
+                    <p class="subs_title">{{ subscription.title }}</p>
+                    <p class="subs_start_of_subscription">c {{ subscription.start_of_subscription }}</p>
+                </div>
+            </div>
+            <div class="subs_subheader">
+                <div class="div_next_payment">
+                    <p class="p_next_payment">{{ subscription.next_payment }}</p>
+                    <p class="p_next_next_payment_title">Следующая оплата</p>
+                </div>
+                <div class="div_spacer"></div>
+                <div class="div_amount">
+                    <p class="p_amount">{{ subscription.amount }}&nbsp;{{ subscription.currency }}</p>
+                    <p class="p_amount_title">{{ subscription.paid_period }}</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="card_body subs_body">
+            
+                <div class="sub_body_row">
+                    <span class="sub_body_title">Дата следующей оплаты</span>
+                    <span class="sub_body_value">{{ subscription.next_payment_date.isoformat }}</span>
+                </div>
+            
+            
+                <div class="sub_body_row">
+                    <span class="sub_body_title">Дата создания</span>
+                    <span class="sub_body_value">{{ subscription.date_of_creation.isoformat }}</span>
+                </div>
+            
+            
+                <div class="sub_body_row">
+                    <span class="sub_body_title">Дата начала подписки</span>
+                    <span class="sub_body_value">{{ subscription.start_of_subscription.isoformat }}</span>
+                </div>
+            
+                <div class="sub_body_row">
+                    <span class="sub_body_title">Всего оплачено</span>
+                    <span class="sub_body_value">{{ subscription.total_paid_for }}&nbsp;<span>{{ subscription.currency }}</span></span>
+                </div>
+            
+                <div class="sub_body_row">
+                    <span class="sub_body_title">Уведомления</span>
+                    <span class="sub_body_value">{{ subscription.notification_period }}</span>
+                </div>
+            
+                <div class="sub_body_row">
+                    <span class="sub_body_title">Категория</span>
+                    <span class="sub_body_value">{{ subscription.category }}</span>
+                </div>
+            
+                <div class="sub_body_row">
+                    <span class="sub_body_title">Комментарий</span>
+                    <span class="sub_body_value">{{ subscription.comment }}</span>
+                </div>
+            
+        </div>
+    
+        <div class="card-footer">
+            <div class="sub_link row">
+                <a class="sub_link_button btn btn-primary" href="{{ subscription.link }}">{% include 'components/icons/link.html' %}&nbsp;Открыть сайт</a>
+            </div>
+        </div>
+
+
+    </div>
+{% endblock %}

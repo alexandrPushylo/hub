@@ -86,6 +86,21 @@ def delete_bills_view(request):
     return HttpResponseRedirect(f'/info_bills?bill={type_of_bill}')
 
 
+def subscription_view(request):
+    context = {}
+    template_name = '404.html'
+
+    subscription_id = request.GET.get('id')
+    if subscription_id:
+        template_name = 'subscriptions/item_subscription.html'
+        subs_dict = U.get_subs_to_dict(subscription_id)
+        context['subscription'] = subs_dict
+        context['subscription']['notification_period'] = U.get_str_notification(subs_dict['notification_period'])
+        context['subscription']['paid_period'] = U.get_str_paid_period(subs_dict['paid_period'])
+        context['subscription']['next_payment'] = U.get_str_next_payment_date(subs_dict['next_payment_date'])
+    return render(request, template_name, context)
+
+
 def dev_view(request):
     context = {}
     template_name = 'dev.html'
