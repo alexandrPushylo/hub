@@ -62,7 +62,7 @@ def info_bills_view(request):
         'title': '',
         'month_choices': A.MONTH_CHOICES
     }
-    template_name = 'bills/404.html'
+    template_name = '404.html'
 
     bills_id = request.GET.get('id')
     type_of_bill = request.GET.get('bill')
