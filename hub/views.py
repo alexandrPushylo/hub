@@ -2,12 +2,6 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 from hub.models import Electricity, Rent, Water
-
-from hub.services import water_supply as WS_
-from hub.services import electricity as E_
-from hub.services import rent as R_
-from hub.services import exchange_rate as ER_
-
 import hub.utilites as U
 import  hub.assets as A
 
@@ -104,4 +98,7 @@ def subscription_view(request):
 def dev_view(request):
     context = {}
     template_name = 'dev.html'
+
     return render(request, template_name, context)
+
+

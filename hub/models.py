@@ -150,7 +150,7 @@ class Subscriptions(models.Model):
     notification_period = models.CharField(max_length=32, verbose_name='Период уведомления', choices=NOTIFICATION_PERIOD_CHOICES, default=None)
     amount = models.DecimalField(max_digits=9, decimal_places=2, verbose_name='Сумма', blank=True, null=True)
     currency = models.CharField(max_length=3, verbose_name='Валюта', choices=CURRENCY_CHOICES, default='BYN')
-    total_paid_for = models.DecimalField(max_digits=9, decimal_places=2, verbose_name='Всего уплачено', blank=True, null=True)
+    total_paid_for = models.DecimalField(max_digits=9, decimal_places=2, verbose_name='Всего оплачено', blank=True, null=True)
 
     link = models.CharField(max_length=512, verbose_name='Ссылка', null=True, blank=True)
     comment = models.TextField(verbose_name='Комментарий', null=True, blank=True)
