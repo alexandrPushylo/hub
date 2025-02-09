@@ -154,6 +154,7 @@ class Subscriptions(models.Model):
 
     link = models.CharField(max_length=512, verbose_name='Ссылка', null=True, blank=True)
     comment = models.TextField(verbose_name='Комментарий', null=True, blank=True)
+    is_active = models.BooleanField(default=True, verbose_name='Активная')
     date_of_creation = models.DateField(auto_now_add=True, verbose_name='Дата создания')
 
     def __str__(self):
