@@ -16,7 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls.static import static
 
+from config.settings import DEBUG, MEDIA_URL, MEDIA_ROOT
 from hub import views as V
 from hub import api as API
 
@@ -27,13 +29,14 @@ urlpatterns = [
     path('delete_bills/', V.delete_bills_view, name='delete_bills'),
     path('info_bills', V.info_bills_view, name='info_bills'),
 
+    path('subscription', V.subscription_view, name='subscription'),
+
     path('api/', API.test_api, name='test_api'),
     path('dev', V.dev_view, name='dev'),
 
 
 
-
-
-
     path('admin/', admin.site.urls),
 ]
+if DEBUG: # new
+    urlpatterns += static(MEDIA_URL, document_root=MEDIA_ROOT)
