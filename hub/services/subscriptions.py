@@ -69,3 +69,12 @@ def get_active_subscriptions():
         )
     return out
 
+def deactivate_subscription(subscription_id: int) -> Subscriptions | None:
+    subscription = get_subscription_by_id(subscription_id)
+    if subscription:
+        subscription.is_active = False
+        subscription.save(update_fields=['is_active'])
+        return subscription
+    else:
+        return None
+

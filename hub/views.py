@@ -105,6 +105,17 @@ def subscription_view(request):
     return render(request, template_name, context)
 
 
+def deactivate_subscription_view(request):
+    subscriptions_id = request.GET.get('id')
+
+    status = U.SUB_S.deactivate_subscription(subscriptions_id) if subscriptions_id else None
+
+    if status:
+        return HttpResponseRedirect(f'/subscriptions')
+    else:
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
 def dev_view(request):
     context = {}
     template_name = 'dev.html'
