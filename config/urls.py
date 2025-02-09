@@ -30,6 +30,7 @@ urlpatterns = [
     path('info_bills', V.info_bills_view, name='info_bills'),
 
     path('subscription', V.subscription_view, name='subscription'),
+    path('subscriptions', V.subscriptions_view, name='subscriptions'),
 
     path('api/', API.test_api, name='test_api'),
     path('dev', V.dev_view, name='dev'),

@@ -267,3 +267,31 @@
 	}
 }
 /*############################################################################*/
+.subscriptions_container{
+	margin-top: 10px;
+}
+.subscriptions_item{
+	width: var(--weight-card)
+}
+.subs_item_header{
+	display: flex;
+	justify-content: space-between;
+}
+.subs_item_logo{
+	width: 40px;
+	height: 40px;
+}
+.subs_item_body{
+	padding: 5px;
+	display: flex;
+	justify-content: space-between;
+}
+.subs_item_next_payment{
+	font-size: 10pt;
+}
+.subs_item_amount{
+	font-size: 10pt;
+	font-weight: bolder;
+}
+
+/*============================================================*/

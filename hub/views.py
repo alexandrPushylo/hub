@@ -80,6 +80,16 @@ def delete_bills_view(request):
     return HttpResponseRedirect(f'/info_bills?bill={type_of_bill}')
 
 
+def subscriptions_view(request):
+    context = {}
+    template_name = 'subscriptions/subscriptions.html'
+
+    subscriptions = U.get_subscriptions_value()
+    context['subscriptions'] = subscriptions
+
+    return render(request, template_name, context)
+
+
 def subscription_view(request):
     context = {}
     template_name = '404.html'

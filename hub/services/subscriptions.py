@@ -41,3 +41,31 @@ def get_subscription_to_dict(subscriptions_id: int) -> dict:
         'comment': subscription.comment,
         'date_of_creation': subscription.date_of_creation,
     }
+
+
+def get_active_subscriptions():
+    subscriptions = Subscriptions.objects.filter(
+        is_active=True,
+    ).select_related('category')
+    out = []
+    for subscription in subscriptions:
+        out.append(
+            {
+                'id': subscription.id,
+                'logo': subscription.logo,
+                'title': subscription.title,
+                'category': subscription.category,
+                'start_of_subscription': subscription.start_of_subscription,
+                'next_payment_date': subscription.next_payment_date,
+                'paid_period': subscription.paid_period,
+                'notification_period': subscription.notification_period,
+                'amount': subscription.amount,
+                'currency': subscription.currency,
+                'total_paid_for': subscription.total_paid_for,
+                'link': subscription.link,
+                'comment': subscription.comment,
+                'date_of_creation': subscription.date_of_creation,
+            }
+        )
+    return out
+
