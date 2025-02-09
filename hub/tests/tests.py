@@ -27,4 +27,3 @@ from django.test import TestCase
     #     self.assertEqual(1 + 1, 2)
 
     # pass
-    

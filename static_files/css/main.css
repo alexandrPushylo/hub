@@ -171,7 +171,6 @@
 .subs_container{
 	margin-top: 10px;
 	max-width: 20rem;
-
 }
 .subs_header{
 	display: flex;
@@ -262,3 +261,9 @@
 	/*padding: 5px;*/
 	text-align: center;
 }
+@media screen and (max-width: 450px) {
+	.subs_container{
+		max-width: 100vw;
+	}
+}
+/*############################################################################*/
