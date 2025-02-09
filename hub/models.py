@@ -124,6 +124,9 @@ class Electricity(models.Model):
 #   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
 #   SUBSCRIPTIONS   ---------------------------------------------------------------------------
 
+def get_logo_directory_path(instance, filename):
+    return "logos/{0}/{1}".format(str(instance.id), filename)
+
 class SubscriptionsCategory(models.Model):
     title = models.CharField(max_length=256, verbose_name='Название категории')
 
@@ -137,6 +140,7 @@ class SubscriptionsCategory(models.Model):
 
 
 class Subscriptions(models.Model):
+    logo = models.ImageField(upload_to=get_logo_directory_path, verbose_name='Лого')
     title = models.CharField(max_length=256, verbose_name='Название подписки')
     category = models.ForeignKey(SubscriptionsCategory, verbose_name='Название категории', on_delete=models.SET_NULL, null=True, blank=True)
 
