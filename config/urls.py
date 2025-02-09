@@ -31,6 +31,7 @@ urlpatterns = [
 
     path('subscription', V.subscription_view, name='subscription'),
     path('subscriptions', V.subscriptions_view, name='subscriptions'),
+    path('edit_subscription', V.edit_subscription_view, name='edit_subscription'),
     path('deactivate_subscription', V.deactivate_subscription_view, name='deactivate_subscription'),
 
     path('api/', API.test_api, name='test_api'),

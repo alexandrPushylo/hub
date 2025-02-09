@@ -1,4 +1,5 @@
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime
+from dateutil.relativedelta import relativedelta
 
 from hub.models import SubscriptionsCategory, Subscriptions
 from hub.assets import NOTIFICATION_PERIOD_CHOICES, PAID_PERIOD_CHOICES, CURRENCY_CHOICES
@@ -77,4 +78,77 @@ def deactivate_subscription(subscription_id: int) -> Subscriptions | None:
         return subscription
     else:
         return None
+
+def get_categories() -> [SubscriptionsCategory]:
+    categories = SubscriptionsCategory.objects.all().values()
+    return categories
+
+def get_subscription_instance(subscription_id: int | None) -> Subscriptions | None:
+    if subscription_id:
+        return get_subscription_by_id(subscription_id)
+    else:
+        return Subscriptions()
+
+def set_data(subscription_instance: Subscriptions, data: dict):
+    s_i = subscription_instance
+    logo_ = data['logo']
+    title_ = data['title']
+    category_ = int(data['category'])
+    # start_of_subscription_ = data['start_of_subscription']
+    start_of_subscription_ = datetime.strptime(data['start_of_subscription'], '%Y-%m-%d').date()
+    paid_period_ = data['paid_period']
+    notification_period_ = data['notification_period']
+    amount_ = float(data['amount'])
+    currency_ = data['currency']
+    link_ = data['link']
+    comment_ = data['comment']
+
+    next_payment_date_ = calculate_next_payment_date(
+        start_payment_date=start_of_subscription_,
+        paid_period=paid_period_,
+    )
+
+    total_paid_for_ = calculate_total_paid_for(
+        start_payment_date=start_of_subscription_,
+        next_payment_date=get_next_payment_date(
+            period=paid_period_,
+            current_date=start_of_subscription_
+        ),
+        amount=amount_
+    )
+
+    if logo_:
+        s_i.logo = f'logos/{s_i.id}/{logo_}'
+    s_i.title = title_
+    s_i.category_id = category_
+    s_i.start_of_subscription = start_of_subscription_
+    s_i.next_payment_date = next_payment_date_
+    s_i.paid_period = paid_period_
+    s_i.notification_period = notification_period_
+    s_i.amount = amount_
+    s_i.currency = currency_
+    s_i.total_paid_for = total_paid_for_
+    s_i.link = link_
+    s_i.comment = comment_
+    s_i.save()
+
+
+def calculate_total_paid_for(start_payment_date: date, next_payment_date: date, amount: float) -> float:
+    diff_day0 = (date.today() - start_payment_date).days
+    diff_day1 = (next_payment_date - start_payment_date).days
+
+    if diff_day1 != 0:
+        count = round(diff_day0 / diff_day1)
+        total_paid_for = amount * count
+        return total_paid_for
+    else:
+        return 0
+
+def calculate_next_payment_date(start_payment_date: date, paid_period: str) -> date:
+    next_payment_date = start_payment_date
+
+    while next_payment_date < date.today():
+        next_payment_date = get_next_payment_date(paid_period, next_payment_date)
+    return next_payment_date
+
 

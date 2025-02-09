@@ -294,4 +294,14 @@ def get_str_next_payment_date(next_payment_period: date) -> str:
     else:
         return ''
 
+def get_subscriptions_value() -> list:
+    subscriptions = SUB_S.get_active_subscriptions()
+    for subscription in subscriptions:
+        subscription['next_payment'] = get_str_next_payment_date(subscription['next_payment_date'])
+    return subscriptions
+
+
+def set_data_subscription(subscription_id: int, data: dict):
+    subscription = SUB_S.get_subscription_instance(subscription_id)
+    SUB_S.set_data(subscription, data)
 
