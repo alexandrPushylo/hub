@@ -152,3 +152,27 @@ def calculate_next_payment_date(start_payment_date: date, paid_period: str) -> d
     return next_payment_date
 
 
+def get_next_payment_date(period: str, current_date: date) -> date:
+    match period:
+        case PaidPeriod.D1.value:
+            return current_date + timedelta(days=1)
+        case PaidPeriod.D2.value:
+            return current_date + timedelta(days=2)
+        case PaidPeriod.W1.value:
+            return current_date + timedelta(weeks=1)
+        case PaidPeriod.W2.value:
+            return current_date + timedelta(weeks=2)
+        case PaidPeriod.W3.value:
+            return current_date + timedelta(weeks=3)
+        case PaidPeriod.M1.value:
+            return current_date + relativedelta(months=+1)
+        case PaidPeriod.M2.value:
+            return current_date + relativedelta(months=+2)
+        case PaidPeriod.M3.value:
+            return current_date + relativedelta(months=+3)
+        case PaidPeriod.M6.value:
+            return current_date + relativedelta(months=+6)
+        case PaidPeriod.Y1.value:
+            return current_date + relativedelta(years=+1)
+        case _:
+            return current_date

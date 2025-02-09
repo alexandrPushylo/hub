@@ -192,30 +192,6 @@ def get_current_currency_data() -> dict:
 
 # ====================================================================================================================
 
-def get_next_payment_date(period: A.PaidPeriod, current_date: date=TODAY()) -> date:
-    match period:
-        case A.PaidPeriod.D1:
-            return current_date + timedelta(days=1)
-        case A.PaidPeriod.D2:
-            return current_date + timedelta(days=2)
-        case A.PaidPeriod.W1:
-            return current_date + timedelta(weeks=1)
-        case A.PaidPeriod.W2:
-            return current_date + timedelta(weeks=2)
-        case A.PaidPeriod.W3:
-            return current_date + timedelta(weeks=3)
-        case A.PaidPeriod.M1:
-            return current_date + relativedelta(months=+1)
-        case A.PaidPeriod.M2:
-            return current_date + relativedelta(months=+2)
-        case A.PaidPeriod.M3:
-            return current_date + relativedelta(months=+3)
-        case A.PaidPeriod.M6:
-            return current_date + relativedelta(months=+6)
-        case A.PaidPeriod.Y1:
-            return current_date + relativedelta(years=+1)
-        case _:
-            return current_date
 
 def get_notification_date(period: A.NotificationPeriod, current_date: date) -> date | None:
     match period:
