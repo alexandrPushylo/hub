@@ -101,7 +101,7 @@ def subscription_view(request):
         context['subscription'] = subs_dict
         context['subscription']['notification_period'] = U.get_str_notification(subs_dict['notification_period'])
         context['subscription']['paid_period'] = U.get_str_paid_period(subs_dict['paid_period'])
-        context['subscription']['next_payment'] = U.get_str_next_payment_date(subs_dict['next_payment_date'])
+        context['subscription']['next_payment'] = U.SUB_S.get_str_next_payment_date(subs_dict['next_payment_date'])
     return render(request, template_name, context)
 
 
@@ -121,7 +121,7 @@ def edit_subscription_view(request):
         context['subscription'] = subs_dict
         # context['subscription']['notification_period'] = U.get_str_notification(subs_dict['notification_period'])
         # context['subscription']['paid_period'] = U.get_str_paid_period(subs_dict['paid_period'])
-        context['subscription']['next_payment'] = U.get_str_next_payment_date(subs_dict['next_payment_date'])
+        context['subscription']['next_payment'] = U.SUB_S.get_str_next_payment_date(subs_dict['next_payment_date'])
     else:
         # ADD MODE
         pass
