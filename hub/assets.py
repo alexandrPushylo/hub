@@ -127,3 +127,8 @@ PAID_PERIOD_CHOICES = (
     (PaidPeriod.M6.value, '6 месяцев'),
     (PaidPeriod.Y1.value, '1 год'),
 )
+
+class EditMode(Enum):
+    ADD = 'add'
+    REMOVE = 'remove'
+    EDIT = 'edit'
