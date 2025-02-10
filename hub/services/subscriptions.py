@@ -115,6 +115,10 @@ def set_data(subscription_id: int | None, data: dict, files: dict, mode: EditMod
         ),
         amount=amount_
     )
+    notification_date_ = get_notification_date(
+        notification_period=notification_period_,
+        current_date=next_payment_date_
+    )
 
     if mode == EditMode.EDIT:
         s_i = get_subscription_by_id(subscription_id)
@@ -125,6 +129,7 @@ def set_data(subscription_id: int | None, data: dict, files: dict, mode: EditMod
         s_i.next_payment_date = next_payment_date_
         s_i.paid_period = paid_period_
         s_i.notification_period = notification_period_
+        s_i.notification_date = notification_date_
         s_i.amount = amount_
         s_i.currency = currency_
         s_i.total_paid_for = total_paid_for_
@@ -140,6 +145,7 @@ def set_data(subscription_id: int | None, data: dict, files: dict, mode: EditMod
             next_payment_date=next_payment_date_,
             paid_period=paid_period_,
             notification_period=notification_period_,
+            notification_date=notification_date_,
             amount=amount_,
             currency=currency_,
             total_paid_for=total_paid_for_,
@@ -190,4 +196,25 @@ def get_next_payment_date(period: str, current_date: date) -> date:
         case PaidPeriod.Y1.value:
             return current_date + relativedelta(years=+1)
         case _:
-            return current_date
+            return current_datedef get_notification_date(notification_period: str, current_date: date) -> date | None:
+    match notification_period:
+        case NotificationPeriod.D1.value:
+            return current_date - timedelta(days=1)
+        case NotificationPeriod.D3.value:
+            return current_date - timedelta(days=3)
+        case NotificationPeriod.D5.value:
+            return current_date - timedelta(days=5)
+        case NotificationPeriod.W1.value:
+            return current_date - timedelta(weeks=1)
+        case NotificationPeriod.W2.value:
+            return current_date - timedelta(weeks=2)
+        case NotificationPeriod.W3.value:
+            return current_date - timedelta(weeks=3)
+        case NotificationPeriod.M1.value:
+            return current_date - relativedelta(months=+1)
+        case NotificationPeriod.M2.value:
+            return current_date - relativedelta(months=+2)
+        case NotificationPeriod.M3.value:
+            return current_date - relativedelta(months=+3)
+        case _:
+            return None

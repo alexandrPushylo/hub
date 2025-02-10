@@ -148,6 +148,8 @@ class Subscriptions(models.Model):
     next_payment_date = models.DateField(verbose_name='Дата следующей оплаты', null=True, blank=True)
     paid_period = models.CharField(max_length=32, verbose_name='Оплачиваемый промежуток', choices=PAID_PERIOD_CHOICES, default=None)
     notification_period = models.CharField(max_length=32, verbose_name='Период уведомления', choices=NOTIFICATION_PERIOD_CHOICES, default=None)
+    notification_date = models.DateField(verbose_name='Дата уведомления', blank=True, null=True)
+
     amount = models.DecimalField(max_digits=9, decimal_places=2, verbose_name='Сумма', blank=True, null=True)
     currency = models.CharField(max_length=3, verbose_name='Валюта', choices=CURRENCY_CHOICES, default='BYN')
     total_paid_for = models.DecimalField(max_digits=9, decimal_places=2, verbose_name='Всего оплачено', blank=True, null=True)
