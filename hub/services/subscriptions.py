@@ -1,9 +1,12 @@
 from datetime import date, timedelta, datetime
+
 from dateutil.relativedelta import relativedelta
 
 from hub.models import SubscriptionsCategory, Subscriptions
 from hub.assets import NOTIFICATION_PERIOD_CHOICES, PAID_PERIOD_CHOICES, CURRENCY_CHOICES
-from hub.assets import NotificationPeriod, PaidPeriod, Currency
+from hub.assets import NotificationPeriod, PaidPeriod, Currency, EditMode
+
+
 from logger import getLogger
 log = getLogger(__name__)
 
@@ -83,17 +86,10 @@ def get_categories() -> [SubscriptionsCategory]:
     categories = SubscriptionsCategory.objects.all().values()
     return categories
 
-def get_subscription_instance(subscription_id: int | None) -> Subscriptions | None:
-    if subscription_id:
-        return get_subscription_by_id(subscription_id)
-    else:
-        return Subscriptions()
-
 def set_data(subscription_id: int | None, data: dict, files: dict, mode: EditMode):
     logo_ = files.get('logo')
     title_ = data['title']
     category_ = int(data['category'])
-    # start_of_subscription_ = data['start_of_subscription']
     start_of_subscription_ = datetime.strptime(data['start_of_subscription'], '%Y-%m-%d').date()
     paid_period_ = data['paid_period']
     notification_period_ = data['notification_period']
@@ -167,11 +163,10 @@ def calculate_total_paid_for(start_payment_date: date, next_payment_date: date, 
 
 def calculate_next_payment_date(start_payment_date: date, paid_period: str) -> date:
     next_payment_date = start_payment_date
-
+    next_payment_date = get_next_payment_date(paid_period, next_payment_date)
     while next_payment_date < date.today():
         next_payment_date = get_next_payment_date(paid_period, next_payment_date)
     return next_payment_date
-
 
 def get_next_payment_date(period: str, current_date: date) -> date:
     match period:
@@ -196,7 +191,10 @@ def get_next_payment_date(period: str, current_date: date) -> date:
         case PaidPeriod.Y1.value:
             return current_date + relativedelta(years=+1)
         case _:
-            return current_datedef get_notification_date(notification_period: str, current_date: date) -> date | None:
+            return current_date
+
+
+def get_notification_date(notification_period: str, current_date: date) -> date | None:
     match notification_period:
         case NotificationPeriod.D1.value:
             return current_date - timedelta(days=1)

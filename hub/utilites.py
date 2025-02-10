@@ -7,6 +7,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from hub.models import Rent, Water, Electricity
 # from hub.models import Debt, Debtor, ExchangeRate
 
+
 from hub.services import water_supply as WATER_S
 from hub.services import electricity as ELECTRICITY_S
 from hub.services import rent as RENT_S

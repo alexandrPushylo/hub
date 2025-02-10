@@ -1,6 +1,7 @@
 from django.db import models
 from hub.assets import CURRENCY_CHOICES, MONTH_CHOICES, NOTIFICATION_PERIOD_CHOICES, PAID_PERIOD_CHOICES
 
+
 # Create your models here.
 
 #   DEBTS   ---------------------------------------------------------------------------
@@ -125,7 +126,7 @@ class Electricity(models.Model):
 #   SUBSCRIPTIONS   ---------------------------------------------------------------------------
 
 def get_logo_directory_path(instance, filename):
-    return "logos/{0}/{1}".format(str(instance.id), filename)
+    return "logos/{0}".format(filename)
 
 class SubscriptionsCategory(models.Model):
     title = models.CharField(max_length=256, verbose_name='Название категории')
@@ -140,7 +141,7 @@ class SubscriptionsCategory(models.Model):
 
 
 class Subscriptions(models.Model):
-    logo = models.ImageField(upload_to=get_logo_directory_path, verbose_name='Лого')
+    logo = models.ImageField(upload_to=get_logo_directory_path, verbose_name='Лого', blank=True, null=True)
     title = models.CharField(max_length=256, verbose_name='Название подписки')
     category = models.ForeignKey(SubscriptionsCategory, verbose_name='Название категории', on_delete=models.SET_NULL, null=True, blank=True)
 
@@ -158,10 +159,6 @@ class Subscriptions(models.Model):
     comment = models.TextField(verbose_name='Комментарий', null=True, blank=True)
     is_active = models.BooleanField(default=True, verbose_name='Активная')
     date_of_creation = models.DateField(auto_now_add=True, verbose_name='Дата создания')
-
-    # def calculate_total_paid_for(self):
-    #     self.total_paid_for += self.amount
-    #     self.save(update_fields=['total_paid_for'])
 
     def __str__(self):
         return f"{self.title} :: {self.next_payment_date}"
