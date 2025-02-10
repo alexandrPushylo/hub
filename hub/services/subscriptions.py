@@ -252,3 +252,13 @@ def get_str_next_payment_date(next_payment_period: date) -> str:
             return f'Через {date_diff.days} дней'
     else:
         return 'Сегодня'
+
+def check_notification():
+    subscriptions = Subscriptions.objects.filter(
+        notification_date__lte=date.today(),
+        is_active=True,
+    )
+
+    for subs in subscriptions:
+        print(f'{get_str_next_payment_date(subs.next_payment_date)} - {subs.next_payment_date}')
+        print(f'{subs.title} - {subs.amount} {subs.currency}')
