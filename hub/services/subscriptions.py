@@ -216,3 +216,39 @@ def get_notification_date(notification_period: str, current_date: date) -> date 
             return current_date - relativedelta(months=+3)
         case _:
             return None
+
+def get_str_next_payment_date(next_payment_period: date) -> str:
+    date_diff = relativedelta(next_payment_period, date.today())
+    if date_diff.years != 0:
+        if date_diff.years == 1:
+            return f'Через {date_diff.years} год'
+        elif date_diff.years in (2, 3, 4,):
+            return f'Через {date_diff.years} года'
+        else:
+            return f'Через {date_diff.years} лет'
+
+    elif date_diff.months != 0:
+        if date_diff.months == 1:
+            return f'Через {date_diff.months} месяц'
+        elif date_diff.months in (2, 3, 4,):
+            return f'Через {date_diff.months} месяца'
+        else:
+            return f'Через {date_diff.months} месяцев'
+
+    elif date_diff.weeks != 0:
+        if date_diff.weeks == 1:
+            return f'Через {date_diff.weeks} неделю'
+        elif date_diff.weeks in (2, 3, 4,):
+            return f'Через {date_diff.weeks} недели'
+        else:
+            return f'Через {date_diff.weeks} недель'
+
+    elif date_diff.days != 0:
+        if date_diff.days == 1:
+            return f'Через {date_diff.days} день'
+        elif date_diff.days in (2, 3, 4,):
+            return f'Через {date_diff.days} дня'
+        else:
+            return f'Через {date_diff.days} дней'
+    else:
+        return 'Сегодня'
