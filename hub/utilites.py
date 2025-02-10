@@ -277,7 +277,7 @@ def get_subscriptions_value() -> list:
     return subscriptions
 
 
-def set_data_subscription(subscription_id: int, data: dict):
-    subscription = SUB_S.get_subscription_instance(subscription_id)
-    SUB_S.set_data(subscription, data)
+def set_data_subscription(subscription_id: int, data: dict, files: dict):
+    mode = A.EditMode.EDIT if subscription_id else A.EditMode.ADD
+    SUB_S.set_data(subscription_id, data, files, mode=mode)
 

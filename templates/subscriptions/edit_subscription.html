@@ -6,7 +6,7 @@
         </div>
 
         <div class="card_body edit_subs_body">
-            <form id="edit_subs_form" method="post">{% csrf_token %}
+            <form id="edit_subs_form" method="post" enctype="multipart/form-data">{% csrf_token %}
                 <input name="id" type="hidden" value="{{ subscription.id }}">
                 <div class="div_edit_row">
                     <img class="img_edit_logo" src="{{ subscription.logo.url }}" alt="">

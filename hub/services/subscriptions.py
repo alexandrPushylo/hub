@@ -89,9 +89,8 @@ def get_subscription_instance(subscription_id: int | None) -> Subscriptions | No
     else:
         return Subscriptions()
 
-def set_data(subscription_instance: Subscriptions, data: dict):
-    s_i = subscription_instance
-    logo_ = data['logo']
+def set_data(subscription_id: int | None, data: dict, files: dict, mode: EditMode):
+    logo_ = files.get('logo')
     title_ = data['title']
     category_ = int(data['category'])
     # start_of_subscription_ = data['start_of_subscription']
@@ -117,20 +116,36 @@ def set_data(subscription_instance: Subscriptions, data: dict):
         amount=amount_
     )
 
-    if logo_:
-        s_i.logo = f'logos/{s_i.id}/{logo_}'
-    s_i.title = title_
-    s_i.category_id = category_
-    s_i.start_of_subscription = start_of_subscription_
-    s_i.next_payment_date = next_payment_date_
-    s_i.paid_period = paid_period_
-    s_i.notification_period = notification_period_
-    s_i.amount = amount_
-    s_i.currency = currency_
-    s_i.total_paid_for = total_paid_for_
-    s_i.link = link_
-    s_i.comment = comment_
-    s_i.save()
+    if mode == EditMode.EDIT:
+        s_i = get_subscription_by_id(subscription_id)
+        s_i.logo = logo_
+        s_i.title = title_
+        s_i.category_id = category_
+        s_i.start_of_subscription = start_of_subscription_
+        s_i.next_payment_date = next_payment_date_
+        s_i.paid_period = paid_period_
+        s_i.notification_period = notification_period_
+        s_i.amount = amount_
+        s_i.currency = currency_
+        s_i.total_paid_for = total_paid_for_
+        s_i.link = link_
+        s_i.comment = comment_
+        s_i.save()
+    elif mode == EditMode.ADD:
+        Subscriptions.objects.create(
+            logo=logo_,
+            title=title_,
+            category_id=category_,
+            start_of_subscription=start_of_subscription_,
+            next_payment_date=next_payment_date_,
+            paid_period=paid_period_,
+            notification_period=notification_period_,
+            amount=amount_,
+            currency=currency_,
+            total_paid_for=total_paid_for_,
+            link=link_,
+            comment=comment_,
+        )
 
 
 def calculate_total_paid_for(start_payment_date: date, next_payment_date: date, amount: float) -> float:

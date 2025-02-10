@@ -127,17 +127,8 @@ def edit_subscription_view(request):
         pass
 
     if request.method == "POST":
-        print(request.POST)
-        print(request.FILES)
-        if request.POST.get('id'):
-            print('edit')
-        else:
-            print('add')
-        U.set_data_subscription(request.POST.get('id'), request.POST)
-
+        U.set_data_subscription(request.POST.get('id'), request.POST, request.FILES)
         return HttpResponseRedirect(f'/subscriptions')
-
-
     return render(request, template_name, context)
 
 
