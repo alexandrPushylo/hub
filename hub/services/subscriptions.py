@@ -118,7 +118,8 @@ def set_data(subscription_id: int | None, data: dict, files: dict, mode: EditMod
 
     if mode == EditMode.EDIT:
         s_i = get_subscription_by_id(subscription_id)
-        s_i.logo = logo_
+        if logo_:
+            s_i.logo = logo_
         s_i.title = title_
         s_i.category_id = category_
         s_i.start_of_subscription = start_of_subscription_
