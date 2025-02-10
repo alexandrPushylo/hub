@@ -75,3 +75,60 @@ TITLE_BILLS = {
     Bills.RENT.value: 'Жировка',
     Bills.ELECTRICITY.value: 'Электроэнергия',
 }
+
+class NotificationPeriod(Enum):
+    NOT = None
+    D1 = '1d'
+    D3 = '3d'
+    D5 = '5d'
+    W1 = '1w'
+    W2 = '2w'
+    W3 = '3w'
+    M1 = '1m'
+    M2 = '2m'
+    M3 = '3m'
+
+NOTIFICATION_PERIOD_CHOICES = (
+    (NotificationPeriod.NOT.value, 'Нет'),
+    (NotificationPeriod.D1.value, 'За 1 день'),
+    (NotificationPeriod.D3.value, 'За 3 дня'),
+    (NotificationPeriod.D5.value, 'За 5 дней'),
+    (NotificationPeriod.W1.value, 'За 1 неделю'),
+    (NotificationPeriod.W2.value, 'За 2 недели'),
+    (NotificationPeriod.W3.value, 'За 3 недели'),
+    (NotificationPeriod.M1.value, 'За 1 месяц'),
+    (NotificationPeriod.M2.value, 'За 2 месяца'),
+    (NotificationPeriod.M3.value, 'За 3 месяца'),
+)
+
+class PaidPeriod(Enum):
+    NOT = None
+    D1 = '1d'
+    D2 = '2d'
+    W1 = '1w'
+    W2 = '2w'
+    W3 = '3w'
+    M1 = '1m'
+    M2 = '2m'
+    M3 = '3m'
+    M6 = '6m'
+    Y1 = '1y'
+
+PAID_PERIOD_CHOICES = (
+    (PaidPeriod.NOT.value, 'Нет'),
+    (PaidPeriod.D1.value, '1 день'),
+    (PaidPeriod.D2.value, '2 дня'),
+    (PaidPeriod.W1.value, '1 неделя'),
+    (PaidPeriod.W2.value, '2 недели'),
+    (PaidPeriod.W3.value, '3 недели'),
+    (PaidPeriod.M1.value, '1 месяц'),
+    (PaidPeriod.M2.value, '2 месяца'),
+    (PaidPeriod.M3.value, '3 месяца'),
+    (PaidPeriod.M6.value, '6 месяцев'),
+    (PaidPeriod.Y1.value, '1 год'),
+)
+
+class EditMode(Enum):
+    ADD = 'add'
+    REMOVE = 'remove'
+    EDIT = 'edit'

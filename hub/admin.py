@@ -3,6 +3,7 @@ from hub.models import Debt, Debtor, ExchangeRate
 from hub.models import Rent
 from hub.models import Electricity
 from hub.models import Water
+from hub.models import SubscriptionsCategory, Subscriptions
 # Register your models here.
 
 admin.site.register(Debt)
@@ -29,3 +30,13 @@ class WaterAdmin(admin.ModelAdmin):
 @admin.register(Electricity)
 class ElectricityAdmin(admin.ModelAdmin):
     list_display = ('payment_date', 'volume', 'amount')
+
+
+@admin.register(SubscriptionsCategory)
+class SubscriptionsCategoryAdmin(admin.ModelAdmin):
+    list_display = ('title',)
+
+@admin.register(Subscriptions)
+class SubscriptionsAdmin(admin.ModelAdmin):
+    list_display = ('title', 'next_payment_date', 'amount',)
+    list_display_links = ('title',)

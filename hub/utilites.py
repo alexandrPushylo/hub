@@ -1,5 +1,5 @@
-from calendar import month
 from datetime import date, datetime, timedelta
+from dateutil.relativedelta import relativedelta
 
 import requests
 from django.core.exceptions import ObjectDoesNotExist
@@ -7,11 +7,13 @@ from django.core.exceptions import ObjectDoesNotExist
 from hub.models import Rent, Water, Electricity
 # from hub.models import Debt, Debtor, ExchangeRate
 
+
 from hub.services import water_supply as WATER_S
 from hub.services import electricity as ELECTRICITY_S
 from hub.services import rent as RENT_S
-# from hub.services import exchange_rate as EXCHANGE_RATE_S
+from hub.services import exchange_rate as EXCHANGE_RATE_S
 from hub.services import weather as WEATHER_S
+from hub.services import subscriptions as SUB_S
 
 import hub.assets as A
 
@@ -185,3 +187,74 @@ def get_inform_data() -> dict:
 def get_weather():
     data = get_data_json(WEATHER_S.URL)
     return data
+
+def get_current_currency_data() -> dict:
+    return EXCHANGE_RATE_S.check_currency_data()
+
+# ====================================================================================================================
+
+def get_subs_by_id(subscription_id: int) -> SUB_S.Subscriptions | None:
+    return SUB_S.get_subscription_by_id(subscription_id)
+
+def get_subs_to_dict(subscription_id: int) -> dict:
+    return SUB_S.get_subscription_to_dict(subscription_id)
+
+def get_str_notification(notification_period: str) -> str:
+    for item in A.NOTIFICATION_PERIOD_CHOICES:
+        if item[0] == notification_period:
+            return item[1]
+
+def get_str_paid_period(paid_period: str) -> str:
+    for item in A.PAID_PERIOD_CHOICES:
+        if item[0] == paid_period:
+            return f'Каждые {item[1]}'
+
+
+def get_str_next_payment_date(next_payment_period: date) -> str:
+    date_diff = relativedelta(next_payment_period, TODAY())
+
+    if date_diff.years != 0:
+        if date_diff.years == 1:
+            return f'Через {date_diff.years} год'
+        elif date_diff.years in (2, 3, 4,):
+            return f'Через {date_diff.years} года'
+        else:
+            return f'Через {date_diff.years} лет'
+
+    elif date_diff.months != 0:
+        if date_diff.months == 1:
+            return f'Через {date_diff.months} месяц'
+        elif date_diff.months in (2, 3, 4,):
+            return f'Через {date_diff.months} месяца'
+        else:
+            return f'Через {date_diff.months} месяцев'
+
+    elif date_diff.weeks != 0:
+        if date_diff.weeks == 1:
+            return f'Через {date_diff.weeks} неделю'
+        elif date_diff.weeks in (2, 3, 4,):
+            return f'Через {date_diff.weeks} недели'
+        else:
+            return f'Через {date_diff.weeks} недель'
+
+    elif date_diff.days != 0:
+        if date_diff.days == 1:
+            return f'Через {date_diff.days} день'
+        elif date_diff.days in (2, 3, 4,):
+            return f'Через {date_diff.days} дня'
+        else:
+            return f'Через {date_diff.days} дней'
+    else:
+        return ''
+
+def get_subscriptions_value() -> list:
+    subscriptions = SUB_S.get_active_subscriptions()
+    for subscription in subscriptions:
+        subscription['next_payment'] = get_str_next_payment_date(subscription['next_payment_date'])
+    return subscriptions
+
+
+def set_data_subscription(subscription_id: int, data: dict, files: dict):
+    mode = A.EditMode.EDIT if subscription_id else A.EditMode.ADD
+    SUB_S.set_data(subscription_id, data, files, mode=mode)
+

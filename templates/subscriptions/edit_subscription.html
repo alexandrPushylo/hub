@@ -1,0 +1,111 @@
+{% extends 'index.html' %}
+{% block body %}
+    <div class="edit_subs_container card mx-auto">
+        <div class="edit_subs_header_control">
+            <a href="{% url 'subscriptions' %}" class="btn btn-light">{% include 'components/icons/close.html' %}</a>
+        </div>
+
+        <div class="card_body edit_subs_body">
+            <form id="edit_subs_form" method="post" enctype="multipart/form-data">{% csrf_token %}
+                <input name="id" type="hidden" value="{{ subscription.id }}">
+                <div class="div_edit_row">
+                    <img class="img_edit_logo" src="{{ subscription.logo.url }}" alt="">
+                    <label class="">
+                        <input name="logo" class="io_edit_logo" type="file" value="{{ subscription.logo }}">
+                    </label>
+                </div>
+
+                <div class="div_edit_row">
+                    <label class="label_edit_row"><span>Название</span>
+                        <input name="title" class="form-control" type="text" value="{{ subscription.title }}">
+                    </label>
+                </div>
+
+                <div class="div_edit_row">
+                    <label class="label_edit_row"><span>Дата начала подписки</span>
+                        <input name="start_of_subscription" class="form-control" type="date"
+                               value="{{ subscription.start_of_subscription.isoformat }}">
+                    </label>
+                </div>
+
+                <div class="div_edit_row">
+                    <label class="label_edit_row"><span>Категория</span>
+                        <select class="form-select" name="category">
+                            <option value="">---</option>
+                            {% for category in categories %}
+                                <option value="{{ category.id }}"
+                                        {% if category.id == subscription.category.id %}selected{% endif %}
+                                >{{ category.title }}</option>
+                            {% endfor %}
+                        </select>
+                    </label>
+                </div>
+
+                <div class="div_edit_row">
+                    <label class="label_edit_row"><span>Оплачиваемый промежуток</span>
+                        <select class="form-select" name="paid_period">
+                            {% for paid_period in paid_period_choices %}
+                                <option value="{{ paid_period.0 }}"
+                                        {% if paid_period.0 == subscription.paid_period %}selected{% endif %}
+                                >{{ paid_period.1 }}</option>
+                            {% endfor %}
+                        </select>
+                    </label>
+                </div>
+                
+                <div class="div_edit_row">
+                    <label class="label_edit_row"><span>Уведомить</span>
+                        <select class="form-select" name="notification_period">
+                            {% for notification_period in notification_period_choices %}
+                                <option value="{{ notification_period.0 }}"
+                                        {% if notification_period.0 == subscription.notification_period %}selected{% endif %}
+                                >{{ notification_period.1 }}</option>
+                            {% endfor %}
+                        </select>
+                    </label>
+                </div>
+
+                <div class="div_edit_row">
+                    <label class="row m-0 p-0"><span>Сумма</span>
+                        <input name="amount" class="form-control col w-auto" type="number" min="0" step="0.01"
+                               value="{{ subscription.amount }}">
+                        <select class="form-select col-auto w-auto" name="currency">
+                            {% for currency in currencies %}
+                                <option value="{{ currency.0 }}"
+                                        {% if currency.0 == subscription.currency %}selected{% endif %}
+                                >{{ currency.1 }}</option>
+                            {% endfor %}
+                        </select>
+                    </label>
+                </div>
+
+                <div class="div_edit_row">
+                    <label class="label_edit_row"><span>Ссылка</span>
+                        <input name="link" class="form-control" type="text" value="{{ subscription.link }}">
+                    </label>
+                </div>
+
+                <div class="div_edit_row">
+                    <label class="label_edit_row"><span>Комментарий</span>
+                        <textarea name="comment"
+                                  class="form-control"
+                                  rows="2">{{ subscription.comment }}</textarea>
+                    </label>
+                </div>
+
+            </form>
+        </div>
+
+        <div class="card-footer">
+            <div class="sub_link row">
+                <button type="submit"
+                        form="edit_subs_form"
+                        class="btn btn-success"
+                >Сохранить
+                </button>
+            </div>
+        </div>
+
+
+    </div>
+{% endblock %}

@@ -1,5 +1,6 @@
 from django.db import models
-from hub.assets import CURRENCY_CHOICES, MONTH_CHOICES
+from hub.assets import CURRENCY_CHOICES, MONTH_CHOICES, NOTIFICATION_PERIOD_CHOICES, PAID_PERIOD_CHOICES
+
 
 # Create your models here.
 
@@ -121,5 +122,52 @@ class Electricity(models.Model):
         ordering = ('-payment_date',)
 
 #   BILLS   ---------------------------------------------------------------------------
+#   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
+#   SUBSCRIPTIONS   ---------------------------------------------------------------------------
+
+def get_logo_directory_path(instance, filename):
+    return "logos/{0}".format(filename)
+
+class SubscriptionsCategory(models.Model):
+    title = models.CharField(max_length=256, verbose_name='Название категории')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
+        ordering = ('title',)
+
+
+class Subscriptions(models.Model):
+    logo = models.ImageField(upload_to=get_logo_directory_path, verbose_name='Лого', blank=True, null=True)
+    title = models.CharField(max_length=256, verbose_name='Название подписки')
+    category = models.ForeignKey(SubscriptionsCategory, verbose_name='Название категории', on_delete=models.SET_NULL, null=True, blank=True)
+
+    start_of_subscription = models.DateField(verbose_name='Дата начала подписки')
+    next_payment_date = models.DateField(verbose_name='Дата следующей оплаты', null=True, blank=True)
+    paid_period = models.CharField(max_length=32, verbose_name='Оплачиваемый промежуток', choices=PAID_PERIOD_CHOICES, default=None)
+    notification_period = models.CharField(max_length=32, verbose_name='Период уведомления', choices=NOTIFICATION_PERIOD_CHOICES, default=None)
+    notification_date = models.DateField(verbose_name='Дата уведомления', blank=True, null=True)
+
+    amount = models.DecimalField(max_digits=9, decimal_places=2, verbose_name='Сумма', blank=True, null=True)
+    currency = models.CharField(max_length=3, verbose_name='Валюта', choices=CURRENCY_CHOICES, default='BYN')
+    total_paid_for = models.DecimalField(max_digits=9, decimal_places=2, verbose_name='Всего оплачено', blank=True, null=True)
+
+    link = models.CharField(max_length=512, verbose_name='Ссылка', null=True, blank=True)
+    comment = models.TextField(verbose_name='Комментарий', null=True, blank=True)
+    is_active = models.BooleanField(default=True, verbose_name='Активная')
+    date_of_creation = models.DateField(auto_now_add=True, verbose_name='Дата создания')
+
+    def __str__(self):
+        return f"{self.title} :: {self.next_payment_date}"
+
+    class Meta:
+        verbose_name = 'Подписка'
+        verbose_name_plural = 'Подписки'
+        ordering = ('title',)
+
+#   SUBSCRIPTIONS   ---------------------------------------------------------------------------
 
 

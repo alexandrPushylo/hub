@@ -6,5 +6,9 @@
     {% if water_supply %}<div class="application_items">{% include 'bills/water_supply.html' %}</div>{% endif %}
     {% if electricity %}<div class="application_items">{% include 'bills/electricity.html' %}</div>{% endif %}
     
+    <div class="application_items">
+        <a href="{% url 'subscriptions' %}">subscription</a>
+    </div>
+    
     
 {% endblock %}
