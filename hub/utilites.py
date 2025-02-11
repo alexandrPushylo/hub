@@ -14,6 +14,7 @@ from hub.services import rent as RENT_S
 from hub.services import exchange_rate as EXCHANGE_RATE_S
 from hub.services import weather as WEATHER_S
 from hub.services import subscriptions as SUB_S
+import hub.telegram_bot as T
 
 import hub.assets as A
 
@@ -223,3 +224,10 @@ def set_data_subscription(subscription_id: int, data: dict, files: dict):
     mode = A.EditMode.EDIT if subscription_id else A.EditMode.ADD
     SUB_S.set_data(subscription_id, data, files, mode=mode)
 
+
+def send_subs_notification():
+    subscriptions = SUB_S.get_check_notification()
+    if subscriptions:
+        for subs in subscriptions:
+            messages = f'{SUB_S.get_str_next_payment_date(subs.next_payment_date)} - {subs.next_payment_date}\n{subs.title} - {subs.amount} {subs.currency}'
+            T.send_messages_by_telegram(messages)
