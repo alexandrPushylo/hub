@@ -231,3 +231,16 @@ def send_subs_notification():
         for subs in subscriptions:
             messages = f'{SUB_S.get_str_next_payment_date(subs.next_payment_date)} - {subs.next_payment_date}\n{subs.title} - {subs.amount} {subs.currency}'
             T.send_messages_by_telegram(messages)
+
+
+def get_subs_data_for_dashboard() -> dict:
+    out = {
+        'title': 'Подписки',
+        'subscriptions': []
+    }
+    subscriptions = SUB_S.get_check_notification()
+    for subs in subscriptions:
+        subs.str_next_payment_date = SUB_S.get_str_next_payment_date(subs.next_payment_date)
+        out['subscriptions'].append(subs)
+
+    return out
