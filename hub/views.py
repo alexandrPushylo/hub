@@ -87,6 +87,8 @@ def subscriptions_view(request):
 
     subscriptions = U.get_subscriptions_value()
     context['subscriptions'] = subscriptions
+    if not subscriptions:
+        return HttpResponseRedirect(f'/dashboard')
 
     return render(request, template_name, context)
 
