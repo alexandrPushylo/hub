@@ -23,8 +23,8 @@ $('#div-body').masonry({
 $('#subscriptions_container').masonry({
 // указываем элемент-контейнер в котором расположены блоки для динамической верстки
     itemSelector: '.subscriptions_item',
-    columnWidth: 20,
-    // gutter: 10,
+    // columnWidth: 20,
+    gutter: 10,
     // fitWidth: false,
     // horizontalOrder: true,
 // указываем класс элемента являющегося блоком в нашей сетке
