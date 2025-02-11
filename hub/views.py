@@ -22,6 +22,7 @@ def dashboard_view(request):
         'electricity': U.get_data_last_bill(Electricity),
         'inf': U.get_inform_data(),
         'rate': U.get_current_currency_data(),
+        'subs': U.get_subs_data_for_dashboard(),
     }
     return render(request, 'dashboard.html', out)
 

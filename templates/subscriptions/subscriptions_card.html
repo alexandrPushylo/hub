@@ -1,0 +1,52 @@
+<div class="bills-card">
+    <div class="bills-card-body">
+        <div class="subscriptions-card-header">
+            <div class="subscriptions-title">{{ subs.title }}</div>
+        </div>
+
+        <div>
+            <hr class="card-hr-title">
+        </div>
+
+        {% for subscription in subs.subscriptions %}
+            <div class="subs_div">
+                <div class="subs_div_col1">
+                    <div>
+                        <img class="subs_logo" src="{{ subscription.logo.url }}" alt="logo">
+                    </div>
+
+                    <div>
+                        <div>
+                            <span class="subs_str_next_payment_date">{{ subscription.str_next_payment_date }}</span>
+                        </div>
+                        <div>
+                            <span class="subs_title">{{ subscription.title }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subs_div_col2">
+                    <div>
+                        <span class="subs_next_payment_date">{{ subscription.next_payment_date }}</span>
+                    </div>
+                    <div>
+                        <span>
+                            <span class="subs_amount">{{ subscription.amount }}</span>
+                            <span class="subs_currency">{{ subscription.currency }}</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    
+    </div>
+
+    <div class="card-buttons-control">
+        <div class="button-control-group">
+            <a class="btn btn-outline-primary"
+               href="{% url 'subscriptions' %}">{% include 'components/icons/info.html' %}</a>
+            <a class="btn btn-outline-success"
+               href="{% url 'edit_subscription' %}">{% include 'components/icons/plus.html' %}</a>
+        </div>
+    </div>
+</div>
