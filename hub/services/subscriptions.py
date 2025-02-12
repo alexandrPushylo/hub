@@ -260,3 +260,17 @@ def get_check_notification():
         is_active=True,
     )
     return subscriptions
+
+
+def update_next_payment_date():
+    subscriptions = Subscriptions.objects.filter(
+        is_active=True,
+        next_payment_date__lt=date.today(),
+    )
+    for subscription in subscriptions:
+        next_payment_date_ = calculate_next_payment_date(
+            subscription.start_of_subscription,
+            subscription.paid_period
+        )
+        subscription.next_payment_date = next_payment_date_
+        subscription.save(update_fields=['next_payment_date'])
