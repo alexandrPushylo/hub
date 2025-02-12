@@ -1,15 +1,23 @@
 {% extends 'index.html' %}
 {% block body %}
     <div id="subscriptions_container" class="subscriptions_container mx-auto">
-        {% for subscription in subscriptions %}            
-            <div class="card subscriptions_item">            
+        <div class="card subscriptions_item"
+             onclick="gotoLocation('{% url 'dashboard' %}')"
+        >
+            <div class="card-header subs_item_header">                
+                <span class="subs_title_dash">Dashboard</span>
+            </div>
+        </div>
+    
+        {% for subscription in subscriptions %}
+            <div class="card subscriptions_item subscriptions_card">
                 <div class="card-header subs_item_header"
                      onclick="gotoLocation('{% url 'subscription' %}?id={{ subscription.id }}')"
                 >
                     <img class="subs_item_logo" src="{{ subscription.logo.url }}" alt="logo">
                     <span class="subs_title">{{ subscription.title }}</span>
                 </div>
-                
+
                 <div class="card-body subs_item_body">
                     <span class="subs_item_next_payment">{{ subscription.next_payment }}</span>
                     <span class="subs_item_amount">{{ subscription.amount }}&nbsp;{{ subscription.currency }}</span>

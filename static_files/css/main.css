@@ -274,7 +274,7 @@
 .subscriptions_container{
 	margin-top: 10px;
 }
-.subscriptions_item{
+.subscriptions_card{
 	width: var(--weight-card)
 }
 .subs_item_header{
@@ -352,6 +352,11 @@
 .subs_title{
 	font-weight: bolder;
 	font-size: 12pt;
+}
+.subs_title_dash{
+	font-weight: bold;
+	font-size: 12pt;
+	text-transform: uppercase;
 }
 .subs_str_next_payment_date{
 	font-size: 8pt;

@@ -211,8 +211,6 @@ def get_str_paid_period(paid_period: str) -> str:
             return f'Каждые {item[1]}'
 
 
-
-
 def get_subscriptions_value() -> list:
     subscriptions = SUB_S.get_active_subscriptions()
     for subscription in subscriptions:
