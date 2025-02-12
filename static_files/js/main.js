@@ -30,7 +30,7 @@ $('#subscriptions_container').masonry({
 // указываем класс элемента являющегося блоком в нашей сетке
     singleMode: true,
 // true - если у вас все блоки одинаковой ширины
-    isResizable: false,
+    isResizable: true,
 // перестраивает блоки при изменении размеров окна
     isAnimated: true,
 // анимируем перестроение блоков
