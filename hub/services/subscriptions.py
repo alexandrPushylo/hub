@@ -38,7 +38,7 @@ def get_subscription_to_dict(subscriptions_id: int) -> dict:
         'next_payment_date': subscription.next_payment_date,
         'paid_period': subscription.paid_period,
         'notification_period': subscription.notification_period,
-        'amount': subscription.amount,
+        'amount': str(subscription.amount),
         'currency': subscription.currency,
         'total_paid_for': subscription.total_paid_for,
         'link': subscription.link,
