@@ -30,7 +30,11 @@
 
 
 /*	Bills	*/
-.bills-card, .inform-card, .rate-card{
+/*.bills-card, */
+.inform-card,
+.rate-card,
+.subs_card,
+.bills_card{
 	width: var(--weight-card);
 	/*height: 6rem;*/
 	border: black 1px solid;
@@ -40,7 +44,7 @@
 	box-shadow: 2px 2px 20px 2px;
 	background-color: var(--card-background-color);
 }
-.bills-card-body, .rate-card-body{
+.bills_card_body, .rate-card-body{
 	margin: 5px;
 }
 .bills-card-header, .inform-card-header, .rate-card-header{
@@ -50,7 +54,7 @@
 
 
 
-.bills-title, .subscriptions-title{
+.bills-title{
 	font-weight: bold;
 }
 .bills-payment_date{}
@@ -95,30 +99,79 @@
 	padding: 10px 10px;
 }
 
-.card-buttons-control{
+.card_buttons_control{
 	display: none;
 	position: absolute;
-	width: 100%;
-	height: 100%;
-	top: 0;
+	/*width: 95%;*/
 	border-radius: 10px;
 	background-color: rgba(208, 214, 214, 0);
+	justify-content: center;
 	align-content: center;
-	text-align: center;
-	/*filter: saturate(2.2);*/
-	/*filter: blur(3px);*/
 }
-.button-control-group{
+.subs_buttons_control{
+	top: 0;
+	bottom: 0;
+	left: 5px;
+	right: 5px;
+	margin: auto;
+	height: 40px;
+	/*margin-inside: 100px;*/
+}
+.rent_buttons_control{
+	bottom: 160px;
+	left: 5px;
+	right: 5px;
+}
+.water_supply_buttons_control{
+	bottom: 90px;
+	left: 5px;
+	right: 5px;
+}
+.electricity_buttons_control{
+	bottom: 0;
+	left: 5px;
+	right: 5px;
 }
 
-.bills-card:hover{
-	.bills-card-body{
+.subs_card:hover{
+	.subs_card_body{
 		filter: blur(3px);
 	}
-	.card-buttons-control{
-		display: block;
+	.subs_buttons_control{
+		display: flex;
 	}
 }
+.rent_item:hover{
+	.rent_card_body{
+		filter: blur(3px);
+	}
+	.rent_buttons_control{
+		display: flex;
+	}
+}
+.electricity_item:hover{
+	.electricity_card_body{
+		filter: blur(3px);
+	}
+	.electricity_buttons_control{
+		display: flex;
+	}
+}
+.water_supply_item:hover{
+	.water_supply_card_body{
+		filter: blur(3px);
+	}
+	.water_supply_buttons_control{
+		display: flex;
+	}
+}
+
+
+
+
+
+
+
 
 
 
@@ -275,7 +328,8 @@
 	margin-top: 10px;
 }
 .subscriptions_card{
-	width: var(--weight-card)
+	width: var(--weight-card);
+	margin-bottom: .5rem;
 }
 .subs_item_header{
 	display: flex;
@@ -330,10 +384,12 @@
 		max-width: 100vw;
 	}
 }
-
+.subs_card_body{
+	padding: 5px;
+}
 .subs_div{
 	display: flex;
-	/*align-items: center;*/
+	align-items: center;
 	justify-content: space-between;
 }
 .subs_div_col1{
@@ -363,4 +419,9 @@
 	font-weight: bolder;
 }.subs_next_payment_date{
 	font-size: 10pt;
+}
+.subscriptions_cart_title, .bills_cart_title{
+	text-align: center;
+	text-transform: uppercase;
+	font-weight: bolder;
 }

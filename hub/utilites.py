@@ -240,5 +240,10 @@ def get_subs_data_for_dashboard() -> dict:
     for subs in subscriptions:
         subs.str_next_payment_date = SUB_S.get_str_next_payment_date(subs.next_payment_date)
         out['subscriptions'].append(subs)
+    return out
 
+def get_bills_data_for_dashboard() -> dict:
+    out = {
+        'title': 'Коммунальные платежи',
+    }
     return out

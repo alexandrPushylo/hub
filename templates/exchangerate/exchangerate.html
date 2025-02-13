@@ -1,9 +1,7 @@
 <div class="rate-card">
     <div class="rate rate-card-body">
-
-
         <div class="rate-card-header">
-            <div>-</div>
+            <div></div>
             <div class="rate-usd">                
                 {% if rate.usd.difference > 0 %}
                     <span class="text-success">{{ rate.usd.difference }}</span>
@@ -22,7 +20,7 @@
             </div>
         </div>
         <div class="rate-card-header">
-            <div>-</div>
+            <div></div>
             <div class="rate-eur">                
                 {% if rate.eur.difference > 0 %}
                     <span class="text-success">{{ rate.eur.difference }}</span>
@@ -41,7 +39,7 @@
             </div>
         </div>
         <div class="rate-card-header">
-            <div>-</div>
+            <div></div>
             <div class="rate-rub">                
                 {% if rate.rub.difference > 0 %}
                     <span class="text-success">{{ rate.rub.difference }}</span>
@@ -59,13 +57,5 @@
                 <span>BYN</span>
             </div>
         </div>
-
-
-    </div>
-    <div class="card-buttons-control">
-        <a class="btn btn-outline-primary"
-           href="{% url 'info_bills' %}?bill=cold_water">{% include 'components/icons/info.html' %}</a>
-        <a class="btn btn-outline-success"
-           href="{% url 'edit_bills' %}?bill=cold_water">{% include 'components/icons/edit.html' %}</a>
     </div>
 </div>
