@@ -1,12 +1,9 @@
 {% extends 'index.html' %}
 {% block body %}
     <div class="application_items">{% include 'informs/informs.html' %}</div>
-    {% if rate %}<div class="application_items">{% include 'exchangerate/exchangerate.html' %}</div>{% endif %}
-    {% if rent %}<div class="application_items">{% include 'bills/rent.html' %}</div>{% endif %}
-    {% if water_supply %}<div class="application_items">{% include 'bills/water_supply.html' %}</div>{% endif %}
-    {% if electricity %}<div class="application_items">{% include 'bills/electricity.html' %}</div>{% endif %}
-    
+    {% if rate %}<div class="application_items">{% include 'exchangerate/exchangerate.html' %}</div>{% endif %}    
     <div class="application_items">{% include 'subscriptions/subscriptions_card.html' %}</div>
+    <div class="application_items">{% include 'bills/bills_card.html' %}</div>
     
     
     

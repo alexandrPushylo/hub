@@ -1,5 +1,5 @@
-<div class="bills-card">
-    <div class="water_supply bills-card-body">
+<div class="water_supply_item">
+    <div class="water_supply_card_body bills_card_body">
         <div class="bills-card-header">
             <div class="bills-title">{{ water_supply.title }}</div>
             <div class="bills-payment_date">{{ water_supply.payment_date }}</div>
@@ -46,14 +46,14 @@
         </div>
     </div>
 
-    <div class="card-buttons-control">
-        <div class="button-control-group">
+    <div class="water_supply_buttons_control card_buttons_control btn-group">
+        
             <a class="btn btn-outline-primary"
                href="{% url 'info_bills' %}?bill=water_supply">{% include 'components/icons/info.html' %}</a>
             <a class="btn btn-outline-success"
                href="{% url 'edit_bills' %}?bill=water_supply&id={{ water_supply.id }}">{% include 'components/icons/edit.html' %}</a>
             <a class="btn btn-outline-success"
                href="{% url 'edit_bills' %}?bill=water_supply">{% include 'components/icons/plus.html' %}</a>
-        </div>
+        
     </div>
 </div>

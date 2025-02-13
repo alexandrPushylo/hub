@@ -1,5 +1,5 @@
-<div class="bills-card">
-    <div class="rent bills-card-body">
+<div class="rent_item">
+    <div class="rent_card_body bills_card_body">
         <div class="bills-card-header">
             <div class="bills-title">Жировка</div>
             <div class="bills-payment_date">{{ rent.payment_date }}</div>
@@ -18,7 +18,7 @@
         </div>        
     </div>
     
-    <div class="rent-buttons-control card-buttons-control">
+    <div class="rent_buttons_control card_buttons_control btn-group">
         <a class="btn btn-outline-primary"
            href="{% url 'info_bills' %}?bill=rent">{% include 'components/icons/info.html' %}</a>
         <a class="btn btn-outline-success"

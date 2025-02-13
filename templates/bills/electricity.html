@@ -1,5 +1,5 @@
-<div class="bills-card">
-    <div class="electricity bills-card-body">
+<div class="electricity_item position-relative">
+    <div class="electricity_card_body bills_card_body">
         <div class="bills-card-header">
             <div class="bills-title">Электроэнергия</div>
             <div class="bills-payment_date">{{ electricity.payment_date }}</div>
@@ -26,7 +26,7 @@
         </div>
     
     </div>
-    <div class="card-buttons-control">
+    <div class="electricity_buttons_control card_buttons_control btn-group">
         <a class="btn btn-outline-primary"
            href="{% url 'info_bills' %}?bill=electricity">{% include 'components/icons/info.html' %}</a>
         <a class="btn btn-outline-success"

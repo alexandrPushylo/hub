@@ -1,0 +1,15 @@
+<div class="bills_card">
+    <div class="bills_card_body">
+        <div class="subscriptions-card-header">
+            <div class="bills_cart_title">{{ bills.title }}</div>
+        </div>
+
+        <div>
+            <hr class="card-hr-title">
+        </div>
+        {% if rent %}{% include 'bills/rent.html' %}{% endif %}
+        {% if water_supply %}{% include 'bills/water_supply.html' %}{% endif %}
+        {% if electricity %}{% include 'bills/electricity.html' %}{% endif %}
+
+    </div>
+</div>
