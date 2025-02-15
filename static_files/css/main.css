@@ -13,6 +13,7 @@
 	--weight-card: 20rem;
 	--card-background-color: rgba(208, 214, 214, 0.52);
 	/*--height-card: max-;*/
+	--nav-bar-bg-color: rgb(107, 116, 124)
 }
 #root{
 	/*display: flex;*/
@@ -20,6 +21,9 @@
 	/*position: relative;*/
 	/*width: 100vw;*/
 
+}
+.navbar{
+	background-color: var(--nav-bar-bg-color);
 }
 #div-body{
 
