@@ -39,6 +39,7 @@ urlpatterns = [
 
 
 
+    path('logout/', V.logout_view, name='logout'),
     path('login/', V.login_view, name='login'),
     path('admin/', admin.site.urls),
 ]

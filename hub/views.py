@@ -11,7 +11,6 @@ import  hub.assets as A
 from logger import getLogger
 log = getLogger(__name__)
 
-
 def index(request):
     return render(request, 'base.html', {})
 
@@ -27,6 +26,13 @@ def dashboard_view(request):
         'bills': U.get_bills_data_for_dashboard(),
     }
     return render(request, 'dashboard.html', out)
+
+
+def logout_view(request):
+    if request.user.is_authenticated:
+        logout(request)
+        return HttpResponseRedirect('/login')
+    return HttpResponseRedirect('/dashboard')
 
 
 def login_view(request):
