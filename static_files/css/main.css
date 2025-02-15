@@ -420,7 +420,7 @@
 }.subs_next_payment_date{
 	font-size: 10pt;
 }
-.subscriptions_cart_title, .bills_cart_title{
+.subscriptions_cart_title, .bills_cart_title {
 	text-align: center;
 	text-transform: uppercase;
 	font-weight: bolder;
