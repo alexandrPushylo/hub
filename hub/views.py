@@ -28,6 +28,21 @@ def dashboard_view(request):
     return render(request, 'dashboard.html', out)
 
 
+def login_view(request):
+    if request.user.is_authenticated:
+        return HttpResponseRedirect('/dashboard')
+    if request.method == 'GET':
+        return render(request, 'login.html')
+    if request.method == 'POST':
+        password = request.POST.get('password')
+        user = U.get_current_user()
+        if user is None:
+            return HttpResponseRedirect('/login')
+        user = authenticate(request, username=user.username, password=password)
+        login(request, user)
+        return HttpResponseRedirect('/dashboard')
+
+
 def edit_bills_view(request):
     context = {
         'today': U.TODAY(),

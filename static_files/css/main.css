@@ -429,3 +429,22 @@
 	text-transform: uppercase;
 	font-weight: bolder;
 }
+
+/*	login	############################*/
+
+#login_form {
+    max-width: 20rem;
+    padding: 5px 5px 5px 10px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 20px 5px;
+	.btn_submit{
+		margin-top: 1rem;
+		text-align: right;
+	}
+}
+
+#form_login label{
+    font-weight: bolder;
+}
+
+/*		############################*/

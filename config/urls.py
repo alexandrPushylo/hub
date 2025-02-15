@@ -39,6 +39,7 @@ urlpatterns = [
 
 
 
+    path('login/', V.login_view, name='login'),
     path('admin/', admin.site.urls),
 ]
 if DEBUG: # new
