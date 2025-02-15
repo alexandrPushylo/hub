@@ -1,3 +1,5 @@
+from datetime import date
+
 from hub.models import Electricity
 from logger import getLogger
 log = getLogger(__name__)
@@ -68,3 +70,12 @@ def set_data(bill_instance: Electricity, data: dict) -> bool:
 
 def calculate_electricity_amount(rate: float, volume: int) -> float:
     return float(rate) * int(volume)
+
+def get_electricity_invoice(payment_month: str, payment_date: date) -> int | None:
+    electricity = Electricity.objects.filter(
+        payment_month=payment_month,
+        payment_date__gte=payment_date,
+    ).last()
+    if electricity:
+        return electricity.volume
+    return None

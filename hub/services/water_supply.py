@@ -1,3 +1,5 @@
+from datetime import date
+
 from hub.models import Water
 from logger import getLogger
 log = getLogger(__name__)
@@ -98,3 +100,16 @@ def calculate_water_amount(water_rate: float, total_water_volume: int) -> float:
 
 def calculate_water_heating_amount(water_heating_rate: float, water_heating_volume: float) -> float:
     return float(water_heating_rate) * float(water_heating_volume)
+
+
+def get_water_invoice(payment_month: str, payment_date: date) -> dict:
+    water = Water.objects.filter(
+        payment_month=payment_month,
+        payment_date__gte=payment_date
+    ).last()
+    if water:
+        return {
+            'cold_water': water.cold_water_volume,
+            'hot_water': water.hot_water_volume,
+        }
+    return {}

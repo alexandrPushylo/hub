@@ -265,3 +265,20 @@ def get_bills_data_for_dashboard() -> dict:
         'title': 'Коммунальные платежи',
     }
     return out
+
+
+def  get_invoice_data() -> dict:
+    payment_month = get_prev_month()
+    payment_period = TODAY() - relativedelta(months=3)
+    payment_month_ru = get_ru_month(payment_month)
+    electricity = ELECTRICITY_S.get_electricity_invoice(payment_month, payment_period)
+    water = WATER_S.get_water_invoice(payment_month, payment_period)
+
+    out = {
+        'payment_month': payment_month_ru,
+        'electricity': electricity,
+        'hot_water': water.get('hot_water'),
+        'cold_water': water.get('cold_water'),
+    }
+
+    return out

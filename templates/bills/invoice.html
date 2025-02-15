@@ -1,0 +1,33 @@
+{% extends 'index.html' %}
+{% block body %}
+    <div class="invoice_container card mx-auto">
+
+        <div class="card-header invoice_header">
+            <a href="{% url 'dashboard' %}" class="btn btn-light">{% include 'components/icons/close.html' %}</a>
+        </div>
+
+        <div class="card_body invoice_body">
+            <div class="invoice_row"><span class="bill_title">Оплачиваемый месяц:</span>
+                <span class="bills_value">{{ payment_month }}</span>
+            </div>
+            
+            <div class="invoice_row"><span class="bill_title">Электроэнергия:</span>
+                <span>+</span>
+                <span class="bills_value">{{ electricity }}</span>
+                <span>кВт.</span>
+            </div>
+            
+            <div class="invoice_row"><span class="bill_title">Горячая вода:</span>
+                <span class="bills_value">{{ hot_water }}</span>
+                <span class="bills-indications-unit">M<span class="bills-indications-unit-pow">3</span></span>
+            </div>
+            
+            <div class="invoice_row"><span class="bill_title">Холодная вода:</span>
+                <span class="bills_value">{{ cold_water }}</span>
+                <span class="bills-indications-unit">M<span class="bills-indications-unit-pow">3</span></span>
+            </div>
+
+        </div>
+
+    </div>
+{% endblock %}

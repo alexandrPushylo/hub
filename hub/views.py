@@ -175,6 +175,13 @@ def deactivate_subscription(request):
 
 
 @U.check_is_authenticated
+def get_invoice(request):
+    context = U.get_invoice_data()
+
+    return render(request, 'bills/invoice.html', context)
+
+
+@U.check_is_authenticated
 def dev_view(request):
     context = {}
     template_name = 'dev.html'

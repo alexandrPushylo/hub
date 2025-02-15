@@ -28,6 +28,7 @@ urlpatterns = [
     path('edit_bills/', V.edit_bills_view, name='edit_bills'),
     path('delete_bills/', V.delete_bills, name='delete_bills'),
     path('info_bills', V.info_bills_view, name='info_bills'),
+    path('get_invoice', V.get_invoice, name='get_invoice'),
 
     path('subscription', V.subscription_view, name='subscription'),
     path('subscriptions', V.subscriptions_view, name='subscriptions'),
