@@ -7,6 +7,7 @@ from django.http import HttpResponseRedirect
 
 from hub.models import Rent, Water, Electricity
 # from hub.models import Debt, Debtor, ExchangeRate
+from django.contrib.auth.models import User
 
 
 from hub.services import water_supply as WATER_S
@@ -34,6 +35,15 @@ def check_is_authenticated(func):
         else:
             return HttpResponseRedirect('/login')
     return wrap
+
+def get_current_user() -> User | None:
+    try:
+        user = User.objects.get(username='admin', is_superuser=True)
+        return user
+    except User.DoesNotExist:
+        log.error('User not found')
+        return None
+
 def get_data_json(url: str) -> dict:
     try:
         response = requests.get(url)
