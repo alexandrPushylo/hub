@@ -1,5 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
+from django.contrib.auth import login, logout, authenticate
 
 from hub.models import Electricity, Rent, Water
 import hub.utilites as U
@@ -14,7 +15,7 @@ log = getLogger(__name__)
 def index(request):
     return render(request, 'base.html', {})
 
-
+@U.check_is_authenticated
 def dashboard_view(request):
     out = {
         'rent': U.get_data_last_bill(Rent),
@@ -68,6 +69,7 @@ def edit_bills_view(request):
     return render(request, template_name, context)
 
 
+@U.check_is_authenticated
 def info_bills_view(request):
     context = {
         'title': '',
@@ -87,7 +89,8 @@ def info_bills_view(request):
     return render(request, template_name, context)
 
 
-def delete_bills_view(request):
+@U.check_is_authenticated
+def delete_bills(request):
     bills_id = request.GET.get('id')
     type_of_bill = request.GET.get('bill')
 
@@ -97,6 +100,7 @@ def delete_bills_view(request):
     return HttpResponseRedirect(f'/info_bills?bill={type_of_bill}')
 
 
+@U.check_is_authenticated
 def subscriptions_view(request):
     context = {}
     template_name = 'subscriptions/subscriptions.html'
@@ -108,7 +112,7 @@ def subscriptions_view(request):
 
     return render(request, template_name, context)
 
-
+@U.check_is_authenticated
 def subscription_view(request):
     context = {}
     template_name = '404.html'
@@ -124,6 +128,7 @@ def subscription_view(request):
     return render(request, template_name, context)
 
 
+@U.check_is_authenticated
 def edit_subscription_view(request):
     context = {}
     template_name = 'subscriptions/edit_subscription.html'
@@ -151,7 +156,8 @@ def edit_subscription_view(request):
     return render(request, template_name, context)
 
 
-def deactivate_subscription_view(request):
+@U.check_is_authenticated
+def deactivate_subscription(request):
     subscriptions_id = request.GET.get('id')
 
     status = U.SUB_S.deactivate_subscription(subscriptions_id) if subscriptions_id else None
@@ -162,6 +168,7 @@ def deactivate_subscription_view(request):
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
+@U.check_is_authenticated
 def dev_view(request):
     context = {}
     template_name = 'dev.html'

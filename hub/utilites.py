@@ -3,6 +3,7 @@ from dateutil.relativedelta import relativedelta
 
 import requests
 from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponseRedirect
 
 from hub.models import Rent, Water, Electricity
 # from hub.models import Debt, Debtor, ExchangeRate
@@ -26,6 +27,13 @@ NOW = datetime.now().time
 MONTH = datetime.now().month
 
 
+def check_is_authenticated(func):
+    def wrap(request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return func(request, *args, **kwargs)
+        else:
+            return HttpResponseRedirect('/login')
+    return wrap
 def get_data_json(url: str) -> dict:
     try:
         response = requests.get(url)
