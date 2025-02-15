@@ -1,0 +1,19 @@
+{% extends 'index.html' %}
+{% block body %}
+    <div id="login_form" class="translate-middle-x position-relative start-50 mt-5">
+        <form method="post" id="form_login">{% csrf_token %}
+            <div>
+                <label class="w-100">Пароль
+                    <input type="password"
+                           required
+                           class="form-control"
+                           name="password"
+                           placeholder="1234">
+                </label>
+            </div>
+            <div class="btn_submit">
+                <span style="text-align: right"><button type="submit" class="btn btn-success">Вход</button></span>
+            </div>
+        </form>
+    </div>
+{% endblock %}

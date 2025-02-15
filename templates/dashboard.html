@@ -1,5 +1,7 @@
 {% extends 'index.html' %}
+
 {% block body %}
+    
     <div class="application_items">{% include 'informs/informs.html' %}</div>
     {% if rate %}<div class="application_items">{% include 'exchangerate/exchangerate.html' %}</div>{% endif %}    
     <div class="application_items">{% include 'subscriptions/subscriptions_card.html' %}</div>

@@ -3,9 +3,11 @@ from dateutil.relativedelta import relativedelta
 
 import requests
 from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponseRedirect
 
 from hub.models import Rent, Water, Electricity
 # from hub.models import Debt, Debtor, ExchangeRate
+from django.contrib.auth.models import User
 
 
 from hub.services import water_supply as WATER_S
@@ -25,6 +27,22 @@ TODAY = date.today
 NOW = datetime.now().time
 MONTH = datetime.now().month
 
+
+def check_is_authenticated(func):
+    def wrap(request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return func(request, *args, **kwargs)
+        else:
+            return HttpResponseRedirect('/login')
+    return wrap
+
+def get_current_user() -> User | None:
+    try:
+        user = User.objects.get(username='admin', is_superuser=True)
+        return user
+    except User.DoesNotExist:
+        log.error('User not found')
+        return None
 
 def get_data_json(url: str) -> dict:
     try:

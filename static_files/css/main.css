@@ -13,6 +13,7 @@
 	--weight-card: 20rem;
 	--card-background-color: rgba(208, 214, 214, 0.52);
 	/*--height-card: max-;*/
+	--nav-bar-bg-color: rgb(107, 116, 124)
 }
 #root{
 	/*display: flex;*/
@@ -20,6 +21,9 @@
 	/*position: relative;*/
 	/*width: 100vw;*/
 
+}
+.navbar{
+	background-color: var(--nav-bar-bg-color);
 }
 #div-body{
 
@@ -420,8 +424,27 @@
 }.subs_next_payment_date{
 	font-size: 10pt;
 }
-.subscriptions_cart_title, .bills_cart_title{
+.subscriptions_cart_title, .bills_cart_title {
 	text-align: center;
 	text-transform: uppercase;
 	font-weight: bolder;
 }
+
+/*	login	############################*/
+
+#login_form {
+    max-width: 20rem;
+    padding: 5px 5px 5px 10px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 20px 5px;
+	.btn_submit{
+		margin-top: 1rem;
+		text-align: right;
+	}
+}
+
+#form_login label{
+    font-weight: bolder;
+}
+
+/*		############################*/

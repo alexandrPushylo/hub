@@ -10,7 +10,11 @@
     <link href="{% static 'css/main.css' %}" rel="stylesheet">
 </head>
 <body>
+<div>
+    {% include 'components/panel/nav_bar.html' %}
+</div>
 <div id="root" class="container-fluid">
+
     <div id="div-body" class="container-fluid position-relative translate-middle-x start-50 top-0">
         {% block body %}{% endblock %}
     </div>
