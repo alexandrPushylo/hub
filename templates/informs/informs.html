@@ -1,12 +1,31 @@
-<div class="inform-card">    
-    <div class="inform-card-header">
-        <div class="inform-today">{{ inf.today }}</div>
+<div class="inform_card">
+    <div class="inform_card_body">
+        <div class="inform_card_date">
+            <span>{{ inf.today }}</span>
+        </div>
+    </div>
+
+    <div class="weather_main rounded-2">
+        <div class="weather_temp">
+            <span>{{ inf.weather.temp }}&deg;</span>
+            <img class="weather_img" src="{{ inf.weather.weather_icon_srs }}" alt="{{ inf.weather.weather_main }}">
+        </div>
         
-    </div> 
-    <div><span>Температура: </span>{{ inf.weather.temp }}</div>
-    <div><span>Ощущается как: </span>{{ inf.weather.feels_like }}</div>
-    <div><span>Влажность: </span>{{ inf.weather.humidity }}</div>
-    <div><span>Давление: </span>{{ inf.weather.pressure }}</div>
-    <div><span>Min. T.: </span>{{ inf.weather.temp_min }}</div>
-    <div><span>Max. T.: </span>{{ inf.weather.temp_max }}</div>
+        <div class="weather_description_div">
+            <p class="weather_description">{{ inf.weather.weather_description }}</p>
+            <p class="weather_feels_like">
+                <span class="weather_feels_like_title">Ощущается как:</span>
+                <span>{{ inf.weather.feels_like }}&deg;</span>                
+            </p>            
+        </div>
+    </div>
+    <div class="weather_min_max">
+        <span class="weather_min_max_title">Максимум</span>
+        <span class="weather_min_max_value">{{ inf.weather.temp_max }}&deg;</span>
+        <span class="weather_min_max_title">Минимум</span>
+        <span class="weather_min_max_value">{{ inf.weather.temp_min }}&deg;</span>
+        <span class="weather_min_max_title">Влажность</span>
+        <span class="weather_min_max_value">{{ inf.weather.humidity }}%</span>        
+    </div>
+
 </div>
