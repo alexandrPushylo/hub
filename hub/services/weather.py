@@ -21,8 +21,15 @@ def get_main_indicators(data: dict) -> dict:
             'pressure': data['main']['pressure'],
             'temp_min': round(data['main']['temp_min']),
             'temp_max': round(data['main']['temp_max']),
+            'weather_main': data['weather'][0]['main'],
+            'weather_description': str(data['weather'][0]['description']).capitalize(),
+            'weather_icon_srs': get_icon_weather(data['weather'][0]['icon']),
         }
     except KeyError as e:
         log.error('get_main_indicators() - [KeyError]' + str(e))
         return {}
 
+
+def get_icon_weather(icon: str):
+    url = f"http://openweathermap.org/img/w/{icon}.png"
+    return url
