@@ -18,6 +18,7 @@ def get_subscriptions_by_period(period: date):
     )
     return subscriptions
 
+
 def get_subscription_by_id(subscriptions_id: int) -> Subscriptions | None:
     try:
         subscriptions = Subscriptions.objects.get(id=subscriptions_id)
@@ -73,6 +74,7 @@ def get_active_subscriptions():
         )
     return out
 
+
 def deactivate_subscription(subscription_id: int) -> Subscriptions | None:
     subscription = get_subscription_by_id(subscription_id)
     if subscription:
@@ -82,9 +84,11 @@ def deactivate_subscription(subscription_id: int) -> Subscriptions | None:
     else:
         return None
 
+
 def get_categories() -> [SubscriptionsCategory]:
     categories = SubscriptionsCategory.objects.all().values()
     return categories
+
 
 def set_data(subscription_id: int | None, data: dict, files: dict, mode: EditMode):
     logo_ = files.get('logo')
@@ -162,12 +166,14 @@ def calculate_total_paid_for(start_payment_date: date, next_payment_date: date, 
     else:
         return 0
 
+
 def calculate_next_payment_date(start_payment_date: date, paid_period: str) -> date:
     next_payment_date = start_payment_date
     next_payment_date = get_next_payment_date(paid_period, next_payment_date)
     while next_payment_date < date.today():
         next_payment_date = get_next_payment_date(paid_period, next_payment_date)
     return next_payment_date
+
 
 def get_next_payment_date(period: str, current_date: date) -> date:
     match period:
@@ -218,6 +224,7 @@ def get_notification_date(notification_period: str, current_date: date) -> date 
         case _:
             return None
 
+
 def get_str_next_payment_date(next_payment_period: date) -> str:
     date_diff = relativedelta(next_payment_period, date.today())
     if date_diff.years != 0:
@@ -253,6 +260,7 @@ def get_str_next_payment_date(next_payment_period: date) -> str:
             return f'Через {date_diff.days} дней'
     else:
         return 'Сегодня'
+
 
 def get_check_notification():
     subscriptions = Subscriptions.objects.filter(

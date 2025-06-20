@@ -9,7 +9,6 @@ from hub.models import Rent, Water, Electricity
 # from hub.models import Debt, Debtor, ExchangeRate
 from django.contrib.auth.models import User
 
-
 from hub.services import water_supply as WATER_S
 from hub.services import electricity as ELECTRICITY_S
 from hub.services import rent as RENT_S
@@ -21,6 +20,7 @@ import hub.telegram_bot as T
 import hub.assets as A
 
 from logger import getLogger
+
 log = getLogger(__name__)
 
 TODAY = date.today
@@ -34,7 +34,9 @@ def check_is_authenticated(func):
             return func(request, *args, **kwargs)
         else:
             return HttpResponseRedirect('/login')
+
     return wrap
+
 
 def get_current_user() -> User | None:
     try:
@@ -43,6 +45,7 @@ def get_current_user() -> User | None:
     except User.DoesNotExist:
         log.error('User not found')
         return None
+
 
 def get_data_json(url: str) -> dict:
     try:
@@ -67,8 +70,9 @@ def get_ru_month(month_eng: str) -> str:
         if month[0] == month_eng:
             return month[1]
 
+
 def get_prev_month() -> str:
-    return A.MONTH_CHOICES[MONTH-2][0]
+    return A.MONTH_CHOICES[MONTH - 2][0]
 
 
 def get_current_bill(
@@ -81,6 +85,7 @@ def get_current_bill(
             return item_bill[0]
     return get_bill_by_id(bill_id, bill_type)
 
+
 def get_bill_by_id(
         bill_id: int | None,
         bill_type: A.Type[Rent | Water | Electricity]
@@ -91,11 +96,13 @@ def get_bill_by_id(
         log.info('get_bill_by_id(): Bill not found [ObjectDoesNotExist]')
         return None
 
+
 def get_last_bill(
         bill_type: A.Type[Rent | Water | Electricity]
 ) -> Rent | Water | Electricity | None:
     last_bill = bill_type.objects.filter().order_by('-payment_date')
     return last_bill[0] if last_bill.exists() else None
+
 
 def get_prev_bill(
         bill_type: A.Type[Rent | Water | Electricity],
@@ -110,6 +117,7 @@ def get_prev_bill(
             return last_bill
     else:
         return None
+
 
 def get_data_bill(
         bill_instance: Rent | Water | Electricity,
@@ -129,11 +137,13 @@ def get_data_bill(
         data.update(ELECTRICITY_S.get_prev_data(get_prev_bill(Electricity, **kwargs)))
     return data
 
+
 def get_data_last_bill(
         bill_type: A.Type[Rent | Water | Electricity]
 ) -> dict[str, str] | None:
     last_bill = get_last_bill(bill_type)
     return get_data_bill(last_bill)
+
 
 def delete_bill(
         bill_id: int,
@@ -148,10 +158,12 @@ def delete_bill(
         log.info('bill was not deleted')
         return False
 
+
 def get_list_bill(
         bill_type: A.Type[Rent | Water | Electricity]
 ) -> list:
     return bill_type.objects.filter().order_by('-payment_date').values()
+
 
 def get_data_for_edit_view(
         bill_id: int,
@@ -164,7 +176,8 @@ def get_data_for_edit_view(
     data = get_data_bill(bill, bill_id=bill_id)
     return data
 
-def get_bill_type(type_of_bill:str) -> A.Type[Rent | Water | Electricity] | None:
+
+def get_bill_type(type_of_bill: str) -> A.Type[Rent | Water | Electricity] | None:
     match type_of_bill:
         case A.Bills.WATER_SUPPLY.value:
             return Water
@@ -203,25 +216,31 @@ def get_inform_data() -> dict:
     }
     return data
 
+
 def get_weather():
     data = get_data_json(WEATHER_S.URL)
     return data
 
+
 def get_current_currency_data() -> dict:
     return EXCHANGE_RATE_S.check_currency_data()
+
 
 # ====================================================================================================================
 
 def get_subs_by_id(subscription_id: int) -> SUB_S.Subscriptions | None:
     return SUB_S.get_subscription_by_id(subscription_id)
 
+
 def get_subs_to_dict(subscription_id: int) -> dict:
     return SUB_S.get_subscription_to_dict(subscription_id)
+
 
 def get_str_notification(notification_period: str) -> str:
     for item in A.NOTIFICATION_PERIOD_CHOICES:
         if item[0] == notification_period:
             return item[1]
+
 
 def get_str_paid_period(paid_period: str) -> str:
     for item in A.PAID_PERIOD_CHOICES:
@@ -260,6 +279,7 @@ def get_subs_data_for_dashboard() -> dict:
         out['subscriptions'].append(subs)
     return out
 
+
 def get_bills_data_for_dashboard() -> dict:
     out = {
         'title': 'Коммунальные платежи',
@@ -267,7 +287,7 @@ def get_bills_data_for_dashboard() -> dict:
     return out
 
 
-def  get_invoice_data() -> dict:
+def get_invoice_data() -> dict:
     payment_month = get_prev_month()
     payment_period = TODAY() - relativedelta(months=3)
     payment_month_ru = get_ru_month(payment_month)
