@@ -11,8 +11,10 @@ import  hub.assets as A
 from logger import getLogger
 log = getLogger(__name__)
 
+
 def index(request):
     return render(request, 'base.html', {})
+
 
 @U.check_is_authenticated
 def dashboard_view(request):
@@ -118,6 +120,7 @@ def subscriptions_view(request):
 
     return render(request, template_name, context)
 
+
 @U.check_is_authenticated
 def subscription_view(request):
     context = {}
@@ -144,7 +147,6 @@ def edit_subscription_view(request):
     context['paid_period_choices'] = A.PAID_PERIOD_CHOICES
     context['notification_period_choices'] = A.NOTIFICATION_PERIOD_CHOICES
     context['currencies'] = A.CURRENCY_CHOICES
-
 
     if subscription_id:
         subs_dict = U.get_subs_to_dict(subscription_id)
