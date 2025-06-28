@@ -175,6 +175,14 @@ def calculate_next_payment_date(start_payment_date: date, paid_period: str) -> d
     return next_payment_date
 
 
+def calculate_next_notification_date(next_payment_date: date, notification_period: str) -> date:
+    next_notification_date = get_notification_date(
+        notification_period=notification_period,
+        current_date=next_payment_date
+    )
+    return next_notification_date
+
+
 def get_next_payment_date(period: str, current_date: date) -> date:
     match period:
         case PaidPeriod.D1.value:
