@@ -1,15 +1,10 @@
 from django.contrib import admin
-from hub.models import Debt, Debtor, ExchangeRate
+from hub.models import ExchangeRate
 from hub.models import Rent
 from hub.models import Electricity
 from hub.models import Water
 from hub.models import SubscriptionsCategory, Subscriptions
 # Register your models here.
-
-admin.site.register(Debt)
-admin.site.register(Debtor)
-
-
 
 
 @admin.register(ExchangeRate)
@@ -35,6 +30,7 @@ class ElectricityAdmin(admin.ModelAdmin):
 @admin.register(SubscriptionsCategory)
 class SubscriptionsCategoryAdmin(admin.ModelAdmin):
     list_display = ('title',)
+
 
 @admin.register(Subscriptions)
 class SubscriptionsAdmin(admin.ModelAdmin):
