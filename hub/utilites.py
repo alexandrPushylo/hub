@@ -1,4 +1,4 @@
-from datetime import date, datetime, timedelta
+from datetime import date, datetime
 from dateutil.relativedelta import relativedelta
 
 import requests

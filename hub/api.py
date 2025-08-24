@@ -1,13 +1,7 @@
 import json
 
 from django.http import HttpResponse
-from django.shortcuts import render
 from django.middleware.csrf import get_token
-
-from hub.models import Rent, Water, Electricity
-import hub.services as S
-import hub.utilites as U
-import  hub.assets as A
 
 # Create your views here.
 

@@ -1,6 +1,3 @@
-import json
-import hub.assets as A
-import hub.utilites as U
 from config.creds import WEATHER_API_KEY
 
 from logger import getLogger
