@@ -504,3 +504,29 @@
 }
 
 /*		############################*/
+
+/*--------------------------------------------------------*/
+
+
+.main_dock{
+	--main-dock-height: 5vh;
+
+	position: absolute;
+	display: flex;
+	bottom: 20px;
+	justify-content: space-around;
+	height: var(--main-dock-height);
+	min-width: 10vw;
+	width: max-content;
+	max-width: 95vw;
+	border: 1px rgba(75, 70, 70, 0.7) solid;
+	background-color: rgba(107, 116, 124, 0.5);
+	border-radius: 10px;
+	box-shadow: rgb(70, 76, 81) 0 0 20px;
+
+	.dock_item{
+		margin: auto;
+	}
+}
+
+/*--------------------------------------------------------*/
