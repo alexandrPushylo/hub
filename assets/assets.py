@@ -1,10 +1,12 @@
 from enum import Enum
 from typing import NamedTuple, Type
 
+
 class CurrencyURL(Enum):
     USD = "https://api.nbrb.by/exrates/rates/431"
     EUR = "https://api.nbrb.by/exrates/rates/451"
     RUB = "https://api.nbrb.by/exrates/rates/456"
+
 
 CURRENCY_CHOICES = (
     ('BYN', 'BYN'),
@@ -12,6 +14,7 @@ CURRENCY_CHOICES = (
     ('EUR', 'EUR'),
     ('RUB', 'RUB'),
 )
+
 
 class MONTH(Enum):
     JANUARY = 'January'
@@ -26,6 +29,7 @@ class MONTH(Enum):
     OCTOBER = 'October'
     NOVEMBER = 'November'
     DECEMBER = 'December'
+
 
 MONTH_CHOICES = (
     (MONTH.JANUARY.value, 'Январь'),
@@ -42,6 +46,7 @@ MONTH_CHOICES = (
     (MONTH.DECEMBER.value, 'Декабрь'),
 )
 
+
 class Currency(Enum):
     BYN = CURRENCY_CHOICES[0][0]
     USD = CURRENCY_CHOICES[1][0]
@@ -54,9 +59,11 @@ class Bills(Enum):
     WATER_SUPPLY = 'water_supply'
     RENT = 'rent'
 
+
 class Status(Enum):
     OK = 'ok'
     ERROR = 'error'
+
 
 EDIT_BILLS_TEMPLATES = {
     Bills.WATER_SUPPLY.value: 'bills/edit_water_supply.html',
@@ -64,17 +71,20 @@ EDIT_BILLS_TEMPLATES = {
     Bills.ELECTRICITY.value: 'bills/edit_electricity.html',
 }
 
+
 INFO_BILLS_TEMPLATES = {
     Bills.WATER_SUPPLY.value: 'bills/info_water_supply.html',
     Bills.RENT.value: 'bills/info_rent.html',
     Bills.ELECTRICITY.value: 'bills/info_electricity.html',
 }
 
+
 TITLE_BILLS = {
     Bills.WATER_SUPPLY.value: 'Водоснабжение',
     Bills.RENT.value: 'Жировка',
     Bills.ELECTRICITY.value: 'Электроэнергия',
 }
+
 
 class NotificationPeriod(Enum):
     NOT = None
@@ -87,6 +97,7 @@ class NotificationPeriod(Enum):
     M1 = '1m'
     M2 = '2m'
     M3 = '3m'
+
 
 NOTIFICATION_PERIOD_CHOICES = (
     (NotificationPeriod.NOT.value, 'Нет'),
@@ -101,6 +112,7 @@ NOTIFICATION_PERIOD_CHOICES = (
     (NotificationPeriod.M3.value, 'За 3 месяца'),
 )
 
+
 class PaidPeriod(Enum):
     NOT = None
     D1 = '1d'
@@ -113,6 +125,7 @@ class PaidPeriod(Enum):
     M3 = '3m'
     M6 = '6m'
     Y1 = '1y'
+
 
 PAID_PERIOD_CHOICES = (
     (PaidPeriod.NOT.value, 'Нет'),
@@ -127,6 +140,7 @@ PAID_PERIOD_CHOICES = (
     (PaidPeriod.M6.value, '6 месяцев'),
     (PaidPeriod.Y1.value, '1 год'),
 )
+
 
 class EditMode(Enum):
     ADD = 'add'

@@ -1,6 +1,6 @@
 from hub.models import ExchangeRate
 
-import hub.assets as A
+import assets.assets as A
 import hub.utilites as U
 
 from logger import getLogger

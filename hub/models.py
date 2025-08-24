@@ -1,5 +1,5 @@
 from django.db import models
-from hub.assets import CURRENCY_CHOICES, MONTH_CHOICES, NOTIFICATION_PERIOD_CHOICES, PAID_PERIOD_CHOICES
+from assets.assets import CURRENCY_CHOICES, MONTH_CHOICES, NOTIFICATION_PERIOD_CHOICES, PAID_PERIOD_CHOICES
 
 
 # Create your models here.

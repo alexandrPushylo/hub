@@ -3,8 +3,7 @@ from datetime import date, timedelta, datetime
 from dateutil.relativedelta import relativedelta
 
 from hub.models import SubscriptionsCategory, Subscriptions
-from hub.assets import NOTIFICATION_PERIOD_CHOICES, PAID_PERIOD_CHOICES, CURRENCY_CHOICES
-from hub.assets import NotificationPeriod, PaidPeriod, Currency, EditMode
+from assets.assets import NotificationPeriod, PaidPeriod, EditMode
 
 
 from logger import getLogger

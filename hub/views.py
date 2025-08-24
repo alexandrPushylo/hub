@@ -4,7 +4,7 @@ from django.contrib.auth import login, logout, authenticate
 
 from hub.models import Electricity, Rent, Water
 import hub.utilites as U
-import  hub.assets as A
+import  assets.assets as A
 
 # Create your views here.
 

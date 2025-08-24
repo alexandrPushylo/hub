@@ -17,7 +17,7 @@ from hub.services import weather as WEATHER_S
 from hub.services import subscriptions as SUB_S
 import hub.telegram_bot as T
 
-import hub.assets as A
+import assets.assets as A
 
 from logger import getLogger
 
